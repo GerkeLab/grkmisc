@@ -4,6 +4,8 @@ Version: 0.0.0.9000
 Authors@R: person("Garrick", "Aden-Buie", email = "Garrick.Aden-Buie@moffitt.org", role = c("aut", "cre"))
 Description: A package of miscellaneously helpful functions.
 License: MIT + file LICENSE
+URL: https://github.com/gadenbuie/grkmisc
+BugReports: https://github.com/gadenbuie/grkmisc/issues
 Imports: 
     magrittr,
     rlang (>= 0.1.2)
@@ -14,5 +16,3 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
-URL: https://github.com/gadenbuie/grkmisc
-BugReports: https://github.com/gadenbuie/grkmisc/issues
