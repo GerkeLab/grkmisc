@@ -7,8 +7,13 @@ License: MIT + file LICENSE
 URL: https://github.com/gadenbuie/grkmisc
 BugReports: https://github.com/gadenbuie/grkmisc/issues
 Imports: 
+    assertthat,
+    clisymbols,
+    crayon,
     magrittr,
-    rlang (>= 0.1.2)
+    purrr,
+    rlang (>= 0.1.2),
+    xfun
 Suggests: 
     testthat
 ByteCompile: true
