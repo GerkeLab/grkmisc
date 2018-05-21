@@ -1,16 +1,18 @@
 Package: grkmisc
+Title: A package of miscellaneously helpful functions.
 Version: 0.0.0.9000
-Title: What the Package Does (One Line, Title Case)
-Description: What the package does (one paragraph).
 Authors@R: person("Garrick", "Aden-Buie", email = "Garrick.Aden-Buie@moffitt.org", role = c("aut", "cre"))
+Description: A package of miscellaneously helpful functions.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-ByteCompile: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+Imports: 
+    magrittr,
+    rlang (>= 0.1.2)
 Suggests: 
     testthat
-Imports: 
-    rlang (>= 0.1.2),
-    magrittr
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
+URL: https://github.com/gadenbuie/grkmisc
+BugReports: https://github.com/gadenbuie/grkmisc/issues
