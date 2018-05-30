@@ -13,11 +13,16 @@ Imports:
     magrittr,
     purrr,
     rlang (>= 0.1.2),
-    xfun
+    xfun,
+    pillar,
+    cli,
+    glue,
+    tidyr
 Suggests: 
     testthat,
     dplyr,
     readr,
+    ggplot2
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
