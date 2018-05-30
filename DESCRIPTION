@@ -15,7 +15,9 @@ Imports:
     rlang (>= 0.1.2),
     xfun
 Suggests: 
-    testthat
+    testthat,
+    dplyr,
+    readr,
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
