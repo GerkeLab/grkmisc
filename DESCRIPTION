@@ -20,7 +20,6 @@ Imports:
     tidyr
 Suggests: 
     testthat,
-    dplyr,
     readr,
     ggplot2
 ByteCompile: true
@@ -28,3 +27,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
+Depends: 
+    dplyr
