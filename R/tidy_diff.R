@@ -5,19 +5,25 @@
 #'
 #' @param x <tbl|df> Reference data frame
 #' @param y <tbl|df> Comparison data frame
-#' @param .id <chr> ID column(s) that are ignored from the differencing
+#' @param ignore <chr> ID column(s) that are ignored from the differencing
 #' @return Object of class `tidy_diff` that can be printed via `print(obj)` or
 #'   plotted with [ggplot2] via `plot(obj)`.
 #' @export
-tidy_diff <- function(x, y, .id = NULL) {
+tidy_diff <- function(x, y, ignore = NULL) {
   # x <- arrange(x, .id)
   x_name = rlang::quo_name(rlang::enquo(x))
   y_name = rlang::quo_name(rlang::enquo(y))
-  if (!is.null(.id)) {
-    ids <- select(x, .id)
-    x <- select(x, -.id)
-    y <- select(y, -.id)
-  } else ids <- NULL
+
+  if (!is.null(ignore)) {
+    x <- x[, intersect(colnames(x), ignore)]
+    y <- y[, intersect(colnames(y), ignore)]
+  }
+
+  meta <- list()
+  meta$names <- c(x = x_name, y = y_name)
+  meta$dims <- purrr::map(list(x = x, y = y), ~ dim(.))
+  meta$colnames <- purrr::map(list(x = x, y = y), ~ colnames(.))
+  meta$coltypes <- purrr::map(list(x = x, y = y), ~ purrr::map_chr(., ~ class(.)[1]))
 
   # De-factorize into characters
   x <- mutate_if(x, is.factor, as.character)
@@ -31,20 +37,22 @@ tidy_diff <- function(x, y, .id = NULL) {
       miss_count = purrr::map_int(misses, length),
       miss_count = ifelse(purrr::map_lgl(value.x, is.null), NA, miss_count),
       miss_count = ifelse(purrr::map_lgl(value.y, is.null), NA, miss_count),
-      state      = ifelse(miss_count == 0, "same", "changed"),
-      state      = case_when(
-        miss_count > 0    ~ "changed",
-        is.na(miss_count) ~ "unique",
-        miss_count == 0   ~ "same",
-        TRUE ~ "other"
-      )
+      state      = ifelse(miss_count == 0, "same", "diff"),
+      state      = ifelse(purrr::map_lgl(value.x, is.null), "unique_x", state),
+      state      = ifelse(purrr::map_lgl(value.y, is.null), "unique_y", state)
+      # state      = case_when(
+      #   miss_count > 0    ~ "diff",
+      #   is.na(miss_count) ~ "unique",
+      #   miss_count == 0   ~ "same",
+      #   TRUE ~ "other"
+      # )
     ) %>%
     split(.$state)
 
   # TODO: catch no changes
-  z_tidy_diff <- z$changed
-  z_tidy_diff$value.x <- purrr::map2(z$changed$value.x, z$changed$misses, function(x, y) x[y])
-  z_tidy_diff$value.y <- purrr::map2(z$changed$value.y, z$changed$misses, function(x, y) x[y])
+  z_tidy_diff <- z$diff
+  z_tidy_diff$value.x <- purrr::map2(z$diff$value.x, z$diff$misses, function(x, y) x[y])
+  z_tidy_diff$value.y <- purrr::map2(z$diff$value.y, z$diff$misses, function(x, y) x[y])
   z_tidy_diff <- z_tidy_diff %>%
     select(-miss_count, -state) %>%
     split(.$variable) %>%
@@ -57,18 +65,15 @@ tidy_diff <- function(x, y, .id = NULL) {
     bind_cols(z_td, x[z_td$miss_index,  z$same$variable])
   })
 
-  meta <- list()
-  meta$names <- c(x = x_name, y = y_name)
-  meta$dims <- purrr::map(list(x = x, y = y), ~ dim(.))
-  meta$colnames <- purrr::map(list(x = x, y = y), ~ colnames(.))
+  z <- purrr::map_dfr(z, ~ {
+    select(., variable, state, miss_count, misses)
+  })
 
   structure(list(
-    tidy    = z_tidy_diff,
-    changed = z$changed,
-    same    = z$same,
-    unique  = z$unique,
-    ids     = ids,
-    meta    = meta
+    tidy   = z_tidy_diff,
+    diff   = z,
+    meta   = meta,
+    ignore = ignore
   ), class = "tidy_diff")
 }
 
@@ -116,19 +121,21 @@ vis_changed <- function(x, y, ...) {
 #' @export
 plot.tidy_diff <- function(z) {
   stopifnot(requireNamespace("ggplot2", quietly = TRUE))
-  z$changed %>%
-    mutate(misses = purrr::map2(misses, value.x, ~ 1:length(..2) %in% ..1)) %>%
-    select(variable, misses) %>%
-    mutate(id = purrr::map(misses, ~ 1:length(.))) %>%
+  x_row_ids <- 1:z$meta$dims$x[1]
+  z$diff %>%
+    select(variable, state, id = misses) %>%
     tidyr::unnest() %>%
     {
-      ggplot2::ggplot() +
-        ggplot2::aes(x = variable, y = -id, fill = misses) +
-        ggplot2::geom_tile() +
-        ggplot2::scale_fill_manual(values = c("lightsteelblue1", "firebrick3")) +
-        ggplot2::scale_y_continuous(labels = function(x) abs(x), expand = c(0,0)) +
-        ggplot2::scale_x_discrete(position = "top", expand = c(0,0)) +
+      ggplot2::ggplot(.) +
+        ggplot2::aes(x = variable, y = -id, color = state) +
+        ggplot2::geom_point(shape = 16) +
+        ggplot2::scale_fill_manual(values = c("same" = "lightsteelblue1",
+                                              "diff" = "firebrick3")) +
+        ggplot2::scale_y_continuous(labels = function(x) abs(x), expand = c(0.04,0)) +
+        ggplot2::scale_x_discrete(position = "top", expand = c(0.04,0)) +
         ggplot2::theme_minimal() +
+        ggplot2::theme(axis.text.x.top = ggplot2::element_text(angle = 45, vjust = 0.5)) +
+        ggplot2::guides(color = FALSE) +
         ggplot2::labs(x = "Column", y = "Row", fill = "Diff.")
     }
 }
@@ -143,7 +150,7 @@ not_equal <- function(x, y) {
   )
 }
 
-#' @inheritParams glue glue glue_collapse
+#' @export
 summary.tidy_diff <- function(z) {
   # 1. Compare dims
   # 2. Column names
@@ -152,44 +159,78 @@ summary.tidy_diff <- function(z) {
   # 5. Number of differing columns
   # 6. Number of differing rows
 
+  x_name <- z$meta$names["x"]
+  y_name <- z$meta$names["y"]
+  x_uniq <- setdiff(z$meta$colnames$x, z$meta$colnames$y)
+  y_uniq <- setdiff(z$meta$colnames$y, z$meta$colnames$x)
+  z_same <- purrr::reduce(z$meta$colnames, intersect)
+
+  capture_tibble_print <- function(x, exclude = c(-1, -3)) {
+    x <- capture.output(tibble:::print.tbl(x))[exclude]
+    paste0("  ", x, collapse = "\n")
+  }
+
   dims <- purrr::map_dfr(setNames(z$meta$dims, z$meta$names),
     ~ data_frame(rows = .[1], cols = .[2]), .id = "set")
 
   cli::cat_rule("Comparison Summary")
-  print(dims)
+  dims <- capture_tibble_print(dims)
+  cli::cat_bullet("Dimensions\n", dims)
   cli::cat_line()
 
-  x_uniq <- setdiff(z$meta$colnames$x, z$meta$colnames$y)
-  y_uniq <- setdiff(z$meta$colnames$y, z$meta$colnames$x)
-
   trunc_bullet <- function(x, ...) {
-    if (x > getOption("width")) x <- paste0(strtrim(x, getOption("width") - 3), "...\033[0m")
+    if (nchar(x) > getOption("width")) x <- paste0(strtrim(x, getOption("width")), "...\033[0m")
     cli::cat_bullet(x, ...)
   }
-  style_vars <- function(x) pillar::style_subtle(glue_collapse(glue("`{x}`"), sep = ", "))
+  style_vars <- function(x) pillar::style_subtle(glue::glue_collapse(glue("`{x}`"), sep = ", "))
 
   cat_thing_w_count <- function(thing, values, styler = crayon::bold) {
     if (!length(values)) return(invisible())
     plural <- if (length(values) > 1) "s" else ""
-    trunc_bullet(glue(
+    trunc_bullet(glue::glue(
       "'{thing}' has {styler(length(values))} unique column{plural}: ",
       style_vars(values)
     ))
   }
-  cat_thing_w_count(z$meta$names["x"], x_uniq)
-  cat_thing_w_count(z$meta$names["y"], y_uniq)
+  cat_thing_w_count(x_name, x_uniq)
+  cat_thing_w_count(y_name, y_uniq)
   if (!length(x_uniq) && !length(y_uniq)) trunc_bullet(
-    glue(
-      "\'{z$meta$names['x']}\' and \'{z$meta$names['y']}\' have the same columns: ",
+    glue::glue(
+      "\'{x_name}\' and \'{y_name}\' have the same ",
+      "{crayon::bold(length(z$meta$colnames[[1]]))} columns: ",
       style_vars(z$meta$colnames$x)
     )
   )
 
+  coltype_diffs <- purrr::map(z$meta$coltypes,
+                              ~ data_frame(column = names(.), type = .)) %>%
+    purrr::reduce(left_join, by = "column") %>%
+    filter(type.x != type.y)
+  if (nrow(coltype_diffs)) {
+    names(coltype_diffs)[2:3] <- c(x_name, y_name)
+    coltype_diffs_out <- capture_tibble_print(coltype_diffs)
+    plural <- if (nrow(coltype_diffs) > 1) "s" else ""
+    cli::cat_bullet(glue::glue(
+      "'{x_name}' and '{y_name}' have differing data types in",
+      " {crayon::bold(nrow(coltype_diffs))} column{plural}:\n",
+      "{coltype_diffs_out}\n\n"
+    ))
+  }
+
   # TODO: Catch no changes
-  trunc_bullet(glue(
-    "There are {crayon::bold(sum(z$changed$miss_count))} differing values ",
-    "across {crayon::bold(length(unique(unlist(z$changed$misses))))} rows"
+  n_misses <- filter(z$diff, state == "diff") %>% pull(miss_count) %>% sum(na.rm = TRUE)
+  n_miss_rows <- filter(z$diff, state == "diff") %>% pull(misses) %>% unlist() %>% unique() %>% length()
+  trunc_bullet(glue::glue(
+    "There are {crayon::bold(n_misses)} differing values ",
+    "across {crayon::bold(n_miss_rows)} rows{if (n_misses) ':'}"
   ))
+  if (n_misses) {
+    z$diff %>%
+      mutate(misses = purrr::map_chr(misses, paste, collapse = ", ")) %>%
+      rename(`misses (row id)` = misses) %>%
+      capture_tibble_print() %>%
+      cli::cat_line()
+  }
 
 }
 

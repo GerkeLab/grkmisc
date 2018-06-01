@@ -2,6 +2,7 @@
 
 S3method(plot,tidy_diff)
 S3method(print,tidy_diff)
+S3method(summary,tidy_diff)
 export("%>%")
 export(auto_extract)
 export(enexpr)
