@@ -1,0 +1,25 @@
+---
+title: "Title"
+author: Author
+date: '`r strftime(Sys.time(), "%A, %b %d, %Y")`'
+mainfont: Fira Sans
+monofont: Fira Mono
+output: 
+  rmdformats::html_clean: 
+    code_folding: "hide"
+  pdf_document: 
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.width = 20, fig.height = 14)
+library(tidyverse)
+theme_set(
+  firasans::theme_ipsum_fsc(
+    axis_text_size = 10, 
+    axis_title_size = 14,
+    axis_title_just = "cc") +
+    theme(panel.grid.minor = element_blank())
+)
+```
