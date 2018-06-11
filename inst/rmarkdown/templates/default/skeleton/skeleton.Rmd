@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
-                      fig.width = 20, fig.height = 14)
+                      fig.width = 10, fig.height = 7)
 library(tidyverse)
 theme_set(
   firasans::theme_ipsum_fsc(
