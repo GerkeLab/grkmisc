@@ -4,14 +4,20 @@
 \alias{tidy_diff}
 \title{Compare Two Data.Frames}
 \usage{
-tidy_diff(x, y, .id = NULL)
+tidy_diff(x, y, ignore = NULL, group_vars = ignore, align = FALSE)
 }
 \arguments{
-\item{x}{<tbl|df> Reference data frame}
+\item{x}{\code{<tbl|df>} Reference data frame}
 
-\item{y}{<tbl|df> Comparison data frame}
+\item{y}{\code{<tbl|df>} Comparison data frame}
 
-\item{.id}{<chr> ID column(s) that are ignored from the differencing}
+\item{ignore}{\code{<chr:NULL>} ID column(s) that are ignored from the differencing}
+
+\item{group_vars}{\code{<chr:ignore>} Column names of grouping variables for alignment,
+takes default from \code{ignore}.}
+
+\item{align}{\code{<lgl:FALSE>} Should alignmment be performed based on the
+grouping variables or the \code{group_vars} parameter?}
 }
 \value{
 Object of class \code{tidy_diff} that can be printed via \code{print(obj)} or
