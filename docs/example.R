@@ -5,7 +5,7 @@
 #' ---
 
 #+ echo=FALSE, message=FALSE
-knitr::opts_chunk$set(cache = FALSE, comment = "#")
+knitr::opts_chunk$set(cache = TRUE, comment = "#")
 library(dplyr)
 
 #' First, we need some fake data. The following functions make fake data, with
@@ -83,8 +83,8 @@ corrupt_values <- function(df, ..., n_rows = nrow(df)/5) {
 
 
 #' Here is the fake data with 10 data columns, 2 ID columns and 10^5 rows.
-x <- make_core_fake(10, 10^6) %>%
-  add_ids(n_ids = c(10^3, 30))
+x <- make_core_fake(10, 10^5) %>%
+  add_ids(n_ids = c(50^4, 300))
 y <- corrupt_values(x, dplyr::contains("colname"), n_rows = 20)
 
 #' Here I additionally remove some columns from each side and change data types
@@ -137,3 +137,15 @@ z$diff
 pryr::object_size(x)
 pryr::object_size(y)
 pryr::object_size(z)
+
+
+#' ### Mismatched Rows
+x2 <- x[sort(sample(1:nrow(x), floor(nrow(x) * 0.9952))), ]
+y2 <- y[sort(sample(1:nrow(y), floor(nrow(y) * 0.9921))), ]
+
+z2 <- tidy_diff(x2, y2, group_vars = c("id_01", "id_02"))
+summary(z2)
+
+z2$diff
+
+z2$tidy[1]

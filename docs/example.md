@@ -1,7 +1,7 @@
 example.R
 ================
 Garrick Aden-Buie
-2018-06-01
+2018-06-13
 
 First, we need some fake data. The following functions make fake data,
 with a core data structure of columns named `colname_NN` and ID columns
@@ -84,8 +84,8 @@ corrupt_values <- function(df, ..., n_rows = nrow(df)/5) {
 Here is the fake data with 10 data columns, 2 ID columns and 10^5 rows.
 
 ``` r
-x <- make_core_fake(10, 10^6) %>%
-  add_ids(n_ids = c(10^3, 30))
+x <- make_core_fake(10, 10^5) %>%
+  add_ids(n_ids = c(50^4, 300))
 y <- corrupt_values(x, dplyr::contains("colname"), n_rows = 20)
 ```
 
@@ -113,41 +113,41 @@ differ.
 tibble:::print.tbl_df(x)
 ```
 
-    # # A tibble: 1,000,000 x 11
-    #    id_01   id_02 colname_01 colname_03 colname_04 colname_05 colname_06
-    #    <chr>   <int> <chr>           <int>      <int>      <int> <fct>     
-    #  1 keklii 271982 pytodq             23         28         -2 h         
-    #  2 ccnklh 617614 bjdvvi              7        -20        -41 b         
-    #  3 kpehmu 571297 lmygeg             35        -29         -2 d         
-    #  4 tugwke 980241 rfimiz            -26        -10        -37 d         
-    #  5 kvbzlt 807817 almjtn            -39         15         17 f         
-    #  6 hafeln 475980 mchiko            -15         40        -46 g         
-    #  7 fxtxue 717063 psmdor             28         13         38 a         
-    #  8 ikbnlz 820462 xbmkju              9        -20          3 f         
-    #  9 equhbs 166083 amotdn             37          2         12 c         
-    # 10 qxqpaa 546228 jxbxjm              8         -6        -11 b         
-    # # ... with 999,990 more rows, and 4 more variables: colname_07 <chr>,
-    # #   colname_08 <fct>, colname_09 <int>, colname_10 <fct>
+    # # A tibble: 100,000 x 11
+    #    id_01  id_02 colname_01 colname_02 colname_04 colname_05 colname_06
+    #    <chr>  <int> <chr>           <dbl>      <int>      <dbl>      <int>
+    #  1 phrayr 65858 epbtha          65.5         -10     39044.         35
+    #  2 vvduay  2027 sfdkpw          99.3         -26     93104.        -39
+    #  3 wghoie 10686 hvsitr          25.7           7     34475.         -3
+    #  4 piftte 28757 fdspcd          66.0          -9     18838.         19
+    #  5 cscwee 53767 gxtmlk          75.5          -9      7078.        -33
+    #  6 mkzsvs 88576 xjoobx           7.80         18     50653.         36
+    #  7 glkbek 76955 ozxukd          72.6           9     50846.         24
+    #  8 twocjp 60623 dxgmuk          18.4          -2     68778.         -7
+    #  9 oxilzd 75934 iapqkh          36.8         -10     18702.         -2
+    # 10 asxihf 28038 bdcqkp          51.3          41     90407.         37
+    # # ... with 99,990 more rows, and 4 more variables: colname_07 <chr>,
+    # #   colname_08 <int>, colname_09 <fct>, colname_10 <chr>
 
 ``` r
 tibble:::print.tbl_df(y)
 ```
 
-    # # A tibble: 1,000,000 x 10
-    #    id_01   id_02 colname_01 colname_02 colname_03 colname_04 colname_06
-    #    <chr>   <int> <chr>      <chr>           <int>      <int> <fct>     
-    #  1 keklii 271982 pytodq     36                 23         28 h         
-    #  2 ccnklh 617614 bjdvvi     -3                  7        -20 b         
-    #  3 kpehmu 571297 lmygeg     -6                 35        -29 d         
-    #  4 tugwke 980241 rfimiz     -35               -26        -10 d         
-    #  5 kvbzlt 807817 almjtn     -43               -39         15 f         
-    #  6 hafeln 475980 mchiko     49                -15         40 g         
-    #  7 fxtxue 717063 psmdor     -35                28         13 a         
-    #  8 ikbnlz 820462 xbmkju     36                  9        -20 f         
-    #  9 equhbs 166083 amotdn     49                 37          2 c         
-    # 10 qxqpaa 546228 jxbxjm     -32                 8         -6 b         
-    # # ... with 999,990 more rows, and 3 more variables: colname_07 <chr>,
-    # #   colname_08 <fct>, colname_09 <int>
+    # # A tibble: 100,000 x 10
+    #    id_01  id_02 colname_02 colname_03 colname_04 colname_05 colname_06
+    #    <chr>  <int>      <dbl> <chr>           <int>      <dbl>      <int>
+    #  1 phrayr 65858      65.5  -31               -10     39044.         35
+    #  2 vvduay  2027      99.3  21                -26     93104.        -39
+    #  3 wghoie 10686      25.7  -45                 7     34475.         -3
+    #  4 piftte 28757      66.0  -42                -9     18838.         19
+    #  5 cscwee 53767      75.5  49                 -9      7078.        -33
+    #  6 mkzsvs 88576       7.80 15                 18     50653.         36
+    #  7 glkbek 76955      72.6  -44                 9     50846.         24
+    #  8 twocjp 60623      18.4  31                 -2     68778.         -7
+    #  9 oxilzd 75934      36.8  18                -10     18702.         -2
+    # 10 asxihf 28038      51.3  20                 41     90407.         37
+    # # ... with 99,990 more rows, and 3 more variables: colname_07 <chr>,
+    # #   colname_08 <int>, colname_09 <fct>
 
 We can compare the two data frames with `tidy_diff()`.
 
@@ -159,7 +159,7 @@ system.time(
 ```
 
     #    user  system elapsed 
-    #   0.177   0.012   0.189
+    #   0.073   0.004   0.148
 
 This creates a `tidy_diff` object with `print`, `summary` and `plot`
 methods
@@ -171,54 +171,53 @@ methods
     Showing differences in first 5 columns...
     
     # A tibble: 2 x 22
-      variable   set   `89811` `236178` `274555` `314342` `315263` `335394`
-      <chr>      <chr> <chr>   <chr>    <chr>    <chr>    <chr>    <chr>   
-    1 colname_01 x     ivrxwx  zvvsus   uytdfq   msqpba   vvyacr   dtbbcu  
-    2 colname_01 y     bbwqwp  zvwbmq   bhhfim   vgxncy   bxlyjj   kqhyua  
-    # ... with 14 more variables: `377293` <chr>, `412980` <chr>,
-    #   `449950` <chr>, `548360` <chr>, `554011` <chr>, `612600` <chr>,
-    #   `616969` <chr>, `642041` <chr>, `687075` <chr>, `737504` <chr>,
-    #   `841880` <chr>, `889129` <chr>, `910756` <chr>, `945483` <chr>
+      variable   set   `8414` `13259` `18295` `20018` `22273` `25650` `26614`
+      <chr>      <chr>  <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    1 colname_02 x       74.5    15.0    70.8    66.2    35.1   82.1     70.5
+    2 colname_02 y       69.5    83.5    24.0    95.8    47.2    3.77    72.4
+    # ... with 13 more variables: `34685` <dbl>, `35318` <dbl>, `36988` <dbl>,
+    #   `48417` <dbl>, `55856` <dbl>, `58655` <dbl>, `64067` <dbl>,
+    #   `67877` <dbl>, `74163` <dbl>, `78105` <dbl>, `83909` <dbl>,
+    #   `91212` <dbl>, `93855` <dbl>
     
     # A tibble: 2 x 22
-      variable   set   `10695` `69367` `104149` `134409` `162126` `197968`
-      <chr>      <chr>   <int>   <int>    <int>    <int>    <int>    <int>
-    1 colname_03 x          -9      32        8       20      -50       45
-    2 colname_03 y         -15     -11      -19      -37       42       22
-    # ... with 14 more variables: `198954` <int>, `253607` <int>,
-    #   `270216` <int>, `312665` <int>, `335488` <int>, `432529` <int>,
-    #   `580123` <int>, `634929` <int>, `663622` <int>, `748165` <int>,
-    #   `771764` <int>, `831684` <int>, `915056` <int>, `987873` <int>
+      variable   set   `5478` `9236` `15055` `23791` `26954` `27415` `34240`
+      <chr>      <chr>  <int>  <int>   <int>   <int>   <int>   <int>   <int>
+    1 colname_04 x        -41    -44     -38     -30      -1      46     -21
+    2 colname_04 y         19     -2     -50       4     -32      29      -8
+    # ... with 13 more variables: `51437` <int>, `57291` <int>, `65933` <int>,
+    #   `72302` <int>, `75636` <int>, `82517` <int>, `83454` <int>,
+    #   `86576` <int>, `87682` <int>, `88100` <int>, `88413` <int>,
+    #   `89221` <int>, `96864` <int>
     
     # A tibble: 2 x 22
-      variable   set   `25536` `34910` `51873` `119893` `156209` `283177`
-      <chr>      <chr>   <int>   <int>   <int>    <int>    <int>    <int>
-    1 colname_04 x          23      11     -43      -17      -33      -26
-    2 colname_04 y          38      34      42       46       49       39
-    # ... with 14 more variables: `339947` <int>, `389172` <int>,
-    #   `483641` <int>, `574453` <int>, `673029` <int>, `693106` <int>,
-    #   `703862` <int>, `730203` <int>, `771930` <int>, `877923` <int>,
-    #   `904323` <int>, `931220` <int>, `971278` <int>, `978464` <int>
+      variable   set   `1234` `9176` `16635` `19505` `21849` `26336` `27123`
+      <chr>      <chr>  <dbl>  <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    1 colname_05 x     75238. 87096.  96539.  31186.  57792.  40174.  29129.
+    2 colname_05 y     13314. 21286.  63879.   3385.  62517.  21458.   1929.
+    # ... with 13 more variables: `39006` <dbl>, `44301` <dbl>, `45463` <dbl>,
+    #   `57951` <dbl>, `62919` <dbl>, `68096` <dbl>, `73194` <dbl>,
+    #   `75482` <dbl>, `85637` <dbl>, `85655` <dbl>, `87831` <dbl>,
+    #   `88592` <dbl>, `89649` <dbl>
+    
+    # A tibble: 2 x 20
+      variable   set   `7337` `7610` `14371` `14771` `17192` `22195` `24209`
+      <chr>      <chr>  <int>  <int>   <int>   <int>   <int>   <int>   <int>
+    1 colname_06 x        -31    -16     -11      40      -4       8     -23
+    2 colname_06 y         -6    -35      35     -40      22     -29      12
+    # ... with 11 more variables: `29191` <int>, `29239` <int>, `29380` <int>,
+    #   `31974` <int>, `59540` <int>, `65227` <int>, `67587` <int>,
+    #   `76559` <int>, `78289` <int>, `79859` <int>, `94105` <int>
     
     # A tibble: 2 x 22
-      variable   set   `88792` `123694` `174992` `177151` `200950` `206452`
-      <chr>      <chr> <chr>   <chr>    <chr>    <chr>    <chr>    <chr>   
-    1 colname_06 x     e       a        j        b        i        j       
-    2 colname_06 y     j       e        e        h        g        f       
-    # ... with 14 more variables: `225852` <chr>, `383856` <chr>,
-    #   `488825` <chr>, `489499` <chr>, `576752` <chr>, `588949` <chr>,
-    #   `660933` <chr>, `668410` <chr>, `687526` <chr>, `740137` <chr>,
-    #   `743152` <chr>, `779694` <chr>, `900570` <chr>, `958053` <chr>
-    
-    # A tibble: 2 x 22
-      variable   set   `25597` `81019` `86588` `120054` `181468` `213365`
-      <chr>      <chr> <chr>   <chr>   <chr>   <chr>    <chr>    <chr>   
-    1 colname_07 x     atyrzw  suutek  xebwrt  zpixub   pjcdsb   qupkgf  
-    2 colname_07 y     rldwre  glzvpk  opvmdl  irxrox   rxnqml   hppwoj  
-    # ... with 14 more variables: `221630` <chr>, `271993` <chr>,
-    #   `338873` <chr>, `353847` <chr>, `419947` <chr>, `458055` <chr>,
-    #   `514348` <chr>, `744611` <chr>, `790790` <chr>, `840215` <chr>,
-    #   `847438` <chr>, `850332` <chr>, `862023` <chr>, `870284` <chr>
+      variable   set   `1484` `1786` `6582` `11641` `34832` `44456` `49842`
+      <chr>      <chr> <chr>  <chr>  <chr>  <chr>   <chr>   <chr>   <chr>  
+    1 colname_07 x     ymjcfu ywkwbe cchkau gvytjv  ljmwuv  ofqpxt  aofute 
+    2 colname_07 y     ummxqs xbugpk uqynjp rpkzhk  bylujm  myorkx  fbqugf 
+    # ... with 13 more variables: `62347` <chr>, `62427` <chr>, `63561` <chr>,
+    #   `64273` <chr>, `65461` <chr>, `69575` <chr>, `71186` <chr>,
+    #   `76500` <chr>, `79032` <chr>, `82964` <chr>, `92254` <chr>,
+    #   `95538` <chr>, `99290` <chr>
     
     ... with differences in 2 more columns: `colname_08`, `colname_09`
 
@@ -227,27 +226,27 @@ methods
 ```
 
 ``` 
-── Comparison Summary ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+── Comparison Summary ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ● Dimensions
-    set      rows  cols
-  1 x     1000000    11
-  2 y     1000000    10
+    set     rows  cols
+  1 x     100000    11
+  2 y     100000    10
 
-● 'x' has 2 unique columns: `colname_05`, `colname_10`
-● 'y' has 1 unique column: `colname_02`
-● There are 139 differing values across 139 rows:
+● 'x' has 2 unique columns: `colname_01`, `colname_10`
+● 'y' has 1 unique column: `colname_03`
+● There are 135 differing values across 135 rows:
      variable   state    miss_count `misses (row id)`                       
-   1 colname_01 diff             20 89811, 236178, 274555, 314342, 315263, …
-   2 colname_03 diff             20 10695, 69367, 104149, 134409, 162126, 1…
-   3 colname_04 diff             20 25536, 34910, 51873, 119893, 156209, 28…
-   4 colname_06 diff             20 88792, 123694, 174992, 177151, 200950, …
-   5 colname_07 diff             20 25597, 81019, 86588, 120054, 181468, 21…
-   6 colname_08 diff             19 47149, 52937, 72864, 202418, 259684, 44…
-   7 colname_09 diff             20 11990, 146848, 150614, 168569, 224131, …
+   1 colname_02 diff             20 8414, 13259, 18295, 20018, 22273, 25650…
+   2 colname_04 diff             20 5478, 9236, 15055, 23791, 26954, 27415,…
+   3 colname_05 diff             20 1234, 9176, 16635, 19505, 21849, 26336,…
+   4 colname_06 diff             18 7337, 7610, 14371, 14771, 17192, 22195,…
+   5 colname_07 diff             20 1484, 1786, 6582, 11641, 34832, 44456, …
+   6 colname_08 diff             20 66, 2275, 14185, 14838, 18848, 29999, 3…
+   7 colname_09 diff             17 3199, 19090, 31854, 38293, 41781, 47063…
    8 id_01      same              0 ""                                      
    9 id_02      same              0 ""                                      
-  10 colname_02 unique_x         NA ""                                      
-  11 colname_05 unique_y         NA ""                                      
+  10 colname_03 unique_x         NA ""                                      
+  11 colname_01 unique_y         NA ""                                      
   12 colname_10 unique_y         NA ""                                      
 ```
 
@@ -264,30 +263,30 @@ subsetting the to the `.$tidy` element of the tidy diff object.
 > z$tidy[1]
 ```
 
-    $colname_01
+    $colname_02
     # A tibble: 20 x 6
-       variable   value.x value.y miss_index id_01   id_02
-       <chr>      <chr>   <chr>        <int> <chr>   <int>
-     1 colname_01 ivrxwx  bbwqwp       89811 vityfv 334304
-     2 colname_01 zvvsus  zvwbmq      236178 aysevx 581581
-     3 colname_01 uytdfq  bhhfim      274555 jtztxn 467022
-     4 colname_01 msqpba  vgxncy      314342 qzlusg 617614
-     5 colname_01 vvyacr  bxlyjj      315263 hibspe 927735
-     6 colname_01 dtbbcu  kqhyua      335394 kjmqdp 245992
-     7 colname_01 husacx  spwbns      377293 zoctir 264199
-     8 colname_01 fcyazo  fxopnb      412980 acnauu 245644
-     9 colname_01 jieklg  qwomat      449950 prrybx 546228
-    10 colname_01 gafefm  ysgegq      548360 vqhijw 668317
-    11 colname_01 yehfft  xkkhgf      554011 rzjipn 271982
-    12 colname_01 dikmiu  mmvavb      612600 wsqafp 245644
-    13 colname_01 mevppw  blquqa      616969 pndylb 630522
-    14 colname_01 opfvky  wxjgwk      642041 ppwhcr  70742
-    15 colname_01 jpzjta  uefyzj      687075 wlradh 582951
-    16 colname_01 kdxkqc  jodijw      737504 rqjezx 522130
-    17 colname_01 udaexy  rljkfi      841880 ziyjjm 668317
-    18 colname_01 aftvey  raxpgk      889129 cyglvs 630522
-    19 colname_01 bthabj  qhltpq      910756 ypbwac 915812
-    20 colname_01 qlrksf  svojna      945483 fqvxbt 571297
+       variable   value.x value.y miss_index id_01  id_02
+       <chr>        <dbl>   <dbl>      <int> <chr>  <int>
+     1 colname_02   74.5    69.5        8414 tactic 51674
+     2 colname_02   15.0    83.5       13259 hmaobf 82090
+     3 colname_02   70.8    24.0       18295 ihuikv 77250
+     4 colname_02   66.2    95.8       20018 npeapv 40991
+     5 colname_02   35.1    47.2       22273 nhxdsh 54127
+     6 colname_02   82.1     3.77      25650 aguqzc 72961
+     7 colname_02   70.5    72.4       26614 edskci 35268
+     8 colname_02   67.8    59.4       34685 aispyu 50907
+     9 colname_02   17.7    68.5       35318 nomqpn 40991
+    10 colname_02   14.5    64.9       36988 jxeahv 86820
+    11 colname_02    6.75   47.1       48417 ayvigc 71432
+    12 colname_02   93.8     5.14      55856 ogplub  1999
+    13 colname_02   87.6    62.8       58655 rftyax 20557
+    14 colname_02   88.9    41.2       64067 pqjigw 23136
+    15 colname_02   40.7    48.1       67877 knzcsc 82816
+    16 colname_02   24.7    69.6       74163 prcfvd 46287
+    17 colname_02   82.8    92.8       78105 euxksw 23558
+    18 colname_02   19.0    59.2       83909 ddwzra 34580
+    19 colname_02   19.3    20.5       91212 mdehwv 38570
+    20 colname_02   64.0    30.4       93855 yfxhtg 63408
 
 The tidy diff object also includes a tidy dataframe with “diff”, “same”
 or “unique” column values.
@@ -299,17 +298,17 @@ or “unique” column values.
     # A tibble: 12 x 4
        variable   state    miss_count misses    
        <chr>      <chr>         <int> <list>    
-     1 colname_01 diff             20 <int [20]>
-     2 colname_03 diff             20 <int [20]>
-     3 colname_04 diff             20 <int [20]>
-     4 colname_06 diff             20 <int [20]>
+     1 colname_02 diff             20 <int [20]>
+     2 colname_04 diff             20 <int [20]>
+     3 colname_05 diff             20 <int [20]>
+     4 colname_06 diff             18 <int [18]>
      5 colname_07 diff             20 <int [20]>
-     6 colname_08 diff             19 <int [19]>
-     7 colname_09 diff             20 <int [20]>
+     6 colname_08 diff             20 <int [20]>
+     7 colname_09 diff             17 <int [17]>
      8 id_01      same              0 <int [0]> 
      9 id_02      same              0 <int [0]> 
-    10 colname_02 unique_x         NA <int [0]> 
-    11 colname_05 unique_y         NA <int [0]> 
+    10 colname_03 unique_x         NA <int [0]> 
+    11 colname_01 unique_y         NA <int [0]> 
     12 colname_10 unique_y         NA <int [0]> 
 
 In terms of size
@@ -318,16 +317,92 @@ In terms of size
 > pryr::object_size(x)
 ```
 
-    168 MB
+    29.2 MB
 
 ``` r
 > pryr::object_size(y)
 ```
 
-    168 MB
+    17.2 MB
 
 ``` r
 > pryr::object_size(z)
 ```
 
-    31.2 kB
+    29.4 kB
+
+### Mismatched Rows
+
+``` r
+x2 <- x[sort(sample(1:nrow(x), floor(nrow(x) * 0.9952))), ]
+y2 <- y[sort(sample(1:nrow(y), floor(nrow(y) * 0.9921))), ]
+
+z2 <- tidy_diff(x2, y2, group_vars = c("id_01", "id_02"))
+summary(z2)
+```
+
+    # ── Comparison Summary ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    # ● Dimensions
+    #     set    rows  cols
+    #   1 x2    99520    11
+    #   2 y2    99210    10
+    # 
+    # ● 'x2' has 2 unique columns: `colname_01`, `colname_10`
+    # ● 'y2' has 1 unique column: `colname_03`
+    # ● There are 8995 differing values across 1399 rows:
+    #      variable   state    miss_count `misses (row id)`                       
+    #    1 colname_02 diff           1286 44, 268, 308, 397, 472, 636, 663, 778, …
+    #    2 colname_04 diff           1285 44, 268, 308, 397, 472, 636, 663, 778, …
+    #    3 colname_05 diff           1286 44, 268, 308, 397, 472, 636, 663, 778, …
+    #    4 colname_06 diff           1284 44, 268, 308, 397, 472, 636, 663, 778, …
+    #    5 colname_07 diff           1285 44, 268, 308, 397, 472, 636, 663, 778, …
+    #    6 colname_08 diff           1286 44, 66, 268, 308, 397, 472, 636, 663, 7…
+    #    7 colname_09 diff           1283 44, 268, 308, 397, 472, 636, 663, 778, …
+    #    8 id_01      same              0 ""                                      
+    #    9 id_02      same              0 ""                                      
+    #   10 colname_03 unique_x         NA 44, 268, 308, 397, 472, 636, 663, 778, …
+    #   11 colname_01 unique_y         NA 99521, 99522, 99523, 99524, 99525, 9952…
+    #   12 colname_10 unique_y         NA 99521, 99522, 99523, 99524, 99525, 9952…
+
+``` r
+z2$diff
+```
+
+    # # A tibble: 15 x 4
+    #    variable   state    miss_count misses       
+    #    <chr>      <chr>         <int> <list>       
+    #  1 colname_02 diff           1286 <int [1,286]>
+    #  2 colname_04 diff           1285 <int [1,285]>
+    #  3 colname_05 diff           1286 <int [1,286]>
+    #  4 colname_06 diff           1284 <int [1,284]>
+    #  5 colname_07 diff           1285 <int [1,285]>
+    #  6 colname_08 diff           1286 <int [1,286]>
+    #  7 colname_09 diff           1283 <int [1,283]>
+    #  8 id_01      same              0 <int [0]>    
+    #  9 id_02      same              0 <int [0]>    
+    # 10 _row.x     same            478 <int [478]>  
+    # 11 _row.y     same            788 <int [788]>  
+    # 12 _row.z     same              0 <int [0]>    
+    # 13 colname_03 unique_x         NA <int [788]>  
+    # 14 colname_01 unique_y         NA <int [478]>  
+    # 15 colname_10 unique_y         NA <int [478]>
+
+``` r
+z2$tidy[1]
+```
+
+    # $colname_02
+    # # A tibble: 1,286 x 8
+    #    variable   value.x value.y miss_index miss_index.x miss_index.y id_01 
+    #    <chr>        <dbl>   <dbl>      <int>        <int>        <int> <chr> 
+    #  1 colname_02    9.99      NA         44           44           NA yxbutq
+    #  2 colname_02   53.3       NA        268          268           NA ypcuee
+    #  3 colname_02   38.7       NA        308          308           NA iwdmye
+    #  4 colname_02   11.7       NA        397          397           NA owhvdz
+    #  5 colname_02   82.7       NA        472          472           NA nyqkpg
+    #  6 colname_02   97.8       NA        636          636           NA fhwqnf
+    #  7 colname_02   50.3       NA        663          663           NA csqvnu
+    #  8 colname_02   99.4       NA        778          778           NA ozatyt
+    #  9 colname_02   84.8       NA        969          969           NA kgtrgs
+    # 10 colname_02   10.9       NA       1113         1113           NA fehiil
+    # # ... with 1,276 more rows, and 1 more variable: id_02 <int>
