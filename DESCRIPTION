@@ -17,7 +17,9 @@ Imports:
     pillar,
     cli,
     glue,
-    tidyr
+    tidyr,
+    styler,
+    clipr
 Suggests: 
     testthat,
     readr,

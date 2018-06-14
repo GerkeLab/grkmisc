@@ -1,0 +1,4 @@
+Name: Insert Tidy-Styled Code
+Description: Insert code from clipboard at cursor, following the tidyverse style guide.
+Binding: insert_styled_text
+Interactive: false
