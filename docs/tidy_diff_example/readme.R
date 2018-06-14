@@ -8,6 +8,13 @@
 knitr::opts_chunk$set(cache = TRUE, comment = "#")
 library(dplyr)
 
+#' - [Functions to Create Data](#functions-to-create-fake-data)
+#' - [Example Data](#example-data)
+#' - [tidy_diff()](#tidy-diff)
+#' - [Data Frames with Mismatched Rows](#data-frames-with-mismatched-rows)
+#'
+#' ## Functions to Create Data
+
 #' First, we need some fake data. The following functions make fake data, with
 #' a core data structure of columns named `colname_NN` and ID columns `id_NN`.
 #' The data are randomly generated as integers, doubles, characters and factors,
@@ -81,6 +88,7 @@ corrupt_values <- function(df, ..., n_rows = nrow(df)/5) {
   df
 }
 
+#' ## Example Data
 
 #' Here is the fake data with 10 data columns, 2 ID columns and 10^5 rows.
 x <- make_core_fake(10, 10^5) %>%
@@ -96,14 +104,10 @@ if (any(y_ints)) {
   y[[which(y_ints)[1]]] <- as.character(y[[which(y_ints)[1]]])
 }
 
-#' And scramble the order but add grouping to both
-#' ... this doesn't work yet. It starts to get a whole lot more complicated when
-#' the number of rows differ.
-# x <- group_by(x, id_01, id_02) %>% {.[sample(1:nrow(.), nrow(.)), ]}
-# y <- group_by(y, id_01, id_02) %>% {.[sample(1:nrow(.), ceiling(nrow(.) * 0.95)), ]}
-
 tibble:::print.tbl_df(x)
 tibble:::print.tbl_df(y)
+
+#' ## Tidy Diff
 
 #' We can compare the two data frames with `tidy_diff()`.
 #+ message=FALSE
@@ -139,11 +143,19 @@ pryr::object_size(y)
 pryr::object_size(z)
 
 
-#' ### Mismatched Rows
-x2 <- x[sort(sample(1:nrow(x), floor(nrow(x) * 0.9952))), ]
-y2 <- y[sort(sample(1:nrow(y), floor(nrow(y) * 0.9921))), ]
+#' ## Data Frames with Mismatched Rows
+#'
+#' The following two lines scramble the order of rows in `x` and `y` while
+#' taking a subsample of the original rows. This means that the two data frames
+#' will be out of order and that there are rows appearing only in `x` or `y`.
+#' Grouping variables are added to indicate the data frame keys that will be
+#' used to align the two input data frames (or
+#' `group_vars = c("id_01", "id_02")` could be set inside `tidy_diff()`).
+x2 <- group_by(x, id_01, id_02) %>% {.[sample(1:nrow(.), floor(nrow(x) * 0.9952)), ]}
+y2 <- group_by(y, id_01, id_02) %>% {.[sample(1:nrow(.), floor(nrow(y) * 0.9921)), ]}
 
-z2 <- tidy_diff(x2, y2, group_vars = c("id_01", "id_02"))
+#+ prompt=TRUE, comment=""
+z2 <- tidy_diff(x2, y2)
 summary(z2)
 
 z2$diff
