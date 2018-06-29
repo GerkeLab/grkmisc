@@ -8,18 +8,21 @@ URL: https://github.com/gadenbuie/grkmisc
 BugReports: https://github.com/gadenbuie/grkmisc/issues
 Imports: 
     assertthat,
+    clipr,
     clisymbols,
     crayon,
     magrittr,
     purrr,
     rlang (>= 0.1.2),
-    xfun,
+    rmdformats,
     styler,
-    clipr
+    xfun
 Suggests: 
-    testthat,
     dplyr,
     readr,
+    testthat
+Remotes: 
+    hrbrmstr/firasans
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
