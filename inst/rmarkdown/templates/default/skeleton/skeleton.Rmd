@@ -4,11 +4,16 @@ author: Author
 date: '`r strftime(Sys.time(), "%A, %b %d, %Y")`'
 mainfont: Fira Sans
 monofont: Fira Mono
-output: 
+output:
+  rmarkdown::html_vignette:
+    df_print: kable
+    standalone: true
   rmdformats::html_clean: 
     code_folding: "hide"
   pdf_document: 
     latex_engine: xelatex
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -22,4 +27,12 @@ theme_set(
     axis_title_just = "cc") +
     theme(panel.grid.minor = element_blank())
 )
+```
+
+```{css, echo=FALSE}
+img {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
 ```
