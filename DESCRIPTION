@@ -16,6 +16,7 @@ Imports:
     purrr,
     rlang (>= 0.1.2),
     rmdformats,
+    stringr,
     styler,
     xfun,
     here

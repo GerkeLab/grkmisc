@@ -11,6 +11,12 @@ style_console <- function(x, ...) {
       x <- sub("<-", "<-\n", x)
     }
   }
+  if (grepl("ggplot", x)) {
+    # Add newline after `+` after finding start of ggplot()
+    ggplot_starts_at <- stringr::str_locate(x, "ggplot")[1, 'start']
+    x <- paste0(substr(x, 1, ggplot_starts_at - 1),
+                gsub("\\+", "\\+\n", substring(x, ggplot_starts_at)))
+  }
   x <- strsplit(x, "\n")[[1]]
   styler::style_text(x, ...)
 }
