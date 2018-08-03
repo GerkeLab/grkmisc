@@ -4,7 +4,7 @@
 \alias{use_gitignore}
 \title{Use Default .gitignore File}
 \usage{
-use_gitignore(directory = NULL, browse = TRUE)
+use_gitignore(directory = here::here(), browse = TRUE)
 }
 \arguments{
 \item{directory}{Directory for the .gitignore, defaults to project root.}

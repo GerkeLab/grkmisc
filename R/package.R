@@ -14,7 +14,7 @@ use_gitignore <- function(directory = here::here(), browse = TRUE) {
   if (append) {
     cli::cat_bullet("Added default .gitignore lines to existing file in ", directory)
   } else cli::cat_bullet("Added default .gitignore in ", directory)
-  return(invisible())
+  invisible(TRUE)
 }
 
 #' Use grkmisc git Pre-Commit Hook
@@ -50,5 +50,5 @@ use_git_hook_precommit <- function(directory = here::here()) {
   file.copy(system.file("templates", "pre-commit.R", package = "grkmisc"),
             git_precommit_file)
   cli::cat_bullet("Added grkmisc pre-commit hook")
-  return(invisible())
+  invisible(TRUE)
 }
