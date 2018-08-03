@@ -12,20 +12,20 @@ Imports:
     clipr,
     clisymbols,
     crayon,
+    here,
     magrittr,
     purrr,
     rlang (>= 0.1.2),
     rmdformats,
     stringr,
     styler,
-    xfun,
-    here
+    xfun
 Suggests: 
-    dplyr,
-    readr,
-    testthat,
     curl,
-    httr
+    dplyr,
+    httr,
+    readr,
+    testthat
 Remotes: 
     hrbrmstr/firasans
 ByteCompile: true
