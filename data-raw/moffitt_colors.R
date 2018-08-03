@@ -1,4 +1,4 @@
-moffitt_colors <- c(
+moffitt_colors <- list(
   blue       = "#00589a",
   light_blue = "#58b0e3",
   green      = "#82c878",
@@ -7,3 +7,4 @@ moffitt_colors <- c(
   yellow     = "#ffcd5a",
   red        = "#eb1455"
 )
+use_data(moffitt_colors, overwrite = TRUE)

@@ -4,7 +4,7 @@
 \name{moffitt_colors}
 \alias{moffitt_colors}
 \title{Moffitt Colors}
-\format{A named vector of 7 colors: blue, light_blue, green, orange,
+\format{A named list of 7 colors: blue, light_blue, green, orange,
 grey, yellow, and red.}
 \usage{
 moffitt_colors
