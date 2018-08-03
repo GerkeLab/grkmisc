@@ -4,10 +4,7 @@
 \alias{use_git_hook_precommit}
 \title{Use grkmisc git Pre-Commit Hook}
 \usage{
-use_git_hook_precommit(directory = here::here())
-}
-\arguments{
-\item{directory}{Root directory containing the git repository}
+use_git_hook_precommit()
 }
 \description{
 Installs a pre-commit hook that automatically bumps the lowest part of the

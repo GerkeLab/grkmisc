@@ -4,16 +4,22 @@
 #'
 #' @param directory Directory for the .gitignore, defaults to project root.
 #' @param browse Open the .gitignore file after modifying?
+#' @param overwrite Should existing file be overwritten?
 #' @export
-use_gitignore <- function(directory = here::here(), browse = TRUE) {
+use_gitignore <- function(directory = here::here(), browse = TRUE, overwrite = TRUE) {
   proj_gitignore <- file.path(directory, ".gitignore")
   default_gitignore <- system.file("templates", ".gitignore", package = "grkmisc")
-  append <- file.exists(proj_gitignore)
+  append <- file.exists(proj_gitignore) && !overwrite
   cat(readLines(default_gitignore), sep = "\n", file = proj_gitignore, append = append)
-  if (browse && rstudioapi::isAvailable()) rstudioapi::navigateToFile(proj_gitignore)
   if (append) {
-    cli::cat_bullet("Added default .gitignore lines to existing file in ", directory)
-  } else cli::cat_bullet("Added default .gitignore in ", directory)
+    cli::cat_bullet("Adding: grkmisc ", crayon::blue("'.gitignore'"),
+                    " to existing ", crayon::blue("'.gitignore'"),
+                    bullet = "tick", bullet_col = "green")
+  } else {
+    cli::cat_bullet("Writing default ", crayon::blue("'.gitignore'"),
+                    bullet = "tick", bullet_col = "green")
+  }
+  if (browse && rstudioapi::isAvailable()) rstudioapi::navigateToFile(proj_gitignore)
   invisible(TRUE)
 }
 
@@ -33,22 +39,89 @@ use_gitignore <- function(directory = here::here(), browse = TRUE) {
 #' `doIncrement=FALSE git commit -m "commit message"`. Alternatively, you can
 #' skip the pre-commit hook with `git commit --no-verify -m "commit message"`.
 #'
-#' @param directory Root directory containing the git repository
 #' @export
-use_git_hook_precommit <- function(directory = here::here()) {
-  if (!dir.exists(file.path(directory, ".git"))) rlang::abort(
-    "This project is not contained in a git repository. You may need to manually specify the `directory`."
+use_git_hook_precommit <- function() {
+  usethis::use_git_hook(
+    "pre-commit",
+    readLines(system.file("templates", "pre-commit.R", package = "grkmisc"))
   )
-  git_hooks_dir <- file.path(directory, ".git", "hooks")
-  git_precommit_file <- file.path(git_hooks_dir, "pre-commit")
-  if (file.exists(git_precommit_file)) {
-   cli::cat_bullet(
-     aste("A pre-commit hook already exists in", git_hooks_dir),
-     bullet = "cross", bullet_col = "red")
-    return(invisible())
+}
+
+#' Create a default package skeleton
+#'
+#' @section Default Package Description:
+#' See [usethis::use_description()] for information about setting your default
+#' package DESCRIPTION file fields. The help file there provides an example of
+#' how to set `"usethis.description"` in your `.Rprofile`.
+#'
+#' @param path Path (and thus package name) where the package will be stored
+#' @param github Should a github repository be created?
+#' @param github_org The organization where the repo should be created. If
+#'   unspecified (or `NULL`), the default is to create the package in your
+#'   personal account.
+#' @param github_private Should the GitHub repo be private?
+#' @param open Should the package be opened? If `TRUE`, tries to open in RStudio
+#'   and falls back to changing the working directory.
+#' @param title Package title: "What the Package Does (One Line, Title Case)"
+#' @param description Package description: "What the package does (one
+#'   paragraph)"
+#' @export
+use_grkmisc_starter_package <- function(
+  path,
+  github = TRUE,
+  github_org = NULL,
+  github_private = FALSE,
+  open = TRUE,
+  title = "What the Package Does (One Line, Title Case)",
+  description = "What the package does (one paragraph)"
+) {
+  required_pkgs <- setdiff(c("spelling", "roxygen2"), installed.packages()[, "Package"])
+  if (length(required_pkgs)) {
+    install.packages(required_pkgs)
   }
-  file.copy(system.file("templates", "pre-commit.R", package = "grkmisc"),
-            git_precommit_file)
-  cli::cat_bullet("Added grkmisc pre-commit hook")
+  usethis::create_package(
+    path, open = FALSE, rstudio = TRUE,
+    fields = list(
+      Title = title,
+      Description = description
+    ))
+  owd <- setwd(path)
+  usethis::use_roxygen_md()
+  usethis::use_readme_rmd(open = FALSE)
+  usethis::use_news_md(open = FALSE)
+  usethis::use_testthat()
+  usethis::use_spell_check()
+  usethis::use_pipe()
+  usethis::use_blank_slate("project")
+  usethis::use_directory("data-raw")
+  use_gitignore(browse = FALSE, overwrite = TRUE)
+  usethis::use_git(message = "Initialize package")
+  use_git_hook_precommit()
+  if (github) {
+    safe_github <- purrr::safely(usethis::use_github)
+    rs <- safe_github(organisation = github_org, private = github_private)
+    ok <- FALSE
+    if (!is.null(rs$error)) {
+      cli::cat_bullet(crayon::red("Error: "),
+                      stringr::str_trim(rs$error$message, side = "right"),
+                      bullet_col = "red")
+      ok <- !grepl("GitHub API error", rs$error$message)
+    }
+    if (ok) {
+      # Something went wrong with GitHub repo start up...but it probably wasn't fatal
+      usethis::use_github_links()
+      usethis::use_github_labels(delete_default = TRUE)
+    }
+  }
+  if (open && rstudioapi::hasFun("openProject")) {
+    cli::cat_bullet("Opening project in RStudio", bullet = "tick", bullet_col = "green")
+    rproj_path <- dir(path, pattern = "Rproj")
+    rstudioapi::openProject(rproj_path, newSession = TRUE)
+  } else if (open) {
+    cli::cat_bullet("Working directory set to new package directory", bullet = "tick", bullet_col = "green")
+  } else {
+    cli::cat_bullet("Package created in ", path, bullet = "tick", bullet_col = "green")
+    setwd(owd)
+  }
   invisible(TRUE)
 }

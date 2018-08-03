@@ -4,12 +4,15 @@
 \alias{use_gitignore}
 \title{Use Default .gitignore File}
 \usage{
-use_gitignore(directory = here::here(), browse = TRUE)
+use_gitignore(directory = here::here(), browse = TRUE,
+  overwrite = TRUE)
 }
 \arguments{
 \item{directory}{Directory for the .gitignore, defaults to project root.}
 
 \item{browse}{Open the .gitignore file after modifying?}
+
+\item{overwrite}{Should existing file be overwritten?}
 }
 \description{
 Copies the grkmisc default .gitignore file into the provided directory.
