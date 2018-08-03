@@ -1,3 +1,20 @@
-# grkmisc 0.0.0.9000
+# grkmisc 0.0.1
 
-* Added a `NEWS.md` file to track changes to the package.
+- A nice default R Markdown template available through RStudio new markdown file
+  "From Template" dialogue called "Garrick Default".
+
+- A Moffitt color palette and Moffitt colors CSV file.
+
+- A Moffitt-styled xaringan presentation template, also in the "From Template"
+  pane of RStudio's new markdown file dialogue as "Moffitt Xaringan".
+  
+- Copy code from the console and insert in "tidy" style using the "Insert Tidy-
+  Styled Code" RStudio addin. Breaks pipe and ggplot steps into individual lines.
+  
+- Shorten GitHub URLs with `shorten_github_url()`.
+
+- Create a brand new package with all the bells and whistles with
+  `use_grkmisc_starter_package()`.
+  
+- A couple helpers to install a default `.gitignore` file with `use_gitignore()`
+  and to install a helpful git pre-commit hook with `use_git_hook_precommit()`.
