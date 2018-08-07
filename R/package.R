@@ -94,9 +94,11 @@ use_grkmisc_starter_package <- function(
   usethis::use_pipe()
   usethis::use_blank_slate("project")
   usethis::use_directory("data-raw")
-  devtools::document(reload = FALSE)
+  cli::cat_bullet("Updating package documentation", bullet = "tick", bullet_col = "green")
+  devtools::document()
   use_gitignore(browse = FALSE, overwrite = TRUE)
-  usethis::use_git(message = "Initialize package")
+  cli::cat_bullet("Initializing git repo", bullet = "tick", bullet_col = "green")
+  repo <- git2r::init(usethis::proj_get())
   use_git_hook_precommit()
   if (github) {
     safe_github <- purrr::safely(usethis::use_github)
@@ -114,6 +116,16 @@ use_grkmisc_starter_package <- function(
       usethis::use_github_labels(delete_default = TRUE)
     }
   }
+
+  # Initial commit
+  paths <- unlist(git2r::status(repo))
+  ask_commit_msg <- glue::glue("OK to make initial commit of {length(paths)} files?")
+  if (yesno::yesno(ask_commit_msg)) {
+    cli::cat_bullet("Adding files and committing", bullet = "tick", bullet_col = "green")
+    git2r::add(repo, paths)
+    git2r::commit(repo, "Initialize package")
+  }
+
   if (open && rstudioapi::hasFun("openProject")) {
     cli::cat_bullet("Opening project in RStudio", bullet = "tick", bullet_col = "green")
     rproj_path <- dir(path, pattern = "Rproj")
