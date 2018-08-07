@@ -75,6 +75,7 @@ use_grkmisc_starter_package <- function(
   title = "What the Package Does (One Line, Title Case)",
   description = "What the package does (one paragraph)"
 ) {
+  done <- function(...) cli::cat_bullet(..., bullet = "tick", bullet_col = "green")
   required_pkgs <- setdiff(c("spelling", "roxygen2"), installed.packages()[, "Package"])
   if (length(required_pkgs)) {
     install.packages(required_pkgs)
@@ -94,10 +95,10 @@ use_grkmisc_starter_package <- function(
   usethis::use_pipe()
   usethis::use_blank_slate("project")
   usethis::use_directory("data-raw")
-  cli::cat_bullet("Updating package documentation", bullet = "tick", bullet_col = "green")
+  done("Updating package documentation")
   devtools::document()
   use_gitignore(browse = FALSE, overwrite = TRUE)
-  cli::cat_bullet("Initializing git repo", bullet = "tick", bullet_col = "green")
+  done("Initializing git repo")
   repo <- git2r::init(usethis::proj_get())
   use_git_hook_precommit()
   if (github) {
@@ -121,19 +122,20 @@ use_grkmisc_starter_package <- function(
   paths <- unlist(git2r::status(repo))
   ask_commit_msg <- glue::glue("OK to make initial commit of {length(paths)} files?")
   if (yesno::yesno(ask_commit_msg)) {
-    cli::cat_bullet("Adding files and committing", bullet = "tick", bullet_col = "green")
+    done("Adding files and committing")
     git2r::add(repo, paths)
     git2r::commit(repo, "Initialize package")
   }
 
   if (open && rstudioapi::hasFun("openProject")) {
-    cli::cat_bullet("Opening project in RStudio", bullet = "tick", bullet_col = "green")
+    done("Opening project in RStudio")
     rproj_path <- dir(path, pattern = "Rproj")
     rstudioapi::openProject(rproj_path, newSession = TRUE)
+    proj_set(owd)
   } else if (open) {
-    cli::cat_bullet("Working directory set to new package directory", bullet = "tick", bullet_col = "green")
+    done("Working directory set to new package directory")
   } else {
-    cli::cat_bullet("Package created in ", path, bullet = "tick", bullet_col = "green")
+    done("Package created in ", path)
     setwd(owd)
   }
   invisible(TRUE)
