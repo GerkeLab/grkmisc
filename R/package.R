@@ -94,6 +94,7 @@ use_grkmisc_starter_package <- function(
   usethis::use_pipe()
   usethis::use_blank_slate("project")
   usethis::use_directory("data-raw")
+  devtools::document(reload = FALSE)
   use_gitignore(browse = FALSE, overwrite = TRUE)
   usethis::use_git(message = "Initialize package")
   use_git_hook_precommit()
