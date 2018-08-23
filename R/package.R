@@ -148,9 +148,9 @@ use_starter_package <- function(
 #' @param path Path where the project will be started
 #' @export
 use_starter_project <- function(path) {
-  create_project(path, rstudio = TRUE)
-  use_blank_slate("project")
-  use_readme_rmd(FALSE)
+  usethis::create_project(path, rstudio = TRUE)
+  usethis::use_blank_slate("project")
+  usethis::use_readme_rmd(FALSE)
   done("Writing ", crayon::blue("'NEWS.md'"))
   news_md <- c("# News\n", strftime(Sys.time(), "## %F"), "\nProject Started")
   cat(news_md, file = "NEWS.md", sep = "\n")
