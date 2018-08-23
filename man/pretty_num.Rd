@@ -15,11 +15,6 @@ abbreviations.}
 
 \item{decimal_digits}{Number of digits to show after the decimal point in the
 selected unit.}
-
-\item{...}{Arguments passed on to \code{base::sprintf}
-\describe{
-  \item{fmt}{a character vector of format strings, each of up to 8192 bytes.}
-}}
 }
 \description{
 Pretty print scaled numbers
