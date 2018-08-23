@@ -95,7 +95,7 @@ use_starter_package <- function(
   usethis::use_blank_slate("project")
   usethis::use_directory("data-raw")
   done("Updating package documentation")
-  devtools::document()
+  devtools::document(usethis::proj_get())
   use_gitignore(browse = FALSE, overwrite = TRUE)
   done("Initializing git repo")
   repo <- git2r::init(usethis::proj_get())
@@ -153,7 +153,7 @@ use_starter_project <- function(path) {
   usethis::use_readme_rmd(FALSE)
   done("Writing ", crayon::blue("'NEWS.md'"))
   news_md <- c("# News\n", strftime(Sys.time(), "## %F"), "\nProject Started")
-  cat(news_md, file = "NEWS.md", sep = "\n")
-  git2r::init()
+  cat(news_md, file = file.path(usethis::proj_get(), "NEWS.md"), sep = "\n")
+  git2r::init(usethis::proj_get())
   done("Project started in ", path)
 }
