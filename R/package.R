@@ -152,8 +152,8 @@ use_starter_project <- function(path) {
   use_blank_slate("project")
   use_readme_rmd(FALSE)
   done("Writing ", crayon::blue("'NEWS.md'"))
-  news_md <- c("# News", strftime(Sys.time(), "## %F"), "", "Project Started")
-  cat(news_md, file = "NEWS.md")
+  news_md <- c("# News\n", strftime(Sys.time(), "## %F"), "\nProject Started")
+  cat(news_md, file = "NEWS.md", sep = "\n")
   git2r::init()
   done("Project started in ", path)
 }
