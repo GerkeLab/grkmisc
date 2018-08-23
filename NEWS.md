@@ -14,7 +14,9 @@
 - Shorten GitHub URLs with `shorten_github_url()`.
 
 - Create a brand new package with all the bells and whistles with
-  `use_grkmisc_starter_package()`.
+  `use_starter_package()`.
   
 - A couple helpers to install a default `.gitignore` file with `use_gitignore()`
   and to install a helpful git pre-commit hook with `use_git_hook_precommit()`.
+
+- Create a new project (not package) with `use_starter_project()`.

@@ -66,7 +66,7 @@ use_git_hook_precommit <- function() {
 #' @param description Package description: "What the package does (one
 #'   paragraph)"
 #' @export
-use_grkmisc_starter_package <- function(
+use_starter_package <- function(
   path,
   github = TRUE,
   github_org = NULL,
@@ -75,7 +75,6 @@ use_grkmisc_starter_package <- function(
   title = "What the Package Does (One Line, Title Case)",
   description = "What the package does (one paragraph)"
 ) {
-  done <- function(...) cli::cat_bullet(..., bullet = "tick", bullet_col = "green")
   required_pkgs <- setdiff(c("spelling", "roxygen2"), installed.packages()[, "Package"])
   if (length(required_pkgs)) {
     install.packages(required_pkgs)
@@ -139,4 +138,20 @@ use_grkmisc_starter_package <- function(
     setwd(owd)
   }
   invisible(TRUE)
+}
+
+#' Create a default project skeleton
+#'
+#' Uses [usethis] to create an empty project, with an RStudio project file and
+#' an initialized git repository in the specified path.
+#'
+#' @param path Path where the project will be started
+#' @export
+use_starter_project <- function(path) {
+  create_project(path, rstudio = TRUE)
+  use_blank_slate("project")
+  use_readme_rmd(FALSE)
+  use_news_md(FALSE)
+  git2r::init()
+  done("Project started in ", path)
 }
