@@ -14,6 +14,7 @@ rx_varname <- "\\*\\* FOR VARIABLE: (?<varname>[\\S\\s]+?) \\*\\*"
 rx_vartype <- "\\*\\* (?<vartype>[A-Z ]+) VARIABLE"
 rx_value <- "(^|\n)(?<value>(value|VALUE)[\\S\\s]+)"
 rx_sas_name <- "\\$?[a-zA-Z_][a-zA-Z0-9_]{0,31}"
+rx_value_var <- paste("^\\s*(VALUE|value)", rx_sas_name)
 
 # ---- Helpers to read proc format statements ----
 read_proc_format_statements <- function(file) {
@@ -75,7 +76,6 @@ labelize_values <- function(pf_value, pf_vartype, missing_values = c(".N")) {
   # "value pctfpsaf\n    .N = \"N/A\"\n  " -> c("N/A" = NA)
   # 'value draw_syv\n    0 = \"(0) T0\"\n    1 = \"(1) T1\"' -> c("(0) T0" = 0, "(1) T1" = 1)
   # " VALUE $formato2 'RED'='Rosso'\n 'YELLOW'='Giallo'\n 'BLUE'='Blu';" -> c("Rosso" = "RED", ...)
-  rx_value_var <- paste("^\\s*(VALUE|value)", rx_sas_name)
   pfv <- trim_leading(pf_value, rx_value_var)
   if (trim_both(pfv) == "") return(null_vartype(pf_vartype))
 
