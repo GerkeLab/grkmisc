@@ -1,6 +1,6 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.0.0.9018
+Version: 0.0.0.9019
 Authors@R: person("Garrick", "Aden-Buie", email =
         "Garrick.Aden-Buie@moffitt.org", role = c("aut", "cre"))
 Description: A package of miscellaneously helpful functions.
@@ -15,8 +15,10 @@ Imports:
     crayon,
     devtools,
     here,
+    labelled,
     magrittr,
     purrr,
+    rematch2,
     rlang (>= 0.1.2),
     rmdformats,
     stringr,
