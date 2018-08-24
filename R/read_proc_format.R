@@ -144,15 +144,16 @@ safe_value <- function(x, force_wrap = FALSE) {
 #'
 #' @param file Path to proc format file.
 #' @param verbose Writes out file path being read. May be removed in the future.
+#' @param missing_values Possible SAS values that should be treated as missing.
 #' @examples
 #' read_proc_format("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
 #' @export
-read_proc_format <- function(file, verbose = FALSE) {
+read_proc_format <- function(file, verbose = FALSE, missing_values = c(".F", ".M", ".N")) {
   if (verbose) cli::cat_bullet("Reading proc format: ", file)
   read_proc_format_statements(file) %>%
     purrr::map_df(extract_statement) %>%
-    dplyr::mutate(label = purrr::map2(value, vartype, labelize_values))
+    dplyr::mutate(label = purrr::map2(value, vartype, labelize_values, missing_values = missing_values))
 }
 
 #' Add labels from proc_format file to SAS data file
@@ -191,6 +192,7 @@ add_proc_format_labels <- function(df, proc_format, ...) {
 }
 
 apply_label_to_var <- function(df, var, labels) {
+  cli::cat_line("Applying labels to variable ", var)
   df[[var]] <- labelled::labelled(df[[var]], labels)
   df
 }

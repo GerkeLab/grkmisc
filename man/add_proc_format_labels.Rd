@@ -16,6 +16,7 @@ the results of \link{read_proc_format}.}
 \describe{
   \item{file}{Path to proc format file.}
   \item{verbose}{Writes out file path being read. May be removed in the future.}
+  \item{missing_values}{Possible SAS values that should be treated as missing.}
 }}
 }
 \description{

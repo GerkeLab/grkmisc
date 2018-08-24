@@ -4,12 +4,15 @@
 \alias{read_proc_format}
 \title{Read Proc Format File}
 \usage{
-read_proc_format(file, verbose = FALSE)
+read_proc_format(file, verbose = FALSE, missing_values = c(".F", ".M",
+  ".N"))
 }
 \arguments{
 \item{file}{Path to proc format file.}
 
 \item{verbose}{Writes out file path being read. May be removed in the future.}
+
+\item{missing_values}{Possible SAS values that should be treated as missing.}
 }
 \description{
 Read Proc Format File
