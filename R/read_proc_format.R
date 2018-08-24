@@ -1,3 +1,4 @@
+# ---- Helpers to strip leading/trailing elements from strings ----
 trim_leading <- function(x, regex = "\\s+") {
   sub(paste0("^", regex), "", x)
 }
@@ -7,6 +8,14 @@ trim_trailing <- function(x, regex = "\\s+") {
 
 trim_both <- function(x, regex = "\\s+") trim_leading(trim_trailing(x, regex), regex)
 
+# ---- Regexes ----
+rx_format <- "\\*\\* FORMAT: (?<format>[\\S\\s]+?) \\*\\*"
+rx_varname <- "\\*\\* FOR VARIABLE: (?<varname>[\\S\\s]+?) \\*\\*"
+rx_vartype <- "\\*\\* (?<vartype>[A-Z ]+) VARIABLE"
+rx_value <- "(^|\n)(?<value>(value|VALUE)[\\S\\s]+)"
+rx_sas_name <- "\\$?[a-zA-Z_][a-zA-Z0-9_]{0,31}"
+
+# ---- Helpers to read proc format statements ----
 read_proc_format_statements <- function(file) {
   pf_raw <- readLines(file)
   pf_raw <- paste(pf_raw, collapse = "\n")
@@ -28,11 +37,6 @@ read_proc_format_statements <- function(file) {
 
 
 extract_statement <- function(pf_statement) {
-  rx_format <- "\\*\\* FORMAT: (?<format>[\\S\\s]+?) \\*\\*"
-  rx_varname <- "\\*\\* FOR VARIABLE: (?<varname>[\\S\\s]+?) \\*\\*"
-  rx_vartype <- "\\*\\* (?<vartype>[A-Z ]+) VARIABLE"
-  rx_value <- "(^|\n)(?<value>(value|VALUE)[\\S\\s]+)"
-
   pf_format <- rematch2::re_match(pf_statement, rx_format)[, 'format']
   pf_varname <- rematch2::re_match(pf_statement, rx_varname)[, 'varname']
   pf_vartype <- rematch2::re_match(sub(rx_varname, "", pf_statement, perl = TRUE), rx_vartype)[, 'vartype']
@@ -42,10 +46,30 @@ extract_statement <- function(pf_statement) {
     pf_varname,
     pf_vartype,
     pf_value
+  ) %>%
+    dplyr::mutate(vartype = guess_vartype(vartype))
+}
+
+guess_vartype <- function(vartype) {
+  vartype[grepl("character", tolower(vartype))] <- "character"
+  vartype[grepl("numeric", tolower(vartype))] <- "numeric"
+  vartype[grepl("date", tolower(vartype))] <- "datetime"
+  vartype[grepl("iso", tolower(vartype))] <- "datetime"
+  vartype[is.na(vartype)] <- "factor"
+  vartype
+}
+
+null_vartype <- function(vartype) {
+  switch(
+    vartype,
+    character = character(0),
+    numeric = double(0),
+    datetime = as.POSIXct(character(0)),
+    factor(0)
   )
 }
 
-labelize_values <- function(pf_value) {
+labelize_values <- function(pf_value, pf_vartype, missing_values = c(".N")) {
   # "value $plco_idf\n  " -> c()
   # "value assaydaysf\n  " -> c()
   # "value pctfpsaf\n    .N = \"N/A\"\n  " -> c("N/A" = NA)
@@ -53,7 +77,7 @@ labelize_values <- function(pf_value) {
   # " VALUE $formato2 'RED'='Rosso'\n 'YELLOW'='Giallo'\n 'BLUE'='Blu';" -> c("Rosso" = "RED", ...)
   rx_value_var <- paste("^\\s*(VALUE|value)", rx_sas_name)
   pfv <- trim_leading(pf_value, rx_value_var)
-  if (trim_both(pfv) == "") return(character(0))
+  if (trim_both(pfv) == "") return(null_vartype(pf_vartype))
 
   pfv <- pfv %>%
     strsplit(split = "\n") %>%
@@ -66,11 +90,13 @@ labelize_values <- function(pf_value) {
     purrr::reduce_right(paste, collapse = ", ", sep = " = ") %>%
     paste0("c(", ., ")")
 
-  eval(parse(text = pfv))
+  convert_to_missing(eval(parse(text = pfv)), missing_values)
 }
 
-
-rx_sas_name <- "\\$?[a-zA-Z_][a-zA-Z0-9_]{0,31}"
+convert_to_missing <- function(values, missing_values = c(".N")) {
+  values[values %in% missing_values] <- NA
+  values
+}
 
 safe_value <- function(x, force_wrap = FALSE) {
   x <- trim_both(x)
@@ -101,5 +127,44 @@ safe_value <- function(x, force_wrap = FALSE) {
 read_proc_format <- function(file) {
   read_proc_format_statements(file) %>%
     purrr::map_df(extract_statement) %>%
-    dplyr::mutate(label = purrr::map(value, labelize_values))
+    dplyr::mutate(label = purrr::map2(value, vartype, labelize_values))
+}
+
+#' Add labels from proc_format file to SAS data file
+#'
+#' @param df Input data frame read from [haven::read_sas]
+#' @param proc_format Either path to SAS file with `proc format` statements or
+#'   the results of [read_proc_format].
+#' @examples
+#' bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d080516.sas7bdat")
+#' bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
+#'
+#' @export
+add_proc_format_labels <- function(df, proc_format) {
+  if (is.character(proc_format)) {
+    if (length(proc_format) == 1) {
+      proc_format <- read_proc_format(proc_format)
+    } else {
+      rlang::abort(paste("`proc_format` must be a path to SAS proc format file,",
+                   "or the result of reading such a file from `read_proc_format()`"))
+    }
+  }
+
+  pf <- purrr::set_names(
+    proc_format$label,
+    proc_format$varname
+  ) %>%
+    # Only apply labels if non-missing
+    purrr::keep(~ length(.[!is.na(.)]) > 0)
+
+  for (var in names(pf)) {
+    df <- apply_label_to_var(df, var, pf[[var]])
+  }
+
+  df
+}
+
+apply_label_to_var <- function(df, var, labels) {
+  df[[var]] <- labelled::labelled(df[[var]], labels)
+  df
 }
