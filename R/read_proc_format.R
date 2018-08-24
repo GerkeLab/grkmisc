@@ -85,12 +85,35 @@ labelize_values <- function(pf_value, pf_vartype, missing_values = c(".N")) {
     purrr::map_chr(trim_both) %>%
     purrr::map(~ strsplit(., "=")[[1]]) %>%
     purrr::keep(~ length(.) > 0) %>%
+    purrr::map(insert_quoted_equals) %>%
     purrr::transpose() %>%
     purrr::imap(~ safe_value(.x, .y == 2)) %>%
     purrr::reduce_right(paste, collapse = ", ", sep = " = ") %>%
     paste0("c(", ., ")")
 
   convert_to_missing(eval(parse(text = pfv)), missing_values)
+}
+
+#' Fixes issue where an equals character might be inside double quotes, in
+#' which case when splitting on "=" there may be an extra (or multiple splits).
+#' This function puts equals back inside *double quotes*. Doesn't work with
+#' single quotes.
+insert_quoted_equals <- function(x) {
+  q_count <- stringr::str_count(x, "\"")
+  if (sum(q_count) == 0) return(x)
+  if (sum(q_count) %% 2 != 0) {
+    rlang::warn(paste0("Mismatched quotes in string `", x, "`"))
+  }
+
+  q_idx <- which(stringr::str_count(x, "\"") == 1)
+  while (length(q_idx) >= 2) {
+    x <- c(x[0:(q_idx[1] - 1)],
+           paste(x[q_idx[1]:q_idx[2]], collapse = "="),
+           if (q_idx[2] < length(x)) x[(q_idx[2] + 1):length(x)]
+    )
+    q_idx <- which(stringr::str_count(x, "\"") == 1)
+  }
+  x
 }
 
 convert_to_missing <- function(values, missing_values = c(".N")) {
