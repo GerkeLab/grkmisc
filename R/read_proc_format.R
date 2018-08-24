@@ -120,11 +120,13 @@ safe_value <- function(x, force_wrap = FALSE) {
 #' Read Proc Format File
 #'
 #' @param file Path to proc format file.
+#' @param verbose Writes out file path being read. May be removed in the future.
 #' @examples
 #' read_proc_format("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
 #' @export
-read_proc_format <- function(file) {
+read_proc_format <- function(file, verbose = FALSE) {
+  if (verbose) cli::cat_bullet("Reading proc format: ", file)
   read_proc_format_statements(file) %>%
     purrr::map_df(extract_statement) %>%
     dplyr::mutate(label = purrr::map2(value, vartype, labelize_values))
@@ -135,15 +137,16 @@ read_proc_format <- function(file) {
 #' @param df Input data frame read from [haven::read_sas]
 #' @param proc_format Either path to SAS file with `proc format` statements or
 #'   the results of [read_proc_format].
+#' @inheritDotParams read_proc_format
 #' @examples
 #' bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d080516.sas7bdat")
 #' bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
 #' @export
-add_proc_format_labels <- function(df, proc_format) {
+add_proc_format_labels <- function(df, proc_format, ...) {
   if (is.character(proc_format)) {
     if (length(proc_format) == 1) {
-      proc_format <- read_proc_format(proc_format)
+      proc_format <- read_proc_format(proc_format, ...)
     } else {
       rlang::abort(paste("`proc_format` must be a path to SAS proc format file,",
                    "or the result of reading such a file from `read_proc_format()`"))

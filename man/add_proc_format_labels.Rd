@@ -4,13 +4,19 @@
 \alias{add_proc_format_labels}
 \title{Add labels from proc_format file to SAS data file}
 \usage{
-add_proc_format_labels(df, proc_format)
+add_proc_format_labels(df, proc_format, ...)
 }
 \arguments{
 \item{df}{Input data frame read from \link[haven:read_sas]{haven::read_sas}}
 
 \item{proc_format}{Either path to SAS file with \code{proc format} statements or
 the results of \link{read_proc_format}.}
+
+\item{...}{Arguments passed on to \code{read_proc_format}
+\describe{
+  \item{file}{Path to proc format file.}
+  \item{verbose}{Writes out file path being read. May be removed in the future.}
+}}
 }
 \description{
 Add labels from proc_format file to SAS data file

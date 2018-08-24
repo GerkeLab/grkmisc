@@ -4,10 +4,12 @@
 \alias{read_proc_format}
 \title{Read Proc Format File}
 \usage{
-read_proc_format(file)
+read_proc_format(file, verbose = FALSE)
 }
 \arguments{
 \item{file}{Path to proc format file.}
+
+\item{verbose}{Writes out file path being read. May be removed in the future.}
 }
 \description{
 Read Proc Format File
