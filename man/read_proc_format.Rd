@@ -4,8 +4,8 @@
 \alias{read_proc_format}
 \title{Read Proc Format File}
 \usage{
-read_proc_format(file, verbose = FALSE, missing_values = c(".F", ".M",
-  ".N"))
+read_proc_format(file, verbose = FALSE, missing_values = paste0(".",
+  c("", 1:9, LETTERS)))
 }
 \arguments{
 \item{file}{Path to proc format file.}
