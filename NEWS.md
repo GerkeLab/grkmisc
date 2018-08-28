@@ -20,3 +20,8 @@
   and to install a helpful git pre-commit hook with `use_git_hook_precommit()`.
 
 - Create a new project (not package) with `use_starter_project()`.
+
+- Import SAS format data files with `read_sas_format()`. Import SAS data files
+  and format files and apply labels directly to the data with 
+  `read_sas_with_format()`. Or apply the labels from a SAS format file using
+  `add_proc_format_labels()`.
