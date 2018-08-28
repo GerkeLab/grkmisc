@@ -33,3 +33,8 @@ bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d08
 bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 
 }
+\seealso{
+Other SAS helper functions: \code{\link{read_proc_format}},
+  \code{\link{read_sas_with_format}}
+}
+\concept{SAS helper functions}

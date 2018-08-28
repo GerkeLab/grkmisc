@@ -187,6 +187,7 @@ safe_value <- function(x, force_wrap = FALSE, missing_values = paste0(".", c("",
 #' @examples
 #' read_proc_format("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
+#' @family SAS helper functions
 #' @export
 read_proc_format <- function(
   file, verbose = FALSE,
@@ -213,6 +214,7 @@ read_proc_format <- function(
 #' bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d080516.sas7bdat")
 #' bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
+#' @family SAS helper functions
 #' @export
 add_proc_format_labels <- function(
   df,
@@ -258,15 +260,44 @@ add_proc_format_labels <- function(
   for (var in names(pf)) {
     var_labelled <- safely_label(df[[var]], pf[[var]])
     if (is.null(var_labelled$error)) {
-      cli::cat_line("Applying labels to variable ", var)
+      cli::cat_bullet("Applying labels to variable ", var, bullet = "continue")
       df[[var]] <- var_labelled$result
     } else {
       cli::cat_bullet("Unable to apply label to ",
                       crayon::bold(var), ": ",
-                      var_labelled$error,
+                      trim_both(var_labelled$error),
                       bullet = "cross", bullet_col = "red")
     }
   }
 
   df
+}
+
+
+#' Read SAS file and label according to PROC FORMAT
+#'
+#' Reads a SAS `sas7bdat` file using [haven::read_sas] and then applies the
+#' labels given in the formats file (containing `PROC FORMAT` statements).
+#' The labels use [labelled::labelled] and may be coerced to factors if desired.
+#'
+#' @param file_bdat Path to the `sas7bdat` file to be read by [haven::read_sas]
+#' @param file_format Path to the SAS formats file to be read by [read_proc_format]
+#' @inheritParams read_proc_format
+#' @inheritDotParams haven::read_sas
+#' @family SAS helper functions
+#' @export
+read_sas_with_format <- function(
+  file_bdat,
+  file_format,
+  verbose = FALSE,
+  missing_values = paste0(".", c("", 1:9, LETTERS)),
+  ...
+) {
+  if (verbose) cli::cat_bullet("Reading SAS file: ", file_bdat)
+  bdat <- haven::read_sas(file_bdat, ...)
+
+  add_proc_format_labels(
+    bdat, file_format,
+    verbose = verbose, missing_values = missing_values
+  )
 }
