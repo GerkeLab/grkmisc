@@ -260,13 +260,14 @@ add_proc_format_labels <- function(
   for (var in names(pf)) {
     var_labelled <- safely_label(df[[var]], pf[[var]])
     if (is.null(var_labelled$error)) {
-      cli::cat_bullet("Applying labels to variable ", var, bullet = "continue")
+      if (verbose) cli::cat_bullet("Applying labels to variable ", var, bullet = "continue")
       df[[var]] <- var_labelled$result
     } else {
-      cli::cat_bullet("Unable to apply label to ",
-                      crayon::bold(var), ": ",
-                      trim_both(var_labelled$error),
-                      bullet = "cross", bullet_col = "red")
+      if (verbose) cli::cat_bullet(
+        "Unable to apply label to ",
+        crayon::bold(var), ": ",
+        trim_both(var_labelled$error),
+        bullet = "cross", bullet_col = "red")
     }
   }
 
