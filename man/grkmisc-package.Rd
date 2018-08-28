@@ -11,8 +11,8 @@ A package of miscellaneously helpful functions.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/gadenbuie/grkmisc}
-  \item Report bugs at \url{https://github.com/gadenbuie/grkmisc/issues}
+  \item \url{https://github.com/gerkelab/grkmisc}
+  \item Report bugs at \url{https://github.com/gerkelab/grkmisc/issues}
 }
 
 }

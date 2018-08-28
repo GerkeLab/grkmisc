@@ -1,12 +1,12 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.0.0.9039
+Version: 0.0.0.9040
 Authors@R: person("Garrick", "Aden-Buie", email =
         "Garrick.Aden-Buie@moffitt.org", role = c("aut", "cre"))
 Description: A package of miscellaneously helpful functions.
 License: MIT + file LICENSE
-URL: https://github.com/gadenbuie/grkmisc
-BugReports: https://github.com/gadenbuie/grkmisc/issues
+URL: https://github.com/gerkelab/grkmisc
+BugReports: https://github.com/gerkelab/grkmisc/issues
 Imports: 
     assertthat,
     cli,
