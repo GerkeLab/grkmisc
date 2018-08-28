@@ -70,7 +70,10 @@ null_vartype <- function(vartype) {
   )
 }
 
-labelize_values <- function(pf_value, pf_vartype, missing_values = c(".N")) {
+labelize_values <- function(
+  pf_value, pf_vartype,
+  missing_values = paste0(".", c("", 1:9, LETTERS))
+) {
   # "value $plco_idf\n  " -> c()
   # "value assaydaysf\n  " -> c()
   # "value pctfpsaf\n    .N = \"N/A\"\n  " -> c("N/A" = NA)
@@ -91,7 +94,7 @@ labelize_values <- function(pf_value, pf_vartype, missing_values = c(".N")) {
     purrr::reduce_right(paste, collapse = ", ", sep = " = ") %>%
     paste0("c(", ., ")")
 
-  convert_to_missing(eval(parse(text = pfv)), missing_values)
+  eval(parse(text = pfv))
 }
 
 #' Fixes issue where an equals character might be inside double quotes, in
@@ -116,13 +119,14 @@ insert_quoted_equals <- function(x) {
   x
 }
 
-convert_to_missing <- function(values, missing_values = c(".N")) {
+convert_to_missing <- function(values, missing_values = paste0(".", c("", 1:9, LETTERS))) {
   values[values %in% missing_values] <- NA
   values
 }
 
-safe_value <- function(x, force_wrap = FALSE) {
+safe_value <- function(x, force_wrap = FALSE, missing_values = paste0(".", c("", 1:9, LETTERS))) {
   x <- trim_both(x)
+  x <- convert_to_missing(x, missing_values)
 
   # Already wrapped in quotes
   if (all(grepl("^\"|\"$", x))) return(x)
@@ -149,7 +153,10 @@ safe_value <- function(x, force_wrap = FALSE) {
 #' read_proc_format("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
 #' @export
-read_proc_format <- function(file, verbose = FALSE, missing_values = c(".F", ".M", ".N")) {
+read_proc_format <- function(
+  file, verbose = FALSE,
+  missing_values = paste0(".", c("", 1:9, LETTERS))
+) {
   if (verbose) cli::cat_bullet("Reading proc format: ", file)
   read_proc_format_statements(file) %>%
     purrr::map_df(extract_statement) %>%
@@ -177,6 +184,11 @@ add_proc_format_labels <- function(df, proc_format, ...) {
     }
   }
 
+  if (any(duplicated(proc_format$varname))) {
+    rlang::warn("Duplicate variables found in `proc_format`, using first defined.")
+    proc_format <- filter(proc_format, !duplicated(varname))
+  }
+
   pf <- purrr::set_names(
     proc_format$label,
     proc_format$varname
@@ -184,15 +196,21 @@ add_proc_format_labels <- function(df, proc_format, ...) {
     # Only apply labels if non-missing
     purrr::keep(~ length(.[!is.na(.)]) > 0)
 
+  possibly_label <- purrr::safely(labelled::labelled)
+
   for (var in names(pf)) {
-    df <- apply_label_to_var(df, var, pf[[var]])
+    if (var == "biopplink0-5") browser()
+    var_labelled <- possibly_label(df[[var]], pf[[var]])
+    if (is.null(var_labelled$error)) {
+      cli::cat_line("Applying labels to variable ", var)
+      df[[var]] <- var_labelled
+    } else {
+      cli::cat_bullet("Unable to apply label to ",
+                      crayon::bold(var), ": ",
+                      var_labelled$error,
+                      bullet = "cross", bullet_col = "red")
+    }
   }
 
-  df
-}
-
-apply_label_to_var <- function(df, var, labels) {
-  cli::cat_line("Applying labels to variable ", var)
-  df[[var]] <- labelled::labelled(df[[var]], labels)
   df
 }
