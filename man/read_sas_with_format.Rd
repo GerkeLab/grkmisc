@@ -4,17 +4,20 @@
 \alias{read_sas_with_format}
 \title{Read SAS file and label according to PROC FORMAT}
 \usage{
-read_sas_with_format(file_bdat, file_format, verbose = FALSE,
-  missing_values = paste0(".", c("", 1:9, LETTERS)), ...)
+read_sas_with_format(file_bdat, file_format, as_factor = FALSE,
+  missing_values = paste0(".", c("", 1:9, LETTERS)), verbose = FALSE,
+  ...)
 }
 \arguments{
 \item{file_bdat}{Path to the \code{sas7bdat} file to be read by \link[haven:read_sas]{haven::read_sas}}
 
 \item{file_format}{Path to the SAS formats file to be read by \link{read_proc_format}}
 
-\item{verbose}{Writes out file path being read. May be removed in the future.}
+\item{as_factor}{Convert labelled variables to factor with \link[haven:as_factor]{haven::as_factor}?}
 
 \item{missing_values}{Possible SAS values that should be treated as missing.}
+
+\item{verbose}{Writes out file path being read. May be removed in the future.}
 
 \item{...}{Arguments passed on to \code{haven::read_sas}
 \describe{

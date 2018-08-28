@@ -4,14 +4,16 @@
 \alias{add_proc_format_labels}
 \title{Add labels from proc_format file to SAS data file}
 \usage{
-add_proc_format_labels(df, proc_format, varname_case = c("lower",
-  "upper"), ...)
+add_proc_format_labels(df, proc_format, as_factor = FALSE,
+  varname_case = c("lower", "upper"), verbose = FALSE, ...)
 }
 \arguments{
 \item{df}{Input data frame read from \link[haven:read_sas]{haven::read_sas}}
 
 \item{proc_format}{Either path to SAS file with \code{proc format} statements or
 the results of \link{read_proc_format}.}
+
+\item{as_factor}{Convert labelled variables to factor with \link[haven:as_factor]{haven::as_factor}?}
 
 \item{varname_case}{SAS variable names are not case-sensitive, but R variable
 names are. Choose one of \code{"lower"} or \code{"upper"} case to normalize the
