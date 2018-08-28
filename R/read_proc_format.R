@@ -231,7 +231,6 @@ add_proc_format_labels <- function(df, proc_format, ...) {
   possibly_label <- purrr::safely(labelled::labelled)
 
   for (var in names(pf)) {
-    if (var == "biopplink0-5") browser()
     var_labelled <- possibly_label(df[[var]], pf[[var]])
     if (is.null(var_labelled$error)) {
       cli::cat_line("Applying labels to variable ", var)
