@@ -132,10 +132,10 @@ labelize_values <- function(
   eval(parse(text = pfv))
 }
 
-#' Fixes issue where an equals character might be inside double quotes, in
-#' which case when splitting on "=" there may be an extra (or multiple splits).
-#' This function puts equals back inside *double quotes*. Doesn't work with
-#' single quotes.
+# Fixes issue where an equals character might be inside double quotes, in
+# which case when splitting on "=" there may be an extra (or multiple splits).
+# This function puts equals back inside *double quotes*. Doesn't work with
+# single quotes.
 insert_quoted_equals <- function(x) {
   q_count <- stringr::str_count(x, "\"")
   if (sum(q_count) == 0) return(x)

@@ -14,7 +14,6 @@ reference:
 - title: RStudio Addins
   desc: ~
   contents:
-  - '`insert_quoted_equals`'
   - '`insert_styled_text`'
   - '`style_console`'
 - title: Packages and Projects
