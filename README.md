@@ -3,12 +3,13 @@
 
 # grkmisc
 
-The goal of grkmisc is to be helpful, mostly to me.
+The goal of grkmisc is to be helpful, but mostly to
+[GerkeLab](https://gerkelab.com).
 
 ## Installation
 
 ``` r
-devtools::install_github("gadenbuie/grkmisc")
+devtools::install_github("gerkelab/grkmisc")
 ```
 
 -----

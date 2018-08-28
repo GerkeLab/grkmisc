@@ -1,6 +1,6 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.0.0.9036
+Version: 0.0.0.9037
 Authors@R: person("Garrick", "Aden-Buie", email =
         "Garrick.Aden-Buie@moffitt.org", role = c("aut", "cre"))
 Description: A package of miscellaneously helpful functions.
