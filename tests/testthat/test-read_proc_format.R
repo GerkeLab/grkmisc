@@ -1,4 +1,4 @@
-context("test-labelize_values")
+context("test read_proc_format functions")
 
 test_that("labelize_values generally works", {
   value_good <- "value dcf_unddeath_ccodef\n    1 = \"Abdomen\"\n    2 = \"Adrenal glands\"\n"
