@@ -60,6 +60,38 @@ guess_vartype <- function(vartype) {
   vartype
 }
 
+expand_varnames <- function(pfdf) {
+  # takes output from expand_statement where varnames may be like `x0-5`
+  # expands varname to be `x0`, `x1`, ..., `x5`
+
+  pfdf_names <- names(pfdf)
+
+  pfdf %>%
+    split(.$format) %>%
+    purrr::map_df(~ cbind(
+      .[, setdiff(pfdf_names, "varname")],
+      dplyr::data_frame(varname = expand_varname(.$varname))
+    )) %>%
+    dplyr::as_tibble() %>%
+    dplyr::select(pfdf_names)
+}
+
+expand_varname <- function(varname) {
+  if (!grepl("\\d-\\d", varname)) return(varname)
+
+  idx_num <- regexec("\\d+-\\d", varname)[[1]][1]
+  var_base <- substring(varname, 1, idx_num - 1)
+  var_indexes <- strsplit(substring(varname, idx_num), "-")[[1]]
+  var_indexes <- try({
+    as.integer(var_indexes)
+  })
+  if (!is.integer(var_indexes) || length(var_indexes) != 2) {
+    message("Check: ", varname)
+    return(varname)
+  }
+  paste0(var_base, var_indexes[1]:var_indexes[2])
+}
+
 null_vartype <- function(vartype) {
   switch(
     vartype,
