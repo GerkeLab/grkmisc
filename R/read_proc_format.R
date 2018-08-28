@@ -253,13 +253,13 @@ add_proc_format_labels <- function(
     # Only apply labels if non-missing
     purrr::keep(~ length(.[!is.na(.)]) > 0)
 
-  possibly_label <- purrr::safely(labelled::labelled)
+  safely_label <- purrr::safely(labelled::labelled)
 
   for (var in names(pf)) {
-    var_labelled <- possibly_label(df[[var]], pf[[var]])
+    var_labelled <- safely_label(df[[var]], pf[[var]])
     if (is.null(var_labelled$error)) {
       cli::cat_line("Applying labels to variable ", var)
-      df[[var]] <- var_labelled
+      df[[var]] <- var_labelled$result
     } else {
       cli::cat_bullet("Unable to apply label to ",
                       crayon::bold(var), ": ",
