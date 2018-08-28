@@ -204,13 +204,22 @@ read_proc_format <- function(
 #' @param df Input data frame read from [haven::read_sas]
 #' @param proc_format Either path to SAS file with `proc format` statements or
 #'   the results of [read_proc_format].
+#' @param varname_case SAS variable names are not case-sensitive, but R variable
+#'   names are. Choose one of `"lower"` or `"upper"` case to normalize the
+#'   variable names in `df` and the `varnames` column of `proc_format`. Or set
+#'   equal to NULL to leave both as-is.
 #' @inheritDotParams read_proc_format
 #' @examples
 #' bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d080516.sas7bdat")
 #' bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
 #'
 #' @export
-add_proc_format_labels <- function(df, proc_format, ...) {
+add_proc_format_labels <- function(
+  df,
+  proc_format,
+  varname_case = c("lower", "upper"),
+  ...
+) {
   if (is.character(proc_format)) {
     if (length(proc_format) == 1) {
       proc_format <- read_proc_format(proc_format, ...)
@@ -224,6 +233,18 @@ add_proc_format_labels <- function(df, proc_format, ...) {
     rlang::warn("Duplicate variables found in `proc_format`, using first defined.")
     proc_format <- filter(proc_format, !duplicated(varname))
   }
+
+  varname_case <- if (!is.null(varname_case)) match.arg(varname_case) else "default"
+
+  varname_transformer <- switch(
+    varname_case,
+    "lower" = tolower,
+    "upper" = toupper,
+    I
+  )
+
+  names(df) <- varname_transformer(names(df))
+  proc_format$varname <- varname_transformer(proc_format$varname)
 
   pf <- purrr::set_names(
     proc_format$label,
