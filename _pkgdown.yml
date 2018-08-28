@@ -1,0 +1,34 @@
+reference:
+- title: Templates
+  desc: "Templates for R Markdown, Slides, Plots, etc."
+  contents:
+  - '`moffitt_colors`'
+- title: Helper Functions
+  desc: "General helper functions that make things easier."
+  contents:
+  - '`shorten_github_url`'
+  - '`pretty_num`'
+  - '`knitr_list_cache`'
+  - '`knitr_load_cache`'
+  - '`auto_extract`'
+- title: RStudio Addins
+  desc: ~
+  contents:
+  - '`insert_quoted_equals`'
+  - '`insert_styled_text`'
+  - '`style_console`'
+- title: Packages and Projects
+  desc: "Helper functions to start up packages or projects."
+  contents:
+  - '`use_starter_package`'
+  - '`use_starter_project`'
+  - '`use_gitignore`'
+  - '`use_git_hook_precommit`'
+- title: Data Import
+  desc: "Import Data"
+  contents:
+  - '`read_csv_filtered`'
+  - '`read_tsv_filtered`'
+  - '`read_sas_with_format`'
+  - '`read_proc_format`'
+  - '`add_proc_format_labels`'
