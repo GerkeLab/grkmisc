@@ -18,7 +18,9 @@ read_proc_format(file, verbose = FALSE, missing_values = paste0(".",
 Read Proc Format File
 }
 \examples{
-read_proc_format("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
+\dontrun{
+read_proc_format("freepsa.sas_formats.feb16.d080516.sas")
+}
 
 }
 \seealso{

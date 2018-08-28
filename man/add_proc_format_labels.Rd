@@ -31,8 +31,10 @@ equal to NULL to leave both as-is.}
 Add labels from proc_format file to SAS data file
 }
 \examples{
-bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d080516.sas7bdat")
-bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
+\dontrun{
+bdat <- haven::read_sas("freepsa_data_feb16_d080516.sas7bdat")
+bdat2 <- add_proc_format_labels(bdat, "freepsa.sas_formats.feb16.d080516.sas")
+}
 
 }
 \seealso{

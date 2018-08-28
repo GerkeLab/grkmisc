@@ -185,7 +185,9 @@ safe_value <- function(x, force_wrap = FALSE, missing_values = paste0(".", c("",
 #' @param verbose Writes out file path being read. May be removed in the future.
 #' @param missing_values Possible SAS values that should be treated as missing.
 #' @examples
-#' read_proc_format("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
+#' \dontrun{
+#' read_proc_format("freepsa.sas_formats.feb16.d080516.sas")
+#' }
 #'
 #' @family SAS helper functions
 #' @export
@@ -212,8 +214,10 @@ read_proc_format <- function(
 #' @param as_factor Convert labelled variables to factor with [haven::as_factor]?
 #' @inheritDotParams read_proc_format
 #' @examples
-#' bdat <- haven::read_sas("/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa_data_feb16_d080516.sas7bdat")
-#' bdat2 <- add_proc_format_labels(bdat, "/Volumes/Lab_Gerke/PLCO/Free PSA/freepsa.sas_formats.feb16.d080516.sas")
+#' \dontrun{
+#' bdat <- haven::read_sas("freepsa_data_feb16_d080516.sas7bdat")
+#' bdat2 <- add_proc_format_labels(bdat, "freepsa.sas_formats.feb16.d080516.sas")
+#' }
 #'
 #' @family SAS helper functions
 #' @export
@@ -291,6 +295,11 @@ add_proc_format_labels <- function(
 #' @inheritParams read_proc_format
 #' @inheritParams add_proc_format_labels
 #' @inheritDotParams haven::read_sas
+#' @examples
+#' \dontrun{
+#' read_sas_with_format("freepsa_data_feb16_d080516.sas7bdat", "freepsa.sas_formats.feb16.d080516.sas")
+#' }
+#'
 #' @family SAS helper functions
 #' @export
 read_sas_with_format <- function(

@@ -42,6 +42,12 @@ Reads a SAS \code{sas7bdat} file using \link[haven:read_sas]{haven::read_sas} an
 labels given in the formats file (containing \code{PROC FORMAT} statements).
 The labels use \link[labelled:labelled]{labelled::labelled} and may be coerced to factors if desired.
 }
+\examples{
+\dontrun{
+read_sas_with_format("freepsa_data_feb16_d080516.sas7bdat", "freepsa.sas_formats.feb16.d080516.sas")
+}
+
+}
 \seealso{
 Other SAS helper functions: \code{\link{add_proc_format_labels}},
   \code{\link{read_proc_format}}
