@@ -63,6 +63,8 @@ guess_vartype <- function(vartype) {
 expand_varnames <- function(pfdf) {
   # takes output from expand_statement where varnames may be like `x0-5`
   # expands varname to be `x0`, `x1`, ..., `x5`
+  #
+  # Does variable expansion by format name because this will be unique (1 row)
 
   pfdf_names <- names(pfdf)
 
@@ -77,6 +79,7 @@ expand_varnames <- function(pfdf) {
 }
 
 expand_varname <- function(varname) {
+  # Expands a string like `"x0-1"` to `c("x0", "x1", "x2")`
   if (!grepl("\\d-\\d", varname)) return(varname)
 
   idx_num <- regexec("\\d+-\\d", varname)[[1]][1]
@@ -192,7 +195,8 @@ read_proc_format <- function(
   if (verbose) cli::cat_bullet("Reading proc format: ", file)
   read_proc_format_statements(file) %>%
     purrr::map_df(extract_statement) %>%
-    dplyr::mutate(label = purrr::map2(value, vartype, labelize_values, missing_values = missing_values))
+    dplyr::mutate(label = purrr::map2(value, vartype, labelize_values, missing_values = missing_values)) %>%
+    expand_varnames()
 }
 
 #' Add labels from proc_format file to SAS data file
