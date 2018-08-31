@@ -14,6 +14,8 @@
 # eg "doIncrement=FALSE git commit -m "commit message"".
 # This is useful when you change the major version number for example.
 
+ALLOWED_BRANCHES <- c("master", "dev")
+
 doIncrement <- TRUE # default
 
 # get the environment variable and modify if necessary
@@ -22,10 +24,14 @@ if (!is.na(tmpEnv)){
   doIncrement <- tmpEnv
 }
 
+ok_branch <- system("git rev-parse --abbrev-ref HEAD", intern=TRUE) %in% ALLOWED_BRANCHES
+if (!ok_branch) cat("** Skipping version bump while not in", paste(ALLOWED_BRANCHES, collapse = ", "), "\n")
+doIncrement <- doIncrement && ok_branch
+
 # check that there are files that will be committed, don't want to increment version if there won't be a commit
 fileDiff <- system("git diff HEAD --name-only", intern=TRUE)
 
-if ("DESCRIPTION" %in% fileDiff) {
+if (doIncrement && "DESCRIPTION" %in% fileDiff) {
   # Don't want to overwrite manual version bump
   desc_diff <- system("git diff HEAD DESCRIPTION", intern = TRUE)
   doIncrement <- !any(grepl("\\+Version", desc_diff))
