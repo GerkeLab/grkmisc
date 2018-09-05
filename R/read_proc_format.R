@@ -38,10 +38,10 @@ read_proc_format_statements <- function(file) {
 
 
 extract_statement <- function(pf_statement) {
-  pf_format <- rematch2::re_match(pf_statement, rx_format)[, 'format']
+  pf_format  <- rematch2::re_match(pf_statement, rx_format)[, 'format']
   pf_varname <- rematch2::re_match(pf_statement, rx_varname)[, 'varname']
   pf_vartype <- rematch2::re_match(sub(rx_varname, "", pf_statement, perl = TRUE), rx_vartype)[, 'vartype']
-  pf_value <- rematch2::re_match(pf_statement, rx_value)[, 'value']
+  pf_value   <- rematch2::re_match(pf_statement, rx_value)[, 'value']
   dplyr::bind_cols(
     pf_format,
     pf_varname,
@@ -83,7 +83,7 @@ expand_varname <- function(varname) {
   if (!grepl("\\d-\\d", varname)) return(varname)
 
   idx_num <- regexec("\\d+-\\d", varname)[[1]][1]
-  var_base <- substring(varname, 1, idx_num - 1)
+  var_base    <- substring(varname, 1, idx_num - 1)
   var_indexes <- strsplit(substring(varname, idx_num), "-")[[1]]
   var_indexes <- try({
     as.integer(var_indexes)
@@ -212,6 +212,9 @@ read_proc_format <- function(
 #'   variable names in `df` and the `varnames` column of `proc_format`. Or set
 #'   equal to NULL to leave both as-is.
 #' @param as_factor Convert labelled variables to factor with [haven::as_factor]?
+#' @param debug_level Default is `0`. Level `1` prints confirmation of reading
+#'   `proc_format` file. Level `2` prints confirmation that the labels were
+#'   applied to each variable in `df`.
 #' @inheritDotParams read_proc_format
 #' @examples
 #' \dontrun{
@@ -226,17 +229,18 @@ add_proc_format_labels <- function(
   proc_format,
   as_factor = FALSE,
   varname_case = c("lower", "upper"),
-  verbose = FALSE,
+  debug_level = 0,
   ...
 ) {
   if (is.character(proc_format)) {
     if (length(proc_format) == 1) {
-      proc_format <- read_proc_format(proc_format, ...)
+      proc_format <- read_proc_format(proc_format, debug_level > 0, ...)
     } else {
       rlang::abort(paste("`proc_format` must be a path to SAS proc format file,",
                    "or the result of reading such a file from `read_proc_format()`"))
     }
   }
+  verbose <- debug_level > 1
 
   if (any(duplicated(proc_format$varname))) {
     rlang::warn("Duplicate variables found in `proc_format`, using first defined.")
@@ -307,14 +311,14 @@ read_sas_with_format <- function(
   file_format,
   as_factor = FALSE,
   missing_values = paste0(".", c("", 1:9, LETTERS)),
-  verbose = FALSE,
+  debug_level = 0,
   ...
 ) {
-  if (verbose) cli::cat_bullet("Reading SAS file: ", file_bdat)
+  if (debug_level > 0) cli::cat_bullet("Reading SAS file: ", file_bdat)
   bdat <- haven::read_sas(file_bdat, ...)
 
   add_proc_format_labels(
     bdat, file_format,
-    as_factor = as_factor, verbose = verbose, missing_values = missing_values
+    as_factor = as_factor, debug_level = debug_level, missing_values = missing_values
   )
 }

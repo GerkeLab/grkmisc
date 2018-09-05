@@ -5,7 +5,7 @@
 \title{Read SAS file and label according to PROC FORMAT}
 \usage{
 read_sas_with_format(file_bdat, file_format, as_factor = FALSE,
-  missing_values = paste0(".", c("", 1:9, LETTERS)), verbose = FALSE,
+  missing_values = paste0(".", c("", 1:9, LETTERS)), debug_level = 0,
   ...)
 }
 \arguments{
@@ -17,7 +17,9 @@ read_sas_with_format(file_bdat, file_format, as_factor = FALSE,
 
 \item{missing_values}{Possible SAS values that should be treated as missing.}
 
-\item{verbose}{Writes out file path being read. May be removed in the future.}
+\item{debug_level}{Default is \code{0}. Level \code{1} prints confirmation of reading
+\code{proc_format} file. Level \code{2} prints confirmation that the labels were
+applied to each variable in \code{df}.}
 
 \item{...}{Arguments passed on to \code{haven::read_sas}
 \describe{

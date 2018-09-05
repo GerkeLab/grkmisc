@@ -5,7 +5,7 @@
 \title{Add labels from proc_format file to SAS data file}
 \usage{
 add_proc_format_labels(df, proc_format, as_factor = FALSE,
-  varname_case = c("lower", "upper"), verbose = FALSE, ...)
+  varname_case = c("lower", "upper"), debug_level = 0, ...)
 }
 \arguments{
 \item{df}{Input data frame read from \link[haven:read_sas]{haven::read_sas}}
@@ -19,6 +19,10 @@ the results of \link{read_proc_format}.}
 names are. Choose one of \code{"lower"} or \code{"upper"} case to normalize the
 variable names in \code{df} and the \code{varnames} column of \code{proc_format}. Or set
 equal to NULL to leave both as-is.}
+
+\item{debug_level}{Default is \code{0}. Level \code{1} prints confirmation of reading
+\code{proc_format} file. Level \code{2} prints confirmation that the labels were
+applied to each variable in \code{df}.}
 
 \item{...}{Arguments passed on to \code{read_proc_format}
 \describe{
