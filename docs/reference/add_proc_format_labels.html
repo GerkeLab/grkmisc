@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9039</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9042</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>add_proc_format_labels</span>(<span class='no'>df</span>, <span class='no'>proc_format</span>, <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>varname_case</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>varname_case</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>), <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,6 +136,12 @@ the results of <a href='read_proc_format.html'>read_proc_format</a>.</p></td>
 names are. Choose one of <code>"lower"</code> or <code>"upper"</code> case to normalize the
 variable names in <code>df</code> and the <code>varnames</code> column of <code>proc_format</code>. Or set
 equal to NULL to leave both as-is.</p></td>
+    </tr>
+    <tr>
+      <th>debug_level</th>
+      <td><p>Default is <code>0</code>. Level <code>1</code> prints confirmation of reading
+<code>proc_format</code> file. Level <code>2</code> prints confirmation that the labels were
+applied to each variable in <code>df</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

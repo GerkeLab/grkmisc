@@ -63,7 +63,7 @@ The labels use labelled::labelled and may be coerced to factors if desired." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9039</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9042</span>
       </span>
     </div>
 
@@ -116,7 +116,7 @@ The labels use <a href='http://www.rdocumentation.org/packages/labelled/topics/l
     </div>
 
     <pre class="usage"><span class='fu'>read_sas_with_format</span>(<span class='no'>file_bdat</span>, <span class='no'>file_format</span>, <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"."</span>, <span class='fu'>c</span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>)), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"."</span>, <span class='fu'>c</span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>)), <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -139,8 +139,10 @@ The labels use <a href='http://www.rdocumentation.org/packages/labelled/topics/l
       <td><p>Possible SAS values that should be treated as missing.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>Writes out file path being read. May be removed in the future.</p></td>
+      <th>debug_level</th>
+      <td><p>Default is <code>0</code>. Level <code>1</code> prints confirmation of reading
+<code>proc_format</code> file. Level <code>2</code> prints confirmation that the labels were
+applied to each variable in <code>df</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
