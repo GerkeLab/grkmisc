@@ -2,3 +2,13 @@ Name: Insert Tidy-Styled Code
 Description: Insert code from clipboard at cursor, following the tidyverse style guide.
 Binding: insert_styled_text
 Interactive: false
+
+Name: Insert Relative Directory Path
+Description: Insert relative path to the directory containing the active file
+Binding: insert_path_dir_active
+Interactive: false
+
+Name: Insert Absolute Directory Path
+Description: Insert relative path to the directory containing the active file
+Binding: insert_path_dir_active_abs
+Interactive: false
