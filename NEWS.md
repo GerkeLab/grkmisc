@@ -25,3 +25,7 @@
   and format files and apply labels directly to the data with 
   `read_sas_with_format()`. Or apply the labels from a SAS format file using
   `add_proc_format_labels()`.
+
+- Insert the relative or absolute path to the directory containing the active
+  document with the RStudio Addins "Insert Relative Directory Path" or
+  "Insert Absolute Directory Path".

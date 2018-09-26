@@ -16,6 +16,7 @@ reference:
   contents:
   - '`insert_styled_text`'
   - '`style_console`'
+  - '`insert_path_dir_active`'
 - title: Packages and Projects
   desc: "Helper functions to start up packages or projects."
   contents:
