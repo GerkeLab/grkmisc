@@ -18,4 +18,12 @@ A CSS palette is included as well, that can be found via
 \code{system.file("moffitt-colors.css", package = "grkmisc")}.
 }
 
+\examples{
+str(moffitt_colors)
+scales::show_col(unlist(moffitt_colors))
+
+}
+\seealso{
+theme_moffitt
+}
 \keyword{datasets}

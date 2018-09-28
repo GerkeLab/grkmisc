@@ -3,7 +3,7 @@ reference:
   desc: "Templates for R Markdown, Slides, Plots, etc."
   contents:
   - '`theme_moffitt`'
-  - '`moffitt_colors`'
+  - matches("color|fill|theme")
 - title: Helper Functions
   desc: "General helper functions that make things easier."
   contents:
