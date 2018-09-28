@@ -54,7 +54,7 @@ theme_moffitt <- function(
   axis_title_size    = 13,
   subtitle_size      = 13,
   default_geom_font  = "Fira Sans Condensed",
-  default_geom_color = moffitt_colors$blue,
+  default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color    = "#6e6e6e",
   plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
@@ -88,7 +88,7 @@ theme_grk <- function(
   axis_title_size    = 13,
   subtitle_size      = 13,
   default_geom_font  = "Fira Sans Condensed",
-  default_geom_color = moffitt_colors$blue,
+  default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color    = "#6e6e6e",
   plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
@@ -137,7 +137,7 @@ theme_grk <- function(
 
 update_geom_moffitt_defaults <- function(
   geom = c("bar" = "fill", "col" = "fill", "dotplot" = "color", "point" = "color"),
-  default = moffitt_colors$blue
+  default = grkmisc::moffitt_colors$blue
 ) {
   purrr::iwalk(geom, ~ .update_geom_default(.y, .x, value = default))
 }

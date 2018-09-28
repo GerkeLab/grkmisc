@@ -10,7 +10,7 @@ theme_moffitt(base_family = "Overpass",
   axis_title_bold = FALSE, axis_title_just = "cc",
   axis_title_size = 13, subtitle_size = 13,
   default_geom_font = "Fira Sans Condensed",
-  default_geom_color = moffitt_colors$blue,
+  default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color, ...)
 
@@ -19,7 +19,7 @@ theme_grk(base_family = "Fira Sans",
   "Mono"), axis_title_family = base_family, axis_title_bold = FALSE,
   axis_title_just = "cc", axis_title_size = 13, subtitle_size = 13,
   default_geom_font = "Fira Sans Condensed",
-  default_geom_color = moffitt_colors$blue,
+  default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color, ...)
 }
