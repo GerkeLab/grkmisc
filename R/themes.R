@@ -164,7 +164,7 @@ moffitt_pal <- function(color_other = "grey") {
 #'
 #' Color scales based on the Moffitt Branding Guidelines, 2014.
 #'
-#' @seealso moffitt_colors [theme_moffit()]
+#' @seealso [moffitt_colors] [theme_moffitt()]
 #' @inheritDotParams ggplot2::discrete_scale
 #' @param color_other When the data contains two values, the second value takes
 #'   this color. Can be any of the colors in [moffitt_colors] other than blue:

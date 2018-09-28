@@ -105,5 +105,5 @@ dplyr::count(mpg, class, sort = TRUE) \%>\%
 
 }
 \seealso{
-moffitt_colors \code{\link[=theme_moffit]{theme_moffit()}}
+\link{moffitt_colors} \code{\link[=theme_moffitt]{theme_moffitt()}}
 }
