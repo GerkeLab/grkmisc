@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add labels from proc_format file to SAS data file — add_proc_format_labels • grkmisc</title>
+<title>Create New Document — doc_new • grkmisc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,13 @@
 
 
 
-<meta property="og:title" content="Add labels from proc_format file to SAS data file — add_proc_format_labels" />
+<meta property="og:title" content="Create New Document — doc_new" />
 
-<meta property="og:description" content="Add labels from proc_format file to SAS data file" />
+<meta property="og:description" content="Creates a new R Markdown document of the requested type. There are currently
+two templates, one for reports where the default is HTML based on the
+HTML vignette template, and another with a Moffitt-styled xaringan theme.
+In both cases, the document and supporting files are added to a directory
+with the name given by the file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,69 +104,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add labels from proc_format file to SAS data file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/read_proc_format.R'><code>R/read_proc_format.R</code></a></small>
-    <div class="hidden name"><code>add_proc_format_labels.Rd</code></div>
+    <h1>Create New Document</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/themes.R'><code>R/themes.R</code></a></small>
+    <div class="hidden name"><code>doc_new.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Add labels from proc_format file to SAS data file</p>
+    <p>Creates a new R Markdown document of the requested type. There are currently
+two templates, one for reports where the default is HTML based on the
+HTML vignette template, and another with a Moffitt-styled xaringan theme.
+In both cases, the document and supporting files are added to a directory
+with the name given by the file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_proc_format_labels</span>(<span class='no'>df</span>, <span class='no'>proc_format</span>, <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>varname_case</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>), <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>doc_new</span>(<span class='no'>path</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"doc"</span>, <span class='st'>"slides"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>Input data frame read from <a href='http://www.rdocumentation.org/packages/haven/topics/read_sas'>haven::read_sas</a></p></td>
+      <th>path</th>
+      <td><p>Path to the location of the new document</p></td>
     </tr>
     <tr>
-      <th>proc_format</th>
-      <td><p>Either path to SAS file with <code>proc format</code> statements or
-the results of <a href='read_proc_format.html'>read_proc_format</a>.</p></td>
-    </tr>
-    <tr>
-      <th>as_factor</th>
-      <td><p>Convert labelled variables to factor with <a href='http://www.rdocumentation.org/packages/haven/topics/as_factor'>haven::as_factor</a>?</p></td>
-    </tr>
-    <tr>
-      <th>varname_case</th>
-      <td><p>SAS variable names are not case-sensitive, but R variable
-names are. Choose one of <code>"lower"</code> or <code>"upper"</code> case to normalize the
-variable names in <code>df</code> and the <code>varnames</code> column of <code>proc_format</code>. Or set
-equal to NULL to leave both as-is.</p></td>
-    </tr>
-    <tr>
-      <th>debug_level</th>
-      <td><p>Default is <code>0</code>. Level <code>1</code> prints confirmation of reading
-<code>proc_format</code> file. Level <code>2</code> prints confirmation that the labels were
-applied to each variable in <code>df</code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed on to <code>read_proc_format</code></p><dl class='dl-horizontal'>
-  <dt>file</dt><dd><p>Path to proc format file.</p></dd>
-  <dt>verbose</dt><dd><p>Writes out file path being read. May be removed in the future.</p></dd>
-  <dt>missing_values</dt><dd><p>Possible SAS values that should be treated as missing.</p></dd>
-</dl></td>
+      <th>type</th>
+      <td><p>Type of document to create</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other SAS helper functions: <code><a href='read_proc_format.html'>read_proc_format</a></code>,
-  <code><a href='read_sas_with_format.html'>read_sas_with_format</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>bdat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>haven</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/haven/topics/read_sas'>read_sas</a></span>(<span class='st'>"freepsa_data_feb16_d080516.sas7bdat"</span>)
-<span class='no'>bdat2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_proc_format_labels</span>(<span class='no'>bdat</span>, <span class='st'>"freepsa.sas_formats.feb16.d080516.sas"</span>)
+<span class='fu'>doc_new</span>(<span class='st'>"my_report.Rmd"</span>, <span class='st'>"doc"</span>)
+<span class='fu'>doc_new</span>(<span class='st'>"my_slides.Rmd"</span>, <span class='st'>"slides"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
@@ -170,9 +146,7 @@ applied to each variable in <code>df</code>.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#see-also">See also</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

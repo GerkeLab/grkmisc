@@ -142,7 +142,7 @@ blockquote {
 }
 .remark-slide table thead th { border-bottom: 1px solid #ddd; }
 th, td { padding: 5px; }
-.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #A7D8A0 }
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #f0f0f0 }
 table.dataTable tbody {
   background-color: #FFFFFF;
   color: #000000;
@@ -151,7 +151,7 @@ table.dataTable.display tbody tr.odd {
   background-color: #FFFFFF;
 }
 table.dataTable.display tbody tr.even {
-  background-color: #A7D8A0;
+  background-color: #f0f0f0;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.5);
@@ -235,6 +235,12 @@ blockquote {
 .right-column img {
   max-height: 35vh;
   margin-top: -2em;
+}
+::-mox-selection {
+  background-color: rgba(255, 255, 0, 0.5);
+}
+::selection {
+  background-color: rgba(255, 255, 0, 0.5);
 }
 kbd {
   padding: 0.1em 0.6em;

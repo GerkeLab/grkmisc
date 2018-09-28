@@ -3,6 +3,7 @@
 export("%>%")
 export(add_proc_format_labels)
 export(auto_extract)
+export(doc_new)
 export(enexpr)
 export(enquo)
 export(ensym)

@@ -145,3 +145,38 @@ update_geom_moffitt_defaults <- function(
 .update_geom_default <- function(geom, attr, value) {
   ggplot2::update_geom_defaults(geom, setNames(list(value), attr))
 }
+
+
+
+# ---- Documents ----
+
+#' Create New Document
+#'
+#' Creates a new R Markdown document of the requested type. There are currently
+#' two templates, one for reports where the default is HTML based on the
+#' HTML vignette template, and another with a Moffitt-styled xaringan theme.
+#' In both cases, the document and supporting files are added to a directory
+#' with the name given by the file.
+#'
+#' @examples
+#' \dontrun{
+#' doc_new("my_report.Rmd", "doc")
+#' doc_new("my_slides.Rmd", "slides")
+#' }
+#'
+#' @param path Path to the location of the new document
+#' @param type Type of document to create
+#' @export
+doc_new <- function(path, type = c("doc", "slides")) {
+  type <- match.arg(type)
+  if (!dir.exists(dirname(path))) {
+    dir.create(dirname(path), recursive = TRUE)
+  }
+  file_path <- switch(
+    type,
+    "doc" = rmarkdown::draft(path, template = "default", package = "grkmisc", edit = FALSE),
+    "slides" = rmarkdown::draft(path, template = "moffitt-xaringan", package = "grkmisc", edit = FALSE)
+  )
+  if (requireNamespace("rstudioapi", quietly = TRUE))
+    rstudioapi::navigateToFile(file_path) else file_path
+}

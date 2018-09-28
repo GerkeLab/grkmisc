@@ -11,6 +11,7 @@ duo_accent(
   code_font_google     = google_font("IBM Plex Mono", "300", "400"),
   text_font_weight     = "400",
   text_slide_number_font_size = "15px",
+  table_row_even_background_color = "#f0f0f0",
   extra_fonts = list(
     google_font("Lora", "300", "300i", "400", "400i")
   ),
@@ -72,6 +73,12 @@ duo_accent(
     ".right-column img" = list(
       "max-height" = "35vh",
       "margin-top" = "-2em"
+    ),
+    "::-mox-selection" = list(
+      "background-color" = "rgba(255, 255, 0, 0.5)"
+    ),
+    "::selection" = list(
+      "background-color" = "rgba(255, 255, 0, 0.5)"
     ),
     "kbd" = list(
       "padding"               = "0.1em 0.6em",

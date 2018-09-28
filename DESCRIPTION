@@ -1,9 +1,13 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Authors@R: person("Garrick", "Aden-Buie", email =
-        "Garrick.Aden-Buie@moffitt.org", role = c("aut", "cre"))
-Description: A package of miscellaneously helpful functions.
-Version: 0.0.0.9045
+Version: 0.0.0.9046
+Authors@R: 
+    person(given = "Garrick",
+           family = "Aden-Buie",
+           role = c("aut", "cre"),
+           email = "Garrick.Aden-Buie@moffitt.org")
+Description: A package of miscellaneously helpful
+    functions.
 License: MIT + file LICENSE
 URL: https://github.com/gerkelab/grkmisc
 BugReports: https://github.com/gerkelab/grkmisc/issues
@@ -36,6 +40,7 @@ Suggests:
     dplyr,
     httr,
     readr,
+    rstudioapi,
     testthat
 ByteCompile: true
 Encoding: UTF-8
