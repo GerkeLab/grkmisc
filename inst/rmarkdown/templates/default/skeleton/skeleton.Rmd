@@ -20,13 +20,9 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
                       fig.width = 10, fig.height = 7)
 library(tidyverse)
-theme_set(
-  firasans::theme_ipsum_fsc(
-    axis_text_size = 10, 
-    axis_title_size = 14,
-    axis_title_just = "cc") +
-    theme(panel.grid.minor = element_blank())
-)
+
+# Use the default grkmisc "Moffitt Theme"
+theme_set(grkmisc::theme_grk() + theme(panel.grid.minor = element_blank()))
 ```
 
 ```{css, echo=FALSE}
