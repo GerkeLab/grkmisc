@@ -29,3 +29,10 @@
 - Insert the relative or absolute path to the directory containing the active
   document with the RStudio Addins "Insert Relative Directory Path" or
   "Insert Absolute Directory Path".
+
+- New ggplot2 themes: `theme_moffitt()` and `theme_grk()`
+
+- New ggplot2 scales: `scale_color_moffitt()` and `scale_fill_moffitt()`. When
+  given two values, both scales allow the user to pick a secondary color from
+  `moffitt_colors` (green, red, orange, light_blue, yellow, or grey (default))
+  to contrast the primary blue color.

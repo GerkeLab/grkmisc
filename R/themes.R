@@ -146,7 +146,74 @@ update_geom_moffitt_defaults <- function(
   ggplot2::update_geom_defaults(geom, setNames(list(value), attr))
 }
 
+# ---- Scales ----
 
+moffitt_pal <- function(color_other = "grey") {
+  function(n) {
+    if (n > 7) rlang::warn("Moffitt Color Palette only has 7 colors.")
+
+    x <- if (n == 2) {
+      moffitt_colors[c("blue", color_other)]
+    } else moffitt_colors[1:n]
+
+    unname(unlist(x))
+  }
+}
+
+#' Moffitt Color Scales for ggplot2
+#'
+#' Color scales based on the Moffitt Branding Guidelines, 2014.
+#'
+#' @seealso moffitt_colors [theme_moffit()]
+#' @inheritDotParams ggplot2::discrete_scale
+#' @param color_other When the data contains two values, the second value takes
+#'   this color. Can be any of the colors in [moffitt_colors] other than blue:
+#'   green, red, orange, light_blue, yellow, or grey (default).
+#'
+#' @examples
+#' library(ggplot2)
+#' ggplot(mtcars) +
+#'   aes(mpg, wt, color = paste(vs)) +
+#'   geom_point(size = 2) +
+#'   theme_moffitt() +
+#'   scale_color_moffitt()
+#'
+#' ggplot(mtcars) +
+#'   aes(mpg, wt, color = paste(vs)) +
+#'   geom_point(size = 2) +
+#'   theme_moffitt() +
+#'   scale_color_moffitt(color_other = "green")
+#'
+#' ggplot(mtcars) +
+#'   aes(mpg, wt, color = paste(carb)) +
+#'   geom_point(size = 2) +
+#'   theme_moffitt() +
+#'   scale_color_moffitt()
+#'
+#' dplyr::count(mpg, class, sort = TRUE) %>%
+#'   dplyr::mutate(class = factor(class, levels = class)) %>%
+#'   ggplot() +
+#'   aes(class, n, fill = class) +
+#'   geom_col() +
+#'   coord_flip() +
+#'   theme_moffitt() +
+#'   scale_fill_moffitt()
+#'
+#' @name scale_moffitt
+#' @export
+scale_colour_moffitt <- function(color_other = "grey", ...) {
+  ggplot2::discrete_scale("colour", "moffitt", moffitt_pal(color_other), ...)
+}
+
+#' @name scale_moffitt
+#' @export
+scale_color_moffitt <- scale_colour_moffitt
+
+#' @name scale_moffitt
+#' @export
+scale_fill_moffitt <- function(color_other = "grey", ...) {
+  ggplot2::discrete_scale("fill", "moffitt", moffitt_pal(color_other), ...)
+}
 
 # ---- Documents ----
 

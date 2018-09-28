@@ -6,7 +6,8 @@
 \alias{grkmisc-package}
 \title{grkmisc: A package of miscellaneously helpful functions.}
 \description{
-A package of miscellaneously helpful functions.
+A package of miscellaneously helpful
+    functions.
 }
 \seealso{
 Useful links:
