@@ -153,8 +153,8 @@ moffitt_pal <- function(color_other = "grey") {
     if (n > 7) rlang::warn("Moffitt Color Palette only has 7 colors.")
 
     x <- if (n == 2) {
-      moffitt_colors[c("blue", color_other)]
-    } else moffitt_colors[1:n]
+      grkmisc::moffitt_colors[c("blue", color_other)]
+    } else grkmisc::moffitt_colors[1:n]
 
     unname(unlist(x))
   }
