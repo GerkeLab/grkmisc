@@ -102,11 +102,11 @@ theme_grk <- function(
   has_showtext <- requireNamespace("sysfonts", quietly = TRUE) &&
     requireNamespace("showtext", quietly = TRUE)
   if (has_showtext) {
-    sysfonts::font_add_google(base_family, regular.wt = 200, bold.wt = 400)
+    try_font_add_google(base_family, regular.wt = 400, bold.wt = 600)
     if (axis_title_family_name != base_family)
-      sysfonts::font_add_google(axis_title_family, axis_title_family_name, regular.wt = 600)
-    sysfonts::font_add_google(default_geom_font)
-    sysfonts::font_add_google(axis_text_family)
+      try_font_add_google(axis_title_family, axis_title_family_name, regular.wt = 600)
+    try_font_add_google(default_geom_font)
+    try_font_add_google(axis_text_family)
     showtext::showtext_auto()
   } else {
     if (!isTRUE(getOption("grkmisc.warned_install_showtext"))) {
@@ -133,6 +133,14 @@ theme_grk <- function(
         family = base_family, face = "plain", color = plot_caption_color),
       panel.background = ggplot2::element_rect(fill = NA, color = panel_border_color)
     )
+}
+
+# Try to get font from Google, otherwise returns null
+try_font_add_google <- function(font, ...) {
+  x <- purrr::possibly(sysfonts::font_add_google, NULL)(font, ...)
+  if (!is.null(x)) rlang::warn(
+    glue::glue('Font "{font}" wasn\'t found on Google Fonts, but may be installed locally.')
+  )
 }
 
 update_geom_moffitt_defaults <- function(
