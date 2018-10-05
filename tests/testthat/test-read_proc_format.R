@@ -71,3 +71,19 @@ test_that("works without fancy extra formatting", {
   expect_equal(x$value, expected_value_text)
   expect_equal(length(x$label[[1]]), 6)
 })
+
+test_that("strips inline comments", {
+  comment_format_file <- tempfile(fileext = "sas")
+  comment_format_text <- c(
+    "proc format;",
+    "value qstatusr",
+    '1 = "(1) Complete" /* with "comment" here */',
+    'run;'
+  )
+  cat(comment_format_text, file=comment_format_file, sep = "\n")
+  x <- read_proc_format(comment_format_file)
+
+  expect_equal(x$varname, "qstatusr")
+  expect_equal(x$value, 'value qstatusr\n1 = "(1) Complete" ')
+  expect_equal(x$label[[1]], c('(1) Complete' = 1))
+})

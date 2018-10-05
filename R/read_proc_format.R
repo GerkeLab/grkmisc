@@ -194,6 +194,24 @@ safe_value <- function(x, force_wrap = FALSE, missing_values = paste0(".", c("",
   } else x
 }
 
+# Strip SAS comments. These are either:
+# 1. Use the whole line, starting with `*` and ending at `;`:
+#
+#    `*comments;`
+#
+# 2. Are within `/* comments */` within a line:
+#
+#    `input @1 name $20.  /* last name    */`
+#
+strip_sas_comments <- function(x, type = "inline") {
+  switch(
+    match.arg(type, c("inline", "line")),
+    "line" = gsub("(^|\n)\\s*\\*.+?;", "", x),
+    "inline" = gsub("/\\*.+?\\*/", "", x)
+  )
+}
+
+# ---- Exported Functions ----
 
 #' Read Proc Format File
 #'
@@ -213,8 +231,11 @@ read_proc_format <- function(
 ) {
   if (verbose) cli::cat_bullet("Reading proc format: ", file)
   read_proc_format_statements(file) %>%
-    purrr::map_df(extract_statement) %>%
-    dplyr::mutate(label = purrr::map2(value, vartype, labelize_values, missing_values = missing_values)) %>%
+    purrr::map_dfr(extract_statement) %>%
+    dplyr::mutate(
+      value = strip_sas_comments(value, "inline"),
+      label = purrr::map2(value, vartype, labelize_values, missing_values = missing_values)
+    ) %>%
     expand_varnames()
 }
 
