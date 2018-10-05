@@ -69,6 +69,7 @@ expand_varnames <- function(pfdf) {
   pfdf_names <- names(pfdf)
 
   pfdf %>%
+    fill_missing_format() %>%
     split(.$format) %>%
     purrr::map_df(~ cbind(
       .[, setdiff(pfdf_names, "varname")],
@@ -93,6 +94,21 @@ expand_varname <- function(varname) {
     return(varname)
   }
   paste0(var_base, var_indexes[1]:var_indexes[2])
+}
+
+fill_missing_varname <- function(pfdf) {
+  if (!any(is.na(pfdf$varname))) return(pfdf)
+  pfdf %>%
+    dplyr::mutate(
+      varname = ifelse(is.na(varname), sub("value (.+?)\n.+", "\\1", value), varname)
+    )
+}
+
+fill_missing_format <- function(pfdf) {
+  if (!any(is.na(pfdf$format))) return(pfdf)
+  if (any(is.na(pfdf$varname))) pfdf <- fill_missing_varname(pfdf)
+  pfdf[is.na(pfdf$format), "format"] <- pfdf[is.na(pfdf$format), "varname"]
+  pfdf
 }
 
 null_vartype <- function(vartype) {
