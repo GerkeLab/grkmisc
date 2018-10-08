@@ -46,3 +46,44 @@ test_that("proc format statements covering multiple variables x0-5", {
   expect_equal(unique(pfdf$format), "biopplink0v")
   expect_equal(nrow(pfdf), length(0:5))
 })
+
+test_that("works without fancy extra formatting", {
+  bare_format_file <- tempfile(fileext = "sas")
+  bare_format_text <- c(
+    "proc format;",
+    "value qstatusr",
+    '1 = "(1) Complete"',
+    '2 = "(2) Incomplete"',
+    '3 = "(3) Not returned"',
+    '4 = "(4) Entered once"',
+    '5 = "(5) Validated"',
+    '6 = "(6) Deceased"',
+    ';',
+    'run;'
+  )
+  cat(bare_format_text, file=bare_format_file, sep = "\n")
+  expected_value_text <- paste(bare_format_text[c(-1, 0:1 - length(bare_format_text))], collapse = "\n")
+  expected_value_text <- paste0(expected_value_text, "\n")
+
+  x <- read_proc_format(bare_format_file)
+  expect_equal(x$varname, "qstatusr")
+  expect_equal(x$format, "qstatusr")
+  expect_equal(x$value, expected_value_text)
+  expect_equal(length(x$label[[1]]), 6)
+})
+
+test_that("strips inline comments", {
+  comment_format_file <- tempfile(fileext = "sas")
+  comment_format_text <- c(
+    "proc format;",
+    "value qstatusr",
+    '1 = "(1) Complete" /* with "comment" here */',
+    'run;'
+  )
+  cat(comment_format_text, file=comment_format_file, sep = "\n")
+  x <- read_proc_format(comment_format_file)
+
+  expect_equal(x$varname, "qstatusr")
+  expect_equal(x$value, 'value qstatusr\n1 = "(1) Complete" ')
+  expect_equal(x$label[[1]], c('(1) Complete' = 1))
+})
