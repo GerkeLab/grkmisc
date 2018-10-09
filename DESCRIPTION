@@ -1,6 +1,6 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.0.0.9048
+Version: 0.0.0.9049
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",

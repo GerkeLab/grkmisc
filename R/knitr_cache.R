@@ -16,7 +16,7 @@ knitr_load_cache <- function(chunk = NULL, cache_path = NULL) {
 
     chunk <- purrr::map_chr(chunk[chunk_good], ~ grep(., chunk_names, value = TRUE))
   } else {
-    chunk <- knitr_list_cache(cache_path)
+    chunk <- knitr_list_cache(cache_path, names_only = FALSE)
   }
 
   if (!length(chunk)) {
