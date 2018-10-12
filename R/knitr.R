@@ -67,3 +67,41 @@ find_cache_path <- function(cache_path = NULL) {
     dplyr::slice(1) %>%
     dplyr::pull(path)
 }
+
+#' Embolden rows matching an expression
+#'
+#' Emboldens rows matching an expression, with optionally selected columns. For
+#' use with [knitr::kable()].
+#'
+#' @examples
+#' x <- dplyr::starwars[1:4, 1:5]
+#' knitr_bold_row(x, height < 100)
+#'
+#' knitr_bold_row(x, mass <= 75, height <= 170, cols = c("name", "height"), format = "html")
+#'
+#' x %>%
+#'   knitr_bold_row(height > 170, cols = "hair_color") %>%
+#'   knitr::kable()
+#'
+#' @param x A data frame
+#' @param ... The filter expressions
+#' @param cols Columns that should be emphasized, default `NULL` or all columns
+#' @param format One of `"markdown"`, `"html"`, or `"latex"`
+#' @export
+knitr_bold_row <- function(x, ..., cols = NULL, format = c("markdown", "html", "latex")) {
+  f_expr <- rlang::enexprs(...)
+  wrap <- switch(
+    match.arg(format),
+    "markdown" = c("**", "**"),
+    "html" = c("<strong>", "</strong>"),
+    "latex" = c("\textbf{", "}")
+  )
+  cols <- if (is.null(cols)) colnames(x) else intersect(colnames(x), cols)
+  i <- x %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(i = dplyr::row_number()) %>%
+    dplyr::filter(!!!f_expr) %>%
+    dplyr::pull(i)
+  x[i, cols] <- apply(x[i, cols], 2, function(x) ifelse(!is.na(x) & x != "", paste0(wrap[1], x, wrap[2]), x))
+  x
+}
