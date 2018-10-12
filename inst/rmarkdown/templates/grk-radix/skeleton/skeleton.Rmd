@@ -1,0 +1,88 @@
+---
+title: "Untitled"
+description: |
+  A new article created using the Radix format.
+author:
+  - name: Garrick Aden-Buie
+    url: https://garrickadenbuie.com
+    affiliation: GerkeLab
+    affiliation_url: https://gerkelab.com
+  - name: Jordan Creed
+    affiliation: GerkeLab
+    affiliation_url: https://gerkelab.com
+  - name: Travis Gerke
+    url: https://travisgerke.com
+    affiliation: GerkeLab
+    affiliation_url: https://gerkelab.com
+date: "`r Sys.Date()`"
+output: radix::radix_article
+creative_commons: CC BY-NC
+preview: https://www.gerkelab.com/img/GerkeLab-1200dpi-square.png
+twitter:
+  site: "@travisgerke"
+  creator: "@grrrck"
+# repository_url: https://github.com/gerkelab/
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, cache = FALSE,
+  warning = FALSE, message = FALSE,
+  fig.width = 10, fig.height = 7,
+  fig.showtext = TRUE # for the fancy fonts, disable if not needed
+)
+```
+
+```{r library, include=FALSE}
+library(tidyverse)
+
+# Use the grkmisc theme
+theme_set(
+  grkmisc::theme_grk(
+    base_family = "Source Serif Pro",
+    axis_text_family = "Source Code Pro",
+    axis_title_family = "Source Serif Pro",
+    default_geom_font = "Source Sans Pro",
+    use_showtext = TRUE
+  ) +
+    theme(panel.grid.minor = element_blank())
+)
+```
+
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro" rel="stylesheet"> 
+
+```{css, echo=FALSE}
+html {
+  font-family: "Source Serif Pro";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Sans Pro";
+}
+
+pre, pre code {
+  font-family: "Source Serif Pro";
+}
+```
+
+<!-- DOCUMENT START -->
+
+## This is Radix
+
+Radix is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Radix at <https://rstudio.github.io/radix>.
+
+### Bacon Ipsum
+
+Spicy jalapeno bacon ipsum dolor amet pork loin doner tenderloin shank. Salami bacon jowl strip steak cupim. Kevin pancetta pastrami, pork chop sirloin tri-tip strip steak. Tail sausage alcatra doner pork cow meatloaf. Pastrami tenderloin jerky pork belly, alcatra hamburger ground round turducken spare ribs doner shoulder. Landjaeger porchetta drumstick beef ribs tri-tip shankle.
+
+```{r}
+ggplot(data_frame(x = 1, y = 1, label = "Fancy Text Here")) +
+  aes(x, y, label = label) +
+  geom_point() + 
+  geom_text(vjust = -1) +
+  labs(x = "X Axis", y = "Y Axis", title = "Plot Title")
+```
+
+Strip steak ball tip turducken, tongue brisket fatback shank leberkas sausage pig andouille burgdoggen meatloaf doner. Ribeye pork belly meatloaf, pig strip steak turducken sausage cupim short loin rump hamburger ham short ribs. Drumstick brisket swine spare ribs, landjaeger kielbasa pancetta pork loin meatball leberkas beef ribs kevin pork belly biltong capicola. Meatball rump prosciutto biltong. Sausage turducken turkey ground round beef ribs beef, pig tongue shank biltong. Prosciutto ball tip flank, pig tongue ham hock hamburger kevin rump buffalo porchetta. Ribeye tri-tip buffalo short ribs tongue spare ribs short loin sirloin landjaeger shankle ham pastrami.
