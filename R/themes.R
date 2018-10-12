@@ -44,6 +44,8 @@
 #' @param axis_text_color Color of axis text
 #' @param plot_caption_color Color of the plot caption text
 #' @param panel_border_color Color of the panel border
+#' @param use_showtext Should [showtext] and [sysfonts] be used to register
+#'   font families from Google? Default is `TRUE`.
 #' @export
 theme_moffitt <- function(
   base_family        = "Overpass",
@@ -58,7 +60,8 @@ theme_moffitt <- function(
   axis_text_color    = "#6e6e6e",
   plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
-  ...
+  ...,
+  use_showtext = TRUE
 ) {
   theme_grk(
     base_family        = base_family,
@@ -73,6 +76,7 @@ theme_moffitt <- function(
     axis_text_color    = axis_text_color,
     plot_caption_color = plot_caption_color,
     panel_border_color = panel_border_color,
+    use_showtext       = use_showtext,
     ...
   )
 }
@@ -92,16 +96,18 @@ theme_grk <- function(
   axis_text_color    = "#6e6e6e",
   plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
-  ...
+  ...,
+  use_showtext = TRUE
 ) {
-  axis_title_family_name <- if (axis_title_bold) {
-    paste(sub(" ?([bB]old|[sS]emi-?[bB]old)", "", axis_title_family), "Bold")
-  } else axis_title_family
-
+  axis_title_family_name <- axis_title_family
   # Get and set fonts - this works across all devices
   has_showtext <- requireNamespace("sysfonts", quietly = TRUE) &&
     requireNamespace("showtext", quietly = TRUE)
-  if (has_showtext) {
+  if (use_showtext && has_showtext) {
+    axis_title_family_name <- if (axis_title_bold) {
+      paste(sub(" ?([bB]old|[sS]emi-?[bB]old)", "", axis_title_family), "Bold")
+    } else axis_title_family
+
     try_font_add_google(base_family, regular.wt = 400, bold.wt = 600)
     if (axis_title_family_name != base_family)
       try_font_add_google(axis_title_family, axis_title_family_name, regular.wt = 600)
@@ -138,7 +144,7 @@ theme_grk <- function(
 # Try to get font from Google, otherwise returns null
 try_font_add_google <- function(font, ...) {
   x <- purrr::possibly(sysfonts::font_add_google, NULL)(font, ...)
-  if (!is.null(x)) rlang::warn(
+  if (is.null(x)) rlang::warn(
     glue::glue('Font "{font}" wasn\'t found on Google Fonts, but may be installed locally.')
   )
 }

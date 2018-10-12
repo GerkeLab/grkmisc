@@ -12,7 +12,7 @@ theme_moffitt(base_family = "Overpass",
   default_geom_font = "Fira Sans Condensed",
   default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
-  panel_border_color = axis_text_color, ...)
+  panel_border_color = axis_text_color, ..., use_showtext = TRUE)
 
 theme_grk(base_family = "Fira Sans",
   axis_text_family = paste(sub(" ?(Mono|Sans|Serif)", "", base_family),
@@ -21,7 +21,7 @@ theme_grk(base_family = "Fira Sans",
   default_geom_font = "Fira Sans Condensed",
   default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
-  panel_border_color = axis_text_color, ...)
+  panel_border_color = axis_text_color, ..., use_showtext = TRUE)
 }
 \arguments{
 \item{base_family}{base font family and size}
@@ -80,6 +80,9 @@ good in constrained space.}
   \item{axis}{add x or y axes? \code{TRUE}, \code{FALSE}, "\code{xy}"}
   \item{ticks}{ticks if \code{TRUE} add ticks}
 }}
+
+\item{use_showtext}{Should \link{showtext} and \link{sysfonts} be used to register
+font families from Google? Default is \code{TRUE}.}
 
 \item{default_color}{Changes default colors of bars and points to
 the value given. Set to \code{NULL} to avoid changing these colors. Note that
