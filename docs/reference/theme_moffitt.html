@@ -68,7 +68,7 @@ prefer, use theme_grk(), which simply uses &quot;Fira Sans&quot; as the base fon
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9050</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9051</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@ prefer, use <code>theme_grk()</code>, which simply uses "Fira Sans" as the base 
   <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"Fira Sans Condensed"</span>,
   <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw pkg'>grkmisc</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/grkmisc/topics/moffitt_colors'>moffitt_colors</a></span>$<span class='no'>blue</span>,
   <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>, <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
-  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>, <span class='no'>...</span>)
+  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>theme_grk</span>(<span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"Fira Sans"</span>,
   <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='fu'>paste</span>(<span class='fu'>sub</span>(<span class='st'>" ?(Mono|Sans|Serif)"</span>, <span class='st'>""</span>, <span class='no'>base_family</span>),
@@ -141,7 +141,7 @@ prefer, use <code>theme_grk()</code>, which simply uses "Fira Sans" as the base 
   <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"Fira Sans Condensed"</span>,
   <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw pkg'>grkmisc</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/grkmisc/topics/moffitt_colors'>moffitt_colors</a></span>$<span class='no'>blue</span>,
   <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>, <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
-  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,6 +227,11 @@ good in constrained space.</p></td>
 </dl></td>
     </tr>
     <tr>
+      <th>use_showtext</th>
+      <td><p>Should showtext and sysfonts be used to register
+font families from Google? Default is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
       <th>default_color</th>
       <td><p>Changes default colors of bars and points to
 the value given. Set to <code>NULL</code> to avoid changing these colors. Note that
@@ -251,7 +256,7 @@ these colors are used only when color or fill is not mapped to the data.</p></td
        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Seminal ggplot2 scatterplot example"</span>,
        <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"A plot that is only useful for demonstration purposes"</span>,
        <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Brought to you by the letter 'g'"</span>)
-<span class='no'>g</span> + <span class='fu'>theme_moffitt</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Overpass" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Fira Sans Condensed" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Overpass Mono" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='img'><img src='theme_moffitt-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>g</span> + <span class='fu'>theme_moffitt</span>(<span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='no'>moffitt_colors</span>$<span class='no'>green</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Overpass" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Fira Sans Condensed" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Overpass Mono" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='img'><img src='theme_moffitt-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>g</span> + <span class='fu'>theme_grk</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Fira Sans" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Fira Sans Condensed" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Font "Fira Mono" wasn't found on Google Fonts, but may be installed locally.</span></div><div class='img'><img src='theme_moffitt-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>g</span> + <span class='fu'>theme_moffitt</span>()</div><div class='img'><img src='theme_moffitt-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>g</span> + <span class='fu'>theme_moffitt</span>(<span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='no'>moffitt_colors</span>$<span class='no'>green</span>)</div><div class='img'><img src='theme_moffitt-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>g</span> + <span class='fu'>theme_grk</span>()</div><div class='img'><img src='theme_moffitt-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
