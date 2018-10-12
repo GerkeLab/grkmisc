@@ -28,7 +28,6 @@ Imports:
     purrr,
     rematch2,
     rlang (>= 0.1.2),
-    rmdformats,
     showtext (>= 0.5-1),
     stringr,
     styler,

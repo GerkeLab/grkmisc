@@ -1,15 +1,13 @@
 ---
 title: "Title"
-author: Author
+author: '`r Sys.info()["effective_user"]`'
 date: '`r strftime(Sys.time(), "%A, %b %d, %Y")`'
-mainfont: Fira Sans
-monofont: Fira Mono
+mainfont: 'Source Serif Pro'
+monofont: 'Source Code Pro'
 output:
   rmarkdown::html_vignette:
     df_print: kable
     standalone: true
-  rmdformats::html_clean: 
-    code_folding: "hide"
   pdf_document: 
     latex_engine: xelatex
 editor_options: 
@@ -17,18 +15,34 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
-                      fig.width = 10, fig.height = 7)
-library(tidyverse)
-
-# Use the default grkmisc "Moffitt Theme"
-theme_set(grkmisc::theme_grk() + theme(panel.grid.minor = element_blank()))
+knitr::opts_chunk$set(
+  echo = FALSE, cache = FALSE,
+  warning = FALSE, message = FALSE,
+  fig.width = 10, fig.height = 7, 
+  fig.showtext = TRUE # for the fancy fonts, disable if not needed
+)
 ```
 
-```{css, echo=FALSE}
+```{css global-css, echo=FALSE}
 img {
   margin: 0;
   padding: 0;
   max-width: 100%;
 }
+```
+
+```{r library, include=FALSE}
+library(tidyverse)
+
+# Use the grkmisc theme
+theme_set(
+  grkmisc::theme_grk(
+    base_family = "Source Serif Pro",
+    axis_text_family = "Source Code Pro",
+    axis_title_family = "Source Serif Pro",
+    default_geom_font = "Source Sans Pro",
+    use_showtext = FALSE
+  ) + 
+    theme(panel.grid.minor = element_blank())
+)
 ```
