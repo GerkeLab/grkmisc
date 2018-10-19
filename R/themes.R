@@ -162,15 +162,19 @@ update_geom_moffitt_defaults <- function(
 
 # ---- Scales ----
 
-moffitt_pal <- function(color_other = "grey") {
+moffitt_pal <- function(color_other = "grey", direction = 1) {
   function(n) {
     if (n > 7) rlang::warn("Moffitt Color Palette only has 7 colors.")
 
     x <- if (n == 2) {
-      grkmisc::moffitt_colors[c("blue", color_other)]
+      color_other <- if (!color_other %in% names(grkmisc::moffitt_colors)) {
+        color_other
+      } else grkmisc::moffitt_colors[color_other]
+      c(grkmisc::moffitt_colors["blue"], color_other)
     } else grkmisc::moffitt_colors[1:n]
 
-    unname(unlist(x))
+    x <- unname(unlist(x))
+    if (direction > 0) x else rev(x)
   }
 }
 
@@ -183,6 +187,8 @@ moffitt_pal <- function(color_other = "grey") {
 #' @param color_other When the data contains two values, the second value takes
 #'   this color. Can be any of the colors in [moffitt_colors] other than blue:
 #'   green, red, orange, light_blue, yellow, or grey (default).
+#' @param direction Reverses the direction of the color scale when `direction`
+#'   is less than 0, i.e. -1.
 #'
 #' @examples
 #' library(ggplot2)
@@ -215,8 +221,8 @@ moffitt_pal <- function(color_other = "grey") {
 #'
 #' @name scale_moffitt
 #' @export
-scale_colour_moffitt <- function(color_other = "grey", ...) {
-  ggplot2::discrete_scale("colour", "moffitt", moffitt_pal(color_other), ...)
+scale_colour_moffitt <- function(color_other = "grey", direction = 1, ...) {
+  ggplot2::discrete_scale("colour", "moffitt", moffitt_pal(color_other, direction), ...)
 }
 
 #' @name scale_moffitt
@@ -225,8 +231,8 @@ scale_color_moffitt <- scale_colour_moffitt
 
 #' @name scale_moffitt
 #' @export
-scale_fill_moffitt <- function(color_other = "grey", ...) {
-  ggplot2::discrete_scale("fill", "moffitt", moffitt_pal(color_other), ...)
+scale_fill_moffitt <- function(color_other = "grey", direction = 1, ...) {
+  ggplot2::discrete_scale("fill", "moffitt", moffitt_pal(color_other, direction), ...)
 }
 
 # ---- Documents ----

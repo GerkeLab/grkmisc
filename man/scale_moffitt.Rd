@@ -7,16 +7,19 @@
 \alias{scale_fill_moffitt}
 \title{Moffitt Color Scales for ggplot2}
 \usage{
-scale_colour_moffitt(color_other = "grey", ...)
+scale_colour_moffitt(color_other = "grey", direction = 1, ...)
 
-scale_color_moffitt(color_other = "grey", ...)
+scale_color_moffitt(color_other = "grey", direction = 1, ...)
 
-scale_fill_moffitt(color_other = "grey", ...)
+scale_fill_moffitt(color_other = "grey", direction = 1, ...)
 }
 \arguments{
 \item{color_other}{When the data contains two values, the second value takes
 this color. Can be any of the colors in \link{moffitt_colors} other than blue:
 green, red, orange, light_blue, yellow, or grey (default).}
+
+\item{direction}{Reverses the direction of the color scale when \code{direction}
+is less than 0, i.e. -1.}
 
 \item{...}{Arguments passed on to \code{ggplot2::discrete_scale}
 \describe{
