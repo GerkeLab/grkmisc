@@ -25,4 +25,11 @@ test_that("if_na() works", {
     dplyr::mutate(ts_diameter = ifelse(status == "tropical storm", wind, 0))
 
   expect_equal(storms_3, storms_4)
+
+  expect_equal(if_na(c("1", NA_character_)), c("1", ""))
+  expect_equal(if_na(c("1", NA_character_), 0), c("1", "0"))
+  expect_equal(suppressWarnings(if_na(c(1L, NA_integer_), "a")), c(1, NA_integer_))
+  expect_warning(if_na(c(1L, NA_integer_), "a"))
+  expect_warning(if_na(factor(1:3, 1:2)))
+  expect_warning(if_na(factor(1:3, 1:2), 1L))
 })

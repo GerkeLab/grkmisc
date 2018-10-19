@@ -4,12 +4,14 @@
 \alias{if_na}
 \title{Replace NA values}
 \usage{
-if_na(x, value = 0L, ..., value_else = NULL)
+if_na(x, value = default_value(x), ..., value_else = NULL)
 }
 \arguments{
 \item{x}{Input vector of values}
 
-\item{value}{Replacement value}
+\item{value}{Replacement value, the default value is based on the input
+value type and favors \code{0}, \code{FALSE}, or empty strings, lists or data frames
+according to the input type.}
 
 \item{...}{Additional expressions to condition replacement. NA values are
 only replaced when the additional expression matches.}
@@ -28,7 +30,7 @@ storms <- storms \%>\%
   filter(name == "Erika", year == 2003) \%>\%
   select(name, year, status, wind, contains("diameter"))
 
-# Default is replacement with 0
+# Default is replacement with appropriate default (0, FALSE, "", etc.)
 storms \%>\%
   mutate(hu_diameter = if_na(hu_diameter))
 
@@ -49,7 +51,7 @@ storms \%>\%
 # are not met
 storms \%>\%
   mutate(
-    ts_diameter = if_na(ts_diameter, wind, status == "tropical_storm", value_else = 0)
+    ts_diameter = if_na(ts_diameter, wind, status == "tropical storm", value_else = 0)
   )
 
 
