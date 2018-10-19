@@ -6,6 +6,11 @@ reference:
   - '`scale_moffitt`'
   - '`doc_new`'
   - matches("color|fill|theme")
+- title: "dplyr Helpers"
+  desc: "Helper functions that extended or work well with `dplyr`."
+  contents:
+  - '`if_na`'
+  - '`recode_if`'
 - title: Helper Functions
   desc: "General helper functions that make things easier."
   contents:

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Insert Path Containing Active File — insert_path_dir_active • grkmisc</title>
+<title>Recode a value based on predicate condition — recode_if • grkmisc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,13 +30,9 @@
 
 
 
-<meta property="og:title" content="Insert Path Containing Active File — insert_path_dir_active" />
+<meta property="og:title" content="Recode a value based on predicate condition — recode_if" />
 
-<meta property="og:description" content="For the &quot;Insert Relative Directory Path&quot; RStudio Addin. Inserts the relative
-path to the directory containing the active source document. If text is
-selected, this text is assumed to be a file inside that directory and is
-appended to the path. The &quot;Insert Absolute Directory Path&quot; Rstudio Addin does
-the same but provides the absolute path to the active source document." />
+<meta property="og:description" content="A simple wrapper around dplyr::recode()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,30 +100,55 @@ the same but provides the absolute path to the active source document." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Insert Path Containing Active File</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/addins.R'><code>R/addins.R</code></a></small>
-    <div class="hidden name"><code>insert_path_dir_active.Rd</code></div>
+    <h1>Recode a value based on predicate condition</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/misc.R'><code>R/misc.R</code></a></small>
+    <div class="hidden name"><code>recode_if.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>For the "Insert Relative Directory Path" RStudio Addin. Inserts the relative
-path to the directory containing the active source document. If text is
-selected, this text is assumed to be a file inside that directory and is
-appended to the path. The "Insert Absolute Directory Path" Rstudio Addin does
-the same but provides the absolute path to the active source document.</p>
+    <p>A simple wrapper around <code><a href='http://dplyr.tidyverse.org/reference/recode.html'>dplyr::recode()</a></code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>insert_path_dir_active</span>(<span class='kw'>relative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>recode_if</span>(<span class='no'>x</span>, <span class='no'>condition</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Input vector</p></td>
+    </tr>
+    <tr>
+      <th>condition</th>
+      <td><p>Conditions upon which the replacement should occurr</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed on to <code><a href='http://dplyr.tidyverse.org/reference/recode.html'>dplyr::recode</a></code></p><dl class='dl-horizontal'>
+  <dt>.x</dt><dd><p>A vector to modify</p></dd>
+  <dt>.default</dt><dd><p>If supplied, all values not otherwise matched will
+be given this value. If not supplied and if the replacements are
+the same type as the original values in <code>.x</code>, unmatched
+values are not changed. If not supplied and if the replacements
+are not compatible, unmatched values are replaced with <code>NA</code>.
 
-<span class='fu'>insert_path_dir_active_abs</span>()</pre>
-        
+<code>.default</code> must be either length 1 or the same length as
+<code>.x</code>.</p></dd>
+  <dt>.missing</dt><dd><p>If supplied, any missing values in <code>.x</code> will be
+replaced by this value. Must be either length 1 or the same length as
+<code>.x</code>.</p></dd>
+</dl></td>
+    </tr>
+    </table>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
   </div>

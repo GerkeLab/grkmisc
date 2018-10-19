@@ -166,3 +166,15 @@ check_type <- function(x, value) {
   })
 }
 
+
+#' Recode a value based on predicate condition
+#'
+#' A simple wrapper around [dplyr::recode()].
+#'
+#' @param x Input vector
+#' @param condition Conditions upon which the replacement should occurr
+#' @inheritDotParams dplyr::recode
+#' @export
+recode_if <- function(x, condition, ...) {
+  dplyr::if_else(condition, dplyr::recode(x, ...), x)
+}

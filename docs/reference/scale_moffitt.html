@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9051</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9054</span>
       </span>
     </div>
 
@@ -111,11 +111,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>scale_colour_moffitt</span>(<span class='kw'>color_other</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>scale_colour_moffitt</span>(<span class='kw'>color_other</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
-<span class='fu'>scale_color_moffitt</span>(<span class='kw'>color_other</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='no'>...</span>)
+<span class='fu'>scale_color_moffitt</span>(<span class='kw'>color_other</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
-<span class='fu'>scale_fill_moffitt</span>(<span class='kw'>color_other</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>scale_fill_moffitt</span>(<span class='kw'>color_other</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,6 +125,11 @@
       <td><p>When the data contains two values, the second value takes
 this color. Can be any of the colors in <a href='moffitt_colors.html'>moffitt_colors</a> other than blue:
 green, red, orange, light_blue, yellow, or grey (default).</p></td>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <td><p>Reverses the direction of the color scale when <code>direction</code>
+is less than 0, i.e. -1.</p></td>
     </tr>
     <tr>
       <th>...</th>
