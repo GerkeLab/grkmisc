@@ -41,8 +41,14 @@ theme_set(
     axis_text_family = "Source Code Pro",
     axis_title_family = "Source Serif Pro",
     default_geom_font = "Source Sans Pro",
-    use_showtext = FALSE
+    use_showtext = TRUE
   ) + 
     theme(panel.grid.minor = element_blank())
 )
 ```
+
+```{r load, include=FALSE}
+# Load Data
+```
+
+<!-- Start Document Here -->
