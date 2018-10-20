@@ -26,10 +26,20 @@ test_that("if_na() works", {
 
   expect_equal(storms_3, storms_4)
 
+  expect_equal(if_na(c(1L, NA)), c(1L, 0L))
+  expect_equal(if_na(c(1.0, NA)), c(1.0, 0))
+  expect_equal(if_na(c("a", NA)), c("a", ""))
   expect_equal(if_na(c("1", NA_character_)), c("1", ""))
   expect_equal(if_na(c("1", NA_character_), 0), c("1", "0"))
+  expect_equal(if_na(factor(1:3, 1:2), 4), factor(c(1L, 2L, 4L)))
+  expect_equal(
+    if_na(factor(1:4, 1:2), 10, c(T, T, T, F), value_else = 11),
+               factor(c(1L, 2L, 10L, 11L))
+  )
+  expect_equal(if_na(list(NA, 1, list(2))), list(NULL, 1, list(2)))
   expect_equal(suppressWarnings(if_na(c(1L, NA_integer_), "a")), c(1, NA_integer_))
   expect_warning(if_na(c(1L, NA_integer_), "a"))
-  expect_warning(if_na(factor(1:3, 1:2)))
-  expect_warning(if_na(factor(1:3, 1:2), 1L))
+  expect_equal(if_na(c(TRUE, NA)), c(TRUE, FALSE))
+  expect_error(if_na(structure(1L, class = "unknown")), "Please provide")
+  expect_error(if_na(structure(1L, class = "unknown"), 0), "Unable to coerce")
 })

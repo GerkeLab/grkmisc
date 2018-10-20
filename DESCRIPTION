@@ -19,11 +19,11 @@ Imports:
     crayon,
     devtools,
     dplyr (>= 0.7.0),
+    forcats (>= 0.3.0),
     ggplot2 (>= 3.0.0),
     haven,
     here,
-    hrbrthemes (>=
-        0.5.0),
+    hrbrthemes (>= 0.5.0),
     labelled,
     magrittr,
     purrr,
