@@ -17,21 +17,21 @@
 #' # Replacement can be single value or vector of values
 #' storms %>%
 #'   mutate(
-#'     ts_diameter = if_na(ts_diameter, 30),
-#'     hu_diameter = if_na(hu_diameter, rnorm(11, 100))
+#'     ts_diameter = if_na(ts_diameter, value = 30),
+#'     hu_diameter = if_na(hu_diameter, value = rnorm(11, 100))
 #'   )
 #'
 #' # Replacement can be predicated on other conditions in addition to missingness
 #' storms %>%
 #'   mutate(
-#'     hu_diameter = if_na(hu_diameter, 30, status == "hurricane")
+#'     hu_diameter = if_na(hu_diameter, value = 30, status == "hurricane")
 #'   )
 #'
 #' # Can provide a secondary value for missing values when the conditions
 #' # are not met
 #' storms %>%
 #'   mutate(
-#'     ts_diameter = if_na(ts_diameter, wind, status == "tropical storm", value_else = 0)
+#'     ts_diameter = if_na(ts_diameter, value = wind, status == "tropical storm", value_else = 0)
 #'   )
 #'
 #' @param x Input vector of values
@@ -45,15 +45,15 @@
 #' @export
 if_na <- function(
   x,
-  value = default_value(x),
   ...,
+  value = default_value(x),
   value_else = NULL
 ) {
   UseMethod("if_na")
 }
 
 #' @export
-if_na.default <- function(x, value = default_value(x), ..., value_else = NULL) {
+if_na.default <- function(x, ..., value = default_value(x), value_else = NULL) {
   value <- check_type(x, value)
   if (!is.null(value_else)) value_else <- check_type(x, value_else)
 
@@ -71,7 +71,7 @@ if_na.default <- function(x, value = default_value(x), ..., value_else = NULL) {
 }
 
 #' @export
-if_na.factor <- function(x, value = "(Missing)", ..., value_else = NULL) {
+if_na.factor <- function(x, ..., value = "(Missing)", value_else = NULL) {
   # if_na() for factors uses forcats::fct_explicit_na()
   # which does not work with the if_else() workflow
   value <- as.character(value)

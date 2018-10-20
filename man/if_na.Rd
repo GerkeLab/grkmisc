@@ -4,17 +4,17 @@
 \alias{if_na}
 \title{Replace NA values}
 \usage{
-if_na(x, value = default_value(x), ..., value_else = NULL)
+if_na(x, ..., value = default_value(x), value_else = NULL)
 }
 \arguments{
 \item{x}{Input vector of values}
 
+\item{...}{Additional expressions to condition replacement. NA values are
+only replaced when the additional expression matches.}
+
 \item{value}{Replacement value, the default value is based on the input
 value type and favors \code{0}, \code{FALSE}, or empty strings, lists or data frames
 according to the input type.}
-
-\item{...}{Additional expressions to condition replacement. NA values are
-only replaced when the additional expression matches.}
 
 \item{value_else}{If given, then provides a secondary replacement value to
 be subsituted for missing values when the conditions in \code{...} are \code{FALSE}.}
@@ -37,21 +37,21 @@ storms \%>\%
 # Replacement can be single value or vector of values
 storms \%>\%
   mutate(
-    ts_diameter = if_na(ts_diameter, 30),
-    hu_diameter = if_na(hu_diameter, rnorm(11, 100))
+    ts_diameter = if_na(ts_diameter, value = 30),
+    hu_diameter = if_na(hu_diameter, value = rnorm(11, 100))
   )
 
 # Replacement can be predicated on other conditions in addition to missingness
 storms \%>\%
   mutate(
-    hu_diameter = if_na(hu_diameter, 30, status == "hurricane")
+    hu_diameter = if_na(hu_diameter, value = 30, status == "hurricane")
   )
 
 # Can provide a secondary value for missing values when the conditions
 # are not met
 storms \%>\%
   mutate(
-    ts_diameter = if_na(ts_diameter, wind, status == "tropical storm", value_else = 0)
+    ts_diameter = if_na(ts_diameter, value = wind, status == "tropical storm", value_else = 0)
   )
 
 }
