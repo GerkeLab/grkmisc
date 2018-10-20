@@ -115,7 +115,7 @@ inputs in the same way as <code>filter</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>if_na</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>default_value</span>(<span class='no'>x</span>), <span class='kw'>value_else</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>if_na</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fu'>default_value</span>(<span class='no'>x</span>), <span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,15 +130,14 @@ inputs in the same way as <code>filter</code>.</p>
 only replaced when the additional expression matches.</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>Replacement value, the default value is based on the input
-value type and favors <code>0</code>, <code>FALSE</code>, or empty strings, lists or data frames
-according to the input type.</p></td>
+      <th>then</th>
+      <td><p>Replacement value. Defaults to a value based on the input type
+and favors <code>0</code>, <code>FALSE</code>, <code>""</code> or empty lists according to the input type.</p></td>
     </tr>
     <tr>
-      <th>value_else</th>
-      <td><p>If given, then provides a secondary replacement value to
-be subsituted for missing values when the conditions in <code>...</code> are <code>FALSE</code>.</p></td>
+      <th>otherwise</th>
+      <td><p>If given, provides a secondary replacement value to be
+subsituted for missing values when the conditions in <code>...</code> are <code>FALSE</code>.</p></td>
     </tr>
     </table>
     
@@ -172,8 +171,8 @@ be subsituted for missing values when the conditions in <code>...</code> are <co
 <span class='co'># Replacement can be single value or vector of values</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
-    <span class='kw'>ts_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>ts_diameter</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>30</span>),
-    <span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>11</span>, <span class='fl'>100</span>))
+    <span class='kw'>ts_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>ts_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fl'>30</span>),
+    <span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>11</span>, <span class='fl'>100</span>))
   )</div><div class='output co'>#&gt; # A tibble: 11 x 6
 #&gt;    name   year status               wind ts_diameter hu_diameter
 #&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;
@@ -191,7 +190,7 @@ be subsituted for missing values when the conditions in <code>...</code> are <co
 <span class='co'># Replacement can be predicated on other conditions in addition to missingness</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
-    <span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"hurricane"</span>)
+    <span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"hurricane"</span>)
   )</div><div class='output co'>#&gt; # A tibble: 11 x 6
 #&gt;    name   year status               wind ts_diameter hu_diameter
 #&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;
@@ -210,7 +209,7 @@ be subsituted for missing values when the conditions in <code>...</code> are <co
 <span class='co'># are not met</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
-    <span class='kw'>ts_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>ts_diameter</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>wind</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"tropical storm"</span>, <span class='kw'>value_else</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+    <span class='kw'>ts_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>ts_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='no'>wind</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"tropical storm"</span>, <span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='fl'>0</span>)
   )</div><div class='output co'>#&gt; # A tibble: 11 x 6
 #&gt;    name   year status               wind ts_diameter hu_diameter
 #&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;

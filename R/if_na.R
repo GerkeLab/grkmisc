@@ -17,70 +17,69 @@
 #' # Replacement can be single value or vector of values
 #' storms %>%
 #'   mutate(
-#'     ts_diameter = if_na(ts_diameter, value = 30),
-#'     hu_diameter = if_na(hu_diameter, value = rnorm(11, 100))
+#'     ts_diameter = if_na(ts_diameter, then = 30),
+#'     hu_diameter = if_na(hu_diameter, then = rnorm(11, 100))
 #'   )
 #'
 #' # Replacement can be predicated on other conditions in addition to missingness
 #' storms %>%
 #'   mutate(
-#'     hu_diameter = if_na(hu_diameter, value = 30, status == "hurricane")
+#'     hu_diameter = if_na(hu_diameter, then = 30, status == "hurricane")
 #'   )
 #'
 #' # Can provide a secondary value for missing values when the conditions
 #' # are not met
 #' storms %>%
 #'   mutate(
-#'     ts_diameter = if_na(ts_diameter, value = wind, status == "tropical storm", value_else = 0)
+#'     ts_diameter = if_na(ts_diameter, then = wind, status == "tropical storm", otherwise = 0)
 #'   )
 #'
 #' @param x Input vector of values
-#' @param value Replacement value, the default value is based on the input
-#'   value type and favors `0`, `FALSE`, or empty strings, lists or data frames
-#'   according to the input type.
-#' @param value_else If given, then provides a secondary replacement value to
-#'   be subsituted for missing values when the conditions in `...` are `FALSE`.
+#' @param then Replacement value. Defaults to a value based on the input type
+#'   and favors `0`, `FALSE`, `""` or empty lists according to the input type.
+#' @param otherwise If given, provides a secondary replacement value to be
+#'   subsituted for missing values when the conditions in `...` are `FALSE`.
 #' @param ... Additional expressions to condition replacement. NA values are
 #'   only replaced when the additional expression matches.
 #' @export
-if_na <- function(x, ..., value = default_value(x), value_else = NULL) {
+if_na <- function(x, ..., then = default_value(x), otherwise = NULL) {
   UseMethod("if_na")
 }
 
 #' @export
-if_na.default <- function(x, ..., value = default_value(x), value_else = NULL) {
-  value <- check_type(x, value)
-  if (!is.null(value_else)) value_else <- check_type(x, value_else)
+if_na.default <- function(x, ..., then = default_value(x), otherwise = NULL) {
+  then <- check_type(x, then)
+  if (!is.null(otherwise)) otherwise <- check_type(x, otherwise)
 
   conditions <- get_conditions(length(x), ...)
 
-  if (!is.null(value_else)) {
+  if (!is.null(otherwise)) {
     dplyr::if_else(
       !is.na(x),
       x,
-      dplyr::if_else(conditions, value, value_else),
+      dplyr::if_else(conditions, then, otherwise),
     )
   } else {
-    dplyr::if_else(!(is.na(x) & conditions), x, value)
+    dplyr::if_else(!(is.na(x) & conditions), x, then)
   }
 }
 
 #' @export
-if_na.factor <- function(x, ..., value = "(Missing)", value_else = NULL) {
+if_na.factor <- function(x, ..., then = "(Missing)", otherwise = NULL) {
   # if_na() for factors uses forcats::fct_explicit_na()
   # which does not work with the if_else() workflow
-  value <- as.character(value)
-  value_else <- if (!is.null(value_else)) as.character(value_else)
+  then <- as.character(then)
+  otherwise <- if (!is.null(otherwise)) as.character(otherwise)
 
   conditions <- get_conditions(length(x), ...)
 
-  if (!is.null(value_else)) {
+  if (!is.null(otherwise)) {
     conditions_else <- is.na(x) & !conditions
-    x <- forcats::fct_explicit_na(x, value)
+    x <- forcats::fct_explicit_na(x, then)
     x[conditions_else] <- NA
-    forcats::fct_explicit_na(x, value_else)
+    forcats::fct_explicit_na(x, otherwise)
   } else {
-    forcats::fct_explicit_na(x, value)
+    forcats::fct_explicit_na(x, then)
   }
 }
 
@@ -100,7 +99,7 @@ default_value.numeric   <- function(x) 0.0
 default_value.logical   <- function(x) FALSE
 default_value.character <- function(x) ""
 default_value.default   <- function(x) {
-  msg <- paste("Please provide a `value` of type", typeof(x))
+  msg <- paste("Please provide a value of type", typeof(x))
   rlang::abort(msg)
 }
 
@@ -108,7 +107,7 @@ check_type <- function(x, value) {
   if (identical(typeof(x), typeof(value))) return(value)
 
   if (!canCoerce(value, class(x))) rlang::abort(
-    paste("Unable to coerce `value` from", class(value)[1], "to", class(x)[1])
+    paste("Unable to coerce value from", class(value)[1], "to", class(x)[1])
   )
 
   tryCatch({
@@ -122,7 +121,7 @@ check_type <- function(x, value) {
   },
   warning = function(w) {
     rlang::warn(
-      paste("Missing values may have been introduced when coercing `value` from",
+      paste("Missing values may have been introduced when coercing value from",
             class(value)[1], "to", class(x)[1])
     )
     suppressWarnings(as(value, class(x)))
