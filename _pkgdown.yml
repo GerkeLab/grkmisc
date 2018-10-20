@@ -10,6 +10,7 @@ reference:
   desc: "Helper functions that extended or work well with `dplyr`."
   contents:
   - '`if_na`'
+  - '`if_na.data.frame`'
   - '`recode_if`'
 - title: Helper Functions
   desc: "General helper functions that make things easier."

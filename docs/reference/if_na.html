@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Replace NA values — if_na • grkmisc</title>
+<title>Replace Missing Values — if_na • grkmisc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Replace NA values — if_na" />
+<meta property="og:title" content="Replace Missing Values — if_na" />
 
-<meta property="og:description" content="Replaces NA values with the given value, or optionally conditions the
+<meta property="og:description" content="Replaces missing values with the given value, or optionally conditions the
 replacement on the expressions given in ..., which are applied to the
 inputs in the same way as filter." />
 <meta name="twitter:card" content="summary" />
@@ -102,28 +102,24 @@ inputs in the same way as filter." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Replace NA values</h1>
+    <h1>Replace Missing Values</h1>
     <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/if_na.R'><code>R/if_na.R</code></a></small>
     <div class="hidden name"><code>if_na.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Replaces NA values with the given value, or optionally conditions the
+    <p>Replaces missing values with the given value, or optionally conditions the
 replacement on the expressions given in <code>...</code>, which are applied to the
 inputs in the same way as <code>filter</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>if_na</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fu'>default_value</span>(<span class='no'>x</span>), <span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>if_na</span>(<span class='no'>.x</span>, <span class='no'>...</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fu'>default_value</span>(<span class='no'>x</span>), <span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>Input vector of values</p></td>
-    </tr>
     <tr>
       <th>...</th>
       <td><p>Additional expressions to condition replacement. NA values are
@@ -139,12 +135,18 @@ and favors <code>0</code>, <code>FALSE</code>, <code>""</code> or empty lists ac
       <td><p>If given, provides a secondary replacement value to be
 subsituted for missing values when the conditions in <code>...</code> are <code>FALSE</code>.</p></td>
     </tr>
+    <tr>
+      <th>x</th>
+      <td><p>Input vector of values</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:grkmisc’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    vars</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
