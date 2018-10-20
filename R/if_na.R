@@ -43,12 +43,7 @@
 #' @param ... Additional expressions to condition replacement. NA values are
 #'   only replaced when the additional expression matches.
 #' @export
-if_na <- function(
-  x,
-  ...,
-  value = default_value(x),
-  value_else = NULL
-) {
+if_na <- function(x, ..., value = default_value(x), value_else = NULL) {
   UseMethod("if_na")
 }
 
