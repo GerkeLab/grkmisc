@@ -12,6 +12,7 @@ reference:
   - '`if_na`'
   - '`if_na.data.frame`'
   - '`recode_if`'
+  - '`logger`'
 - title: Helper Functions
   desc: "General helper functions that make things easier."
   contents:

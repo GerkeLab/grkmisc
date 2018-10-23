@@ -73,7 +73,7 @@ good in constrained space.}
   \item{axis_title_face}{axis title font family, face and size}
   \item{axis_title_size}{axis title font family, face and size}
   \item{axis_title_just}{axis title font justification, one of \code{[blmcrt]}}
-  \item{plot_margin}{plot margin (specify with \link[ggplot2:margin]{ggplot2::margin})}
+  \item{plot_margin}{plot margin (specify with \code{\link[ggplot2:margin]{ggplot2::margin()}})}
   \item{grid_col}{grid & axis colors; both default to \code{#cccccc}}
   \item{axis_col}{grid & axis colors; both default to \code{#cccccc}}
   \item{grid}{panel grid (\code{TRUE}, \code{FALSE}, or a combination of \code{X}, \code{x}, \code{Y}, \code{y})}
