@@ -4,6 +4,7 @@
 #' @inheritDotParams styler::style_text
 #' @export
 style_console <- function(x, ...) {
+  x <- paste(x, collapse = "\n")
   if (!grepl("\n", x)) {
     if (grepl("%>%", x)) {
       x <- sub("%>%", "%>%\n", x)
