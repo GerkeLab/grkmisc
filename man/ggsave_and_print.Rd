@@ -38,17 +38,8 @@ in interactive mode.}
 
 \item{...}{Arguments passed on to \code{ggplot2::ggsave}
 \describe{
-  \item{filename}{File name to create on disk.}
-  \item{plot}{Plot to save, defaults to last plot displayed.}
-  \item{device}{Device to use. Can be either be a device function
-(e.g. \code{\link[=png]{png()}}), or one of "eps", "ps", "tex" (pictex),
-"pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
   \item{path}{Path to save plot to (combined with filename).}
   \item{scale}{Multiplicative scaling factor.}
-  \item{width}{Plot size in \code{units} ("in", "cm", or "mm").
-If not supplied, uses the size of current graphics device.}
-  \item{height}{Plot size in \code{units} ("in", "cm", or "mm").
-If not supplied, uses the size of current graphics device.}
   \item{units}{Plot size in \code{units} ("in", "cm", or "mm").
 If not supplied, uses the size of current graphics device.}
   \item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),

@@ -16,6 +16,7 @@ reference:
 - title: Helper Functions
   desc: "General helper functions that make things easier."
   contents:
+  - '`ggsave_and_print`'
   - '`shorten_github_url`'
   - '`pretty_num`'
   - '`knitr_bold_row`'

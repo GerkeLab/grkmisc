@@ -26,17 +26,18 @@
 #'   in interactive mode.
 #' @param base_dir Save figures into a specified directory
 #' @inheritParams ggplot2::ggsave
-#' @inheritDotParams ggplot2::ggsave
+#' @inheritDotParams ggplot2::ggsave -filename:-device -width -height
 #' @export
-ggsave_and_print <- function(plot,
-                                filename,
-                                width = 20,
-                                height = 15,
-                                device = fs::path_ext(filename),
-                                include = knitr::opts_current$get("include") %||% TRUE,
-                                ...,
-                                force_save = FALSE,
-                                base_dir = getwd()
+ggsave_and_print <- function(
+  plot,
+  filename,
+  width = 20,
+  height = 15,
+  device = fs::path_ext(filename),
+  include = knitr::opts_current$get("include") %||% TRUE,
+  ...,
+  force_save = FALSE,
+  base_dir = getwd()
 ) {
   if (interactive() && !force_save) return(plot)
 
