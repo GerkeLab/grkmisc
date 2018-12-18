@@ -1,6 +1,6 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.0.0.9057
+Version: 0.0.0.9058
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -49,4 +49,4 @@ ByteCompile: true
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

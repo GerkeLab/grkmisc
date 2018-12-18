@@ -28,7 +28,8 @@ pretty_num <- function(
     rlang::stop("`units` must be list of numeric lower bounds")
   }
 
-  purrr::map_chr(x, prettify_number, units = units, decimal_digits = decimal_digits, ...)
+  x <- purrr::map_chr(x, prettify_number, units = units, decimal_digits = decimal_digits, ...)
+  prettify_remove_decimal(x, units)
 }
 
 
@@ -45,6 +46,26 @@ prettify_number <- function(x, units = c('k' = 1000, 'M' = 1e6, "B" = 1e9), deci
   }
 
   sprintf(paste0("%0.", decimal_digits, "f%s"), x/this_unit, this_name)
+}
+
+prettify_remove_decimal <- function(x, units) {
+  if (!any(grepl("\\.", x))) return(x)
+  x_decimals <- x
+  for (unit in names(units)) {
+    # strip unit name from result
+    x_decimals <- sub(unit, "", x_decimals, fixed = TRUE)
+  }
+  x_decimals <- sub(".+(\\.\\d*)$", "\\1", x_decimals)
+  x_decimals <- unique(x_decimals)
+
+  # Nothing to do here
+  if (!any(nzchar(x_decimals))) return(x)
+  # Decimals are required to differentiate
+  if (length(x_decimals) > 1) return(x)
+  # Decimals are not just ".0"
+  if (grepl("[1-9]", x_decimals)) return(x)
+
+  sub(x_decimals, "", x, fixed = TRUE)
 }
 
 
@@ -114,4 +135,79 @@ logger_level <- function(level) {
   )
   level <- match.arg(toupper(level), names(levels), several.ok = FALSE)
   levels[level]
+}
+
+#' Truncate and wrap strings
+#'
+#' Truncates, trims, and wraps strings. Built for ggplot2 plots with long
+#' string labels.
+#'
+#' @param x Strings
+#' @param truncate_at Maximum total string length prior to wrapping. Default is
+#'   80 characters. Use `NULL` to skip truncation.
+#' @param truncate_with Character string that is added at the end of each string
+#'   to indicate that the string was truncated. Eats into string length. Default
+#'   is `"..."`; set to `NULL` or `""` to skip.
+#' @param trim Should whitespace be trimmed? Default is `TRUE`.
+#' @param wrap_at Wraps string at given length, passed to [stringr::str_wrap()].
+#' @examples
+#' text <- "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+#' pretty_string(text, truncate_at = 20, wrap_at = NULL)
+#' pretty_string(text, truncate_at = NULL, wrap_at = 10)
+#'
+#' library(ggplot2)
+#' set.seed(654321)
+#' ex <- dplyr::data_frame(
+#'   label = sample(stringr::sentences, 3),
+#'   value = runif(3, 0, 10)
+#' )
+#'
+#' g <- ggplot(ex) +
+#'   aes(value, label) +
+#'   geom_point()
+#'
+#' g
+#'
+#' g + scale_y_discrete(
+#'   label = format_pretty_string(truncate_at = 25)
+#' )
+#'
+#' g + scale_y_discrete(
+#'   label = format_pretty_string(truncate_at = NULL, wrap_at = 20)
+#' )
+#' @export
+pretty_string <- function(
+  x,
+  truncate_at = 80,
+  truncate_with = "...",
+  trim = TRUE,
+  wrap_at = 40
+) {
+  x <- as.character(x)
+  if (trim) x <- stringr::str_trim(x)
+  truncate <- !is.null(truncate_at) && any(nchar(x[!is.na(x)]) > truncate_at)
+  if (truncate) {
+    truncate_actual <- if (!is.null(truncate_with)) {
+      truncate_at - nchar(truncate_with)
+    } else truncate_at
+    x[nchar(x) > truncate_at] <- paste0(
+      substr(x[nchar(x) > truncate_at], 1, truncate_actual),
+      truncate_with
+    )
+  }
+  if (!is.null(wrap_at) && wrap_at < max(nchar(x), na.rm = TRUE)) {
+    x <- stringr::str_wrap(x, wrap_at)
+  }
+  x
+}
+
+#' @describeIn pretty_string Provides a pretty string formatter for ggplot2 labels
+#' @export
+format_pretty_string <- function(
+  truncate_at = 80,
+  truncate_with = "...",
+  trim = TRUE,
+  wrap_at = 40
+) {
+  function(x) pretty_string(x, truncate_at, truncate_with, trim, wrap_at)
 }

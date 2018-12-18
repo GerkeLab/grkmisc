@@ -12,5 +12,10 @@ test_that("pretty_num() works", {
     ),
     c("1.2mm", "1.2cm", "12.3cm", "1.2m")
     )
-  expect_equal(pretty_num(123456, units = c(M = 1e6)), "123456.0")
+  expect_equal(pretty_num(123456, units = c(M = 1e6)), "123456")
+})
+
+test_that("pretty_num() removes decimals when not needed", {
+  expect_equal(pretty_num(1:4 * 1000), paste0(1:4, "k"))
+  expect_equal(pretty_num(c(1, 1.5, 2) * 1000), c("1.0k", "1.5k", "2.0k"))
 })
