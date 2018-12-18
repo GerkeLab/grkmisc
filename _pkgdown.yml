@@ -19,6 +19,7 @@ reference:
   - '`ggsave_and_print`'
   - '`shorten_github_url`'
   - '`pretty_num`'
+  - '`pretty_string`'
   - '`knitr_bold_row`'
   - '`knitr_list_cache`'
   - '`knitr_load_cache`'

@@ -28,7 +28,8 @@ If not supplied, uses the size of current graphics device.}
 plot is saved but not printed. If \code{TRUE}, then the plot is saved and
 printed.}
 
-\item{...}{Other arguments passed on to graphics \code{device}.}
+\item{...}{Other arguments passed on to the graphics device function,
+as specified by \code{device}.}
 
 \item{force_save}{If \code{TRUE} the plot is saved, even if inside an interactive
 session. The default is \code{FALSE}, meaning that plots are not saved when
