@@ -266,6 +266,13 @@ doc_new <- function(path, type = c("doc", "slides", "radix")) {
     "slides" = rmarkdown::draft(path, template = "moffitt-xaringan", package = "grkmisc", edit = FALSE),
     "radix"  = rmarkdown::draft(path, template = "grk-radix", package = "grkmisc", edit = FALSE)
   )
+  if (type == "radix" && !requireNamespace("radix", quietly = TRUE)) {
+    if (!requireNamespace("remotes", quietly = TRUE)) {
+      rlang::abort("Please install 'remotes' with `install.packages(\"remotes\")`")
+    }
+    message("Installing radix from rstudio/radix...")
+    remotes::install_github("radix/rstudio")
+  }
   if (requireNamespace("rstudioapi", quietly = TRUE))
     rstudioapi::navigateToFile(file_path) else file_path
 }
