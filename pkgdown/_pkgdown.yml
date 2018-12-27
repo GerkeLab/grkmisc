@@ -1,3 +1,45 @@
+url: https://gerkelab.github.io/grkmisc
+
+authors:
+  Garrick Aden-Buie:
+    href: https://www.garrickadenbuie.com
+  Travis Gerke:
+    href: https://travisgerke.com
+
+template:
+  params:
+    bootswatch: lumen
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - github
+    - gerkelab
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/gerkelab/grkmisc
+    gerkelab:
+      icon: fa-flask fa-lg
+      href: https://gerkelab.com
+      text: GerkeLab
+
 reference:
 - title: Templates
   desc: "Templates for R Markdown, Slides, Plots, etc."

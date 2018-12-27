@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,6 +30,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="Pipe-Capable Log Messages — logger" />
 
 <meta property="og:description" content="Writes a log message, suitable for use inside pipes, meaning that the first
@@ -64,7 +66,7 @@ log message." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9058</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9059</span>
       </span>
     </div>
 
@@ -89,6 +91,13 @@ log message." />
   <a href="https://github.com/gerkelab/grkmisc">
     <span class="fa fa-github fa-lg"></span>
      
+  </a>
+</li>
+<li>
+  <a href="https://gerkelab.com">
+    <span class="fa fa-flask fa-lg"></span>
+     
+    GerkeLab
   </a>
 </li>
       </ul>
@@ -152,8 +161,8 @@ are <code>"INFO"</code> and <code>stdout()</code> respectively.</p>
   <span class='fu'>logger</span>(<span class='st'>"Starting with {nrow(.data)} rows"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"setosa"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>logger</span>(<span class='st'>"Filtered to {nrow(.data)} rows and {ncol(.data)} columns"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>head</span>()</div><div class='output co'>#&gt; [2018-12-18 13:06:31.168860] INFO    Starting with 150 rows
-#&gt; [2018-12-18 13:06:31.169718] INFO    Filtered to 50 rows and 5 columns</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+  <span class='fu'>head</span>()</div><div class='output co'>#&gt; [2018-12-27 08:28:19.834635] INFO    Starting with 150 rows
+#&gt; [2018-12-27 08:28:19.835555] INFO    Filtered to 50 rows and 5 columns</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; 1          5.1         3.5          1.4         0.2  setosa
 #&gt; 2          4.9         3.0          1.4         0.2  setosa
 #&gt; 3          4.7         3.2          1.3         0.2  setosa
@@ -177,7 +186,7 @@ are <code>"INFO"</code> and <code>stdout()</code> respectively.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Garrick Aden-Buie.</p>
+  <p>Developed by <a href='https://www.garrickadenbuie.com'>Garrick Aden-Buie</a>.</p>
 </div>
 
 <div class="pkgdown">
