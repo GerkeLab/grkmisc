@@ -11,12 +11,18 @@
 #' pretty_num(123456789)
 #' pretty_num(12345678900)
 #' pretty_num(c(1234, 1234567, 12345678900))
+#'
+#' library(ggplot2)
+#' ggplot(mtcars) +
+#'   aes(mpg, wt * 1000) +
+#'   geom_point() +
+#'   scale_y_continuous(labels = format_pretty_num())
 #' @export
 pretty_num <- function(
   x,
   units = c("k" = 1e3, "M" = 1e6, "B" = 1e9),
   decimal_digits = 1,
-  ...
+  no_dot_zero = FALSE
 ) {
   if (!is.numeric(x)) {
     rlang::stop("`pretty_num()` inputs should be numeric")
@@ -28,13 +34,21 @@ pretty_num <- function(
     rlang::stop("`units` must be list of numeric lower bounds")
   }
 
-  x <- purrr::map_chr(x, prettify_number, units = units, decimal_digits = decimal_digits, ...)
-  prettify_remove_decimal(x, units)
+  x <- purrr::map_chr(x, prettify_number, units = units, decimal_digits = decimal_digits)
+  prettify_remove_decimal(x, units, no_dot_zero)
+}
+
+#' @describeIn pretty_num A label formatter for ggplot2
+#' @export
+format_pretty_num <- function(
+  units = c("k" = 1e3, "M" = 1e6, "B" = 1e9),
+  decimal_digits = 1,
+  no_dot_zero = TRUE) {
+  function(x) pretty_num(x, units, decimal_digits, no_dot_zero)
 }
 
 
-prettify_number <- function(x, units = c('k' = 1000, 'M' = 1e6, "B" = 1e9), decimal_digits = 1, ...) {
-
+prettify_number <- function(x, units = c('k' = 1000, 'M' = 1e6, "B" = 1e9), decimal_digits = 1) {
   units <- sort(units)
   this_unit <- units[x >= units]
   if (!length(this_unit)) {
@@ -48,7 +62,7 @@ prettify_number <- function(x, units = c('k' = 1000, 'M' = 1e6, "B" = 1e9), deci
   sprintf(paste0("%0.", decimal_digits, "f%s"), x/this_unit, this_name)
 }
 
-prettify_remove_decimal <- function(x, units) {
+prettify_remove_decimal <- function(x, units, no_dot_zero = FALSE) {
   if (!any(grepl("\\.", x))) return(x)
   x_decimals <- x
   for (unit in names(units)) {
@@ -61,7 +75,11 @@ prettify_remove_decimal <- function(x, units) {
   # Nothing to do here
   if (!any(nzchar(x_decimals))) return(x)
   # Decimals are required to differentiate
-  if (length(x_decimals) > 1) return(x)
+  if (length(x_decimals) > 1) {
+    if (no_dot_zero) {
+      return(sub("(\\d+)\\.0+([^1-9]?)$", "\\1\\2", x))
+    } else return(x)
+  }
   # Decimals are not just ".0"
   if (grepl("[1-9]", x_decimals)) return(x)
 

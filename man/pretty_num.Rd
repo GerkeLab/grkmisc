@@ -2,10 +2,14 @@
 % Please edit documentation in R/misc.R
 \name{pretty_num}
 \alias{pretty_num}
+\alias{format_pretty_num}
 \title{Pretty print scaled numbers}
 \usage{
 pretty_num(x, units = c(k = 1000, M = 1e+06, B = 1e+09),
-  decimal_digits = 1, ...)
+  decimal_digits = 1, no_dot_zero = FALSE)
+
+format_pretty_num(units = c(k = 1000, M = 1e+06, B = 1e+09),
+  decimal_digits = 1, no_dot_zero = TRUE)
 }
 \arguments{
 \item{x}{Vector of numbers}
@@ -19,10 +23,21 @@ selected unit.}
 \description{
 Pretty print scaled numbers
 }
+\section{Functions}{
+\itemize{
+\item \code{format_pretty_num}: A label formatter for ggplot2
+}}
+
 \examples{
 pretty_num(1234)
 pretty_num(12345, decimal_digits = 3)
 pretty_num(123456789)
 pretty_num(12345678900)
 pretty_num(c(1234, 1234567, 12345678900))
+
+library(ggplot2)
+ggplot(mtcars) +
+  aes(mpg, wt * 1000) +
+  geom_point() +
+  scale_y_continuous(labels = format_pretty_num())
 }
