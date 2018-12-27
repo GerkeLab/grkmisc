@@ -36,3 +36,17 @@
   given two values, both scales allow the user to pick a secondary color from
   `moffitt_colors` (green, red, orange, light_blue, yellow, or grey (default))
   to contrast the primary blue color.
+
+- A function to help replace missing values in data frame columns: `if_na()`
+
+- A pipe-friendly logging functions: `logger()`
+
+- A pipe- and Rmd-friendly function to save ggplot objects: `ggsave_and_print()`.
+  In comparison with `ggsave()`, the first argument is the plot object and the
+  second argument is the filename, making this function pipe-friendly. By
+  default, the plot is printed but not saved when used interactively.
+  
+- A function to truncate and wrap long strings: `pretty_string()`
+
+- `format_pretty_string()` and `format_pretty_number()` return formatting
+  functions that can be used as labellers in ggplot2 scales.

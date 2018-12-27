@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9059</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9060</span>
       </span>
     </div>
 
@@ -126,6 +126,11 @@
 <li><p>Insert the relative or absolute path to the directory containing the active document with the RStudio Addins “Insert Relative Directory Path” or “Insert Absolute Directory Path”.</p></li>
 <li><p>New ggplot2 themes: <code><a href="../reference/theme_moffitt.html">theme_moffitt()</a></code> and <code><a href="../reference/theme_moffitt.html">theme_grk()</a></code></p></li>
 <li><p>New ggplot2 scales: <code><a href="../reference/scale_moffitt.html">scale_color_moffitt()</a></code> and <code><a href="../reference/scale_moffitt.html">scale_fill_moffitt()</a></code>. When given two values, both scales allow the user to pick a secondary color from <code>moffitt_colors</code> (green, red, orange, light_blue, yellow, or grey (default)) to contrast the primary blue color.</p></li>
+<li><p>A function to help replace missing values in data frame columns: <code><a href="../reference/if_na.html">if_na()</a></code></p></li>
+<li><p>A pipe-friendly logging functions: <code><a href="../reference/logger.html">logger()</a></code></p></li>
+<li><p>A pipe- and Rmd-friendly function to save ggplot objects: <code><a href="../reference/ggsave_and_print.html">ggsave_and_print()</a></code>. In comparison with <code>ggsave()</code>, the first argument is the plot object and the second argument is the filename, making this function pipe-friendly. By default, the plot is printed but not saved when used interactively.</p></li>
+<li><p>A function to truncate and wrap long strings: <code><a href="../reference/pretty_string.html">pretty_string()</a></code></p></li>
+<li><p><code><a href="../reference/pretty_string.html">format_pretty_string()</a></code> and <code>format_pretty_number()</code> return formatting functions that can be used as labellers in ggplot2 scales.</p></li>
 </ul>
 </div>
   </div>
