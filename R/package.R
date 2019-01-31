@@ -130,7 +130,7 @@ use_starter_package <- function(
     done("Opening project in RStudio")
     rproj_path <- dir(path, pattern = "Rproj")
     rstudioapi::openProject(rproj_path, newSession = TRUE)
-    proj_set(owd)
+    usethis::proj_set(owd)
   } else if (open) {
     done("Working directory set to new package directory")
   } else {
