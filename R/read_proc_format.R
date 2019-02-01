@@ -229,6 +229,7 @@ read_proc_format <- function(
   file, verbose = FALSE,
   missing_values = paste0(".", c("", 1:9, LETTERS))
 ) {
+  require_package("rematch2")
   if (verbose) cli::cat_bullet("Reading proc format: ", file)
   read_proc_format_statements(file) %>%
     purrr::map_dfr(extract_statement) %>%
@@ -269,6 +270,8 @@ add_proc_format_labels <- function(
   debug_level = 0,
   ...
 ) {
+  require_package("haven")
+  require_package("labelled")
   if (is.character(proc_format)) {
     if (length(proc_format) == 1) {
       proc_format <- read_proc_format(proc_format, debug_level > 0, ...)
@@ -351,6 +354,7 @@ read_sas_with_format <- function(
   debug_level = 0,
   ...
 ) {
+  require_package("haven")
   if (debug_level > 0) cli::cat_bullet("Reading SAS file: ", file_bdat)
   bdat <- haven::read_sas(file_bdat, ...)
 

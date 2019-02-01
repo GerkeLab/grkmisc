@@ -25,13 +25,13 @@ auto_extract <- function(path, ..., gunzip_args = NULL) {
 
   for (file in files) {
     file_args <- switch(
-      xfun::file_ext(file),
+      file_ext(file),
       "zip" = unzip_args,
       untar_args
     )
     file_args$file <- file
     output <- switch(
-      xfun::file_ext(file),
+      file_ext(file),
       "zip" = do.call("unzip_in_dir", file_args),
       "tar" = do.call("untar_in_dir", file_args),
       "gz"  = do.call("untar_in_dir", file_args),
@@ -52,11 +52,23 @@ auto_extract <- function(path, ..., gunzip_args = NULL) {
 untar_in_dir <- function(file, ...) {
   assertthat::is.readable(file)
   message("Untarring file: ", file)
-  xfun::in_dir(dirname(file), untar(basename(file), ...))
+  in_dir(dirname(file), untar(basename(file), ...))
 }
 
 unzip_in_dir <- function(file, ...) {
   assertthat::is.readable(file)
   message("Unzipping file: ", file)
-  xfun::in_dir(dirname(file), unzip(basename(file), ...))
+  in_dir(dirname(file), unzip(basename(file), ...))
+}
+
+file_ext <- function(x) {
+  # tools::file_ext
+  pos <- regexpr("\\.([[:alnum:]]+)$", x)
+  ifelse(pos > -1L, substring(x, pos + 1L), "")
+}
+
+in_dir <- function (dir, expr) {
+    owd = setwd(dir)
+    on.exit(setwd(owd))
+    expr
 }

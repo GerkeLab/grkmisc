@@ -105,7 +105,9 @@ use_starter_package <- function(
   }
   usethis::use_directory("data-raw")
   done("Updating package documentation")
-  devtools::document(usethis::proj_get())
+  if (suggest_package("devtools")) {
+    devtools::document(usethis::proj_get())
+  }
   use_gitignore(browse = FALSE, overwrite = TRUE)
   done("Initializing git repo")
   repo <- git2r::init(usethis::proj_get())

@@ -1,6 +1,6 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.0.0.9062
+Version: 0.0.0.9063
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -14,34 +14,34 @@ BugReports: https://github.com/gerkelab/grkmisc/issues
 Imports: 
     assertthat,
     cli,
-    clipr,
-    clisymbols,
     crayon,
-    devtools,
     dplyr (>= 0.7.0),
     forcats (>= 0.3.0),
+    fs,
     ggplot2 (>= 3.0.0),
-    haven,
     here,
     hrbrthemes (>= 0.5.0),
-    labelled,
     magrittr,
     purrr,
-    rematch2,
     rlang (>= 0.1.2),
     showtext (>= 0.5-1),
     stringr,
-    styler,
-    sysfonts (>= 0.7.3),
     usethis (>= 1.4.0),
-    xfun,
     yesno
 Suggests: 
+    clipr,
     curl,
+    devtools,
+    haven,
     httr,
     knitr,
+    labelled,
     readr (>= 1.1.1),
+    rematch2,
+    roxygen2,
     rstudioapi,
+    styler,
+    sysfonts (>= 0.7.3),
     testthat
 ByteCompile: true
 Encoding: UTF-8

@@ -19,7 +19,9 @@ style_console <- function(x, ...) {
                 gsub("\\+", "\\+\n", substring(x, ggplot_starts_at)))
   }
   x <- strsplit(x, "\n")[[1]]
-  styler::style_text(x, ...)
+  if (suggest_package("styler")) {
+    styler::style_text(x, ...)
+  } else x
 }
 
 #' Insert Styled Text
@@ -30,7 +32,7 @@ style_console <- function(x, ...) {
 #'
 #' @inheritParams style_console
 insert_styled_text <- function(x = NULL, ...) {
-  if (!requireNamespace("clipr", quietly = TRUE)) rlang::abort("Please install `clipr`")
+  require_package("clipr")
   if (!clipr::clipr_available()) rlang::abort("clipr is unable to read from the clipboard")
   if (is.null(x)) x <- clipr::read_clip()
   x <- style_console(x, ...)
