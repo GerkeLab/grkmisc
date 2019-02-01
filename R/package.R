@@ -86,13 +86,23 @@ use_starter_package <- function(
       Description = description
     ))
   owd <- setwd(path)
+  usethis::proj_set(path)
   usethis::use_roxygen_md()
   usethis::use_readme_rmd(open = FALSE)
-  usethis::use_news_md(open = FALSE)
+  done("Writing NEWS.md")
+  pkg_data <- usethis:::package_data()
+  cat(glue::glue(
+    "## {pkg_data$Package} {pkg_data$Version}
+
+    * Initialized {pkg_data$Package} package
+    "
+  ), file = "NEWS.md")
   usethis::use_testthat()
   usethis::use_spell_check()
   usethis::use_pipe()
-  usethis::use_blank_slate("project")
+  if (in_rstudio_project() || is_usethis_recent()) {
+    usethis::use_blank_slate("project")
+  }
   usethis::use_directory("data-raw")
   done("Updating package documentation")
   devtools::document(usethis::proj_get())
@@ -156,4 +166,15 @@ use_starter_project <- function(path) {
   cat(news_md, file = file.path(usethis::proj_get(), "NEWS.md"), sep = "\n")
   git2r::init(usethis::proj_get())
   done("Project started in ", path)
+}
+
+in_rstudio_project <- function() {
+  if (!requireNamespace("rstudioapi", quietly = TRUE)) return(FALSE)
+  if (!rstudioapi::hasFun("getActiveProject")) return(FALSE)
+  if (is.null(rstudioapi::getActiveProject())) return(FALSE)
+  TRUE
+}
+
+is_usethis_recent <- function() {
+  package_version(packageVersion("usethis")) >= "1.4.0.9000"
 }
