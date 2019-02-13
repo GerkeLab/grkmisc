@@ -6,7 +6,11 @@
 #' @param browse Open the .gitignore file after modifying?
 #' @param overwrite Should existing file be overwritten?
 #' @export
-use_gitignore <- function(directory = here::here(), browse = TRUE, overwrite = TRUE) {
+use_gitignore <- function(
+  directory = here::here(),
+  browse = TRUE,
+  overwrite = yesno::yesno("Overwrite .gitignore? Select no to append to existing .gitignore file")
+) {
   proj_gitignore <- file.path(directory, ".gitignore")
   default_gitignore <- system.file("templates", ".gitignore", package = "grkmisc")
   if (!file.exists(default_gitignore)) {
