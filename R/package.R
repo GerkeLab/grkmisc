@@ -9,6 +9,14 @@
 use_gitignore <- function(directory = here::here(), browse = TRUE, overwrite = TRUE) {
   proj_gitignore <- file.path(directory, ".gitignore")
   default_gitignore <- system.file("templates", ".gitignore", package = "grkmisc")
+  if (!file.exists(default_gitignore)) {
+    rlang::abort(paste(
+      ".gitignore template is missing from your installation of `grkmisc`.",
+      "You may need to reinstall `grkmisc`.",
+      "\nYou can also view the .gitignore template online at:",
+      "\nhttps://github.com/GerkeLab/grkmisc/blob/master/inst/templates/.gitignore"
+    ))
+  }
   append <- file.exists(proj_gitignore) && !overwrite
   cat(readLines(default_gitignore), sep = "\n", file = proj_gitignore, append = append)
   if (append) {
