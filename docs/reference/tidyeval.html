@@ -34,11 +34,27 @@
   
 <meta property="og:title" content="Tidy eval helpers — tidyeval" />
 
-<meta property="og:description" content="These functions provide tidy eval-compatible ways to capture
-symbols (sym(), syms(), ensym()), expressions (expr(),
-exprs(), enexpr()), and quosures (quo(), quos(), enquo()).
-To learn more about tidy eval and how to use these tools, read
-http://rlang.tidyverse.org/articles/tidy-evaluation.html" />
+<meta property="og:description" content="
+sym() creates a symbol from a string and
+syms() creates a list of symbols from a
+character vector.
+expr() and quo() quote
+one expression. quo() wraps the quoted expression in a quosure.
+The plural variants rlang::exprs() and
+quos() return a list of quoted expressions or
+quosures.
+enexpr() and enquo()
+capture the expression supplied as argument by the user of the
+current function (enquo() wraps this expression in a quosure).
+enexprs() and enquos()
+capture multiple expressions supplied as arguments, including
+....
+" />
+
+<meta property="og:description" content="exprs() is not exported to avoid conflicts with Biobase::exprs(),
+therefore one should always use rlang::exprs().
+To learn more about tidy eval and how to use these tools, visit
+http://rlang.r-lib.org and the Metaprogramming section of Advanced R." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -67,7 +83,7 @@ http://rlang.tidyverse.org/articles/tidy-evaluation.html" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9060</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -120,11 +136,27 @@ http://rlang.tidyverse.org/articles/tidy-evaluation.html" />
 
     <div class="ref-description">
     
-    <p>These functions provide tidy eval-compatible ways to capture
-symbols (<code>sym()</code>, <code>syms()</code>, <code>ensym()</code>), expressions (<code>expr()</code>,
-<code>exprs()</code>, <code>enexpr()</code>), and quosures (<code>quo()</code>, <code>quos()</code>, <code>enquo()</code>).
-To learn more about tidy eval and how to use these tools, read
-<a href='http://rlang.tidyverse.org/articles/tidy-evaluation.html'>http://rlang.tidyverse.org/articles/tidy-evaluation.html</a></p>
+    <ul>
+<li><p><code><a href='https://rlang.r-lib.org/reference/sym.html'>sym</a>()</code> creates a symbol from a string and
+<code><a href='https://rlang.r-lib.org/reference/sym.html'>syms</a>()</code> creates a list of symbols from a
+character vector.</p></li>
+<li><p><code><a href='https://rlang.r-lib.org/reference/quotation.html'>expr</a>()</code> and <code><a href='https://rlang.r-lib.org/reference/quotation.html'>quo</a>()</code> quote
+one expression. <code>quo()</code> wraps the quoted expression in a quosure.</p>
+<p>The plural variants <code><a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::exprs()</a></code> and
+<code><a href='https://rlang.r-lib.org/reference/quotation.html'>quos</a>()</code> return a list of quoted expressions or
+quosures.</p></li>
+<li><p><code><a href='https://rlang.r-lib.org/reference/quotation.html'>enexpr</a>()</code> and <code><a href='https://rlang.r-lib.org/reference/quotation.html'>enquo</a>()</code>
+capture the expression supplied as argument by the user of the
+current function (<code>enquo()</code> wraps this expression in a quosure).</p>
+<p><code><a href='https://rlang.r-lib.org/reference/quotation.html'>enexprs</a>()</code> and <code><a href='https://rlang.r-lib.org/reference/quotation.html'>enquos</a>()</code>
+capture multiple expressions supplied as arguments, including
+<code>...</code>.</p></li>
+</ul>
+
+    <p><code>exprs()</code> is not exported to avoid conflicts with <code><a href='http://www.rdocumentation.org/packages/Biobase/topics/exprs'>Biobase::exprs()</a></code>,
+therefore one should always use <code><a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::exprs()</a></code>.</p>
+<p>To learn more about tidy eval and how to use these tools, visit
+<a href='http://rlang.r-lib.org'>http://rlang.r-lib.org</a> and the <a href='https://adv-r.hadley.nz/introduction-16.html'>Metaprogramming section</a> of <a href='https://adv-r.hadley.nz'>Advanced R</a>.</p>
     
     </div>
 

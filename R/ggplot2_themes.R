@@ -60,8 +60,10 @@ theme_moffitt <- function(
   axis_text_color    = "#6e6e6e",
   plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
+  panel_background_color = "#FFFFFF",
   ...,
-  use_showtext = TRUE
+  use_showtext = TRUE,
+  hide_panel_grid_minor = TRUE
 ) {
   theme_grk(
     base_family        = base_family,
@@ -77,6 +79,8 @@ theme_moffitt <- function(
     plot_caption_color = plot_caption_color,
     panel_border_color = panel_border_color,
     use_showtext       = use_showtext,
+    panel_background_color = panel_background_color,
+    hide_panel_grid_minor  = hide_panel_grid_minor,
     ...
   )
 }
@@ -84,20 +88,22 @@ theme_moffitt <- function(
 #' @rdname theme_moffitt
 #' @export
 theme_grk <- function(
-  base_family        = "Fira Sans",
-  axis_text_family   = paste(sub(" ?(Mono|Sans|Serif)", "", base_family), "Mono"),
+  base_family        = "PT Sans",
+  axis_text_family   = "PT Mono",
   axis_title_family  = base_family,
   axis_title_bold    = FALSE,
   axis_title_just    = "cc",
   axis_title_size    = 13,
   subtitle_size      = 13,
-  default_geom_font  = "Fira Sans Condensed",
+  default_geom_font  = "PT Sans Narrow",
   default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color    = "#6e6e6e",
   plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
+  panel_background_color = "grey96",
   ...,
-  use_showtext = TRUE
+  use_showtext = TRUE,
+  hide_panel_grid_minor = TRUE
 ) {
   axis_title_family_name <- axis_title_family
   # Get and set fonts - this works across all devices
@@ -124,21 +130,30 @@ theme_grk <- function(
   if (!is.null(default_geom_font)) hrbrthemes::update_geom_font_defaults(default_geom_font)
   if (!is.null(default_geom_color)) update_geom_moffitt_defaults(default = default_geom_color)
 
-  hrbrthemes::theme_ipsum(
-    base_family = base_family,
-    subtitle_size = subtitle_size,
-    axis_title_size = axis_title_size,
-    axis_title_family = axis_title_family_name,
-    axis_title_just = axis_title_just,
-    ...
-  ) +
+  theme <-
+    hrbrthemes::theme_ipsum(
+      base_family = base_family,
+      subtitle_size = subtitle_size,
+      axis_title_size = axis_title_size,
+      axis_title_family = axis_title_family_name,
+      axis_title_just = axis_title_just,
+      ...
+    ) +
     ggplot2::theme(
       axis.text = ggplot2::element_text(
-        family = axis_text_family, color = axis_text_color),
+        family = axis_text_family, color = axis_text_color, inherit.blank = TRUE),
       plot.caption = ggplot2::element_text(
-        family = base_family, face = "plain", color = plot_caption_color),
-      panel.background = ggplot2::element_rect(fill = NA, color = panel_border_color)
+        family = base_family, face = "plain", color = plot_caption_color, inherit.blank = TRUE),
+      panel.background = ggplot2::element_rect(fill = panel_background_color),
+      panel.border = ggplot2::element_rect(fill = NA, color = panel_border_color, inherit.blank = TRUE)
     )
+
+  if (hide_panel_grid_minor) theme <- theme + theme(
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank()
+  )
+
+  theme
 }
 
 # Try to get font from Google, otherwise returns null

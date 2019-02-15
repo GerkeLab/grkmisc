@@ -70,7 +70,7 @@ prefer, use theme_grk(), which simply uses &quot;Fira Sans&quot; as the base fon
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9060</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -141,16 +141,19 @@ prefer, use <code>theme_grk()</code>, which simply uses "Fira Sans" as the base 
   <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"Fira Sans Condensed"</span>,
   <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw pkg'>grkmisc</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/grkmisc/topics/moffitt_colors'>moffitt_colors</a></span>$<span class='no'>blue</span>,
   <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>, <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
-  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
+  <span class='kw'>panel_background_color</span> <span class='kw'>=</span> <span class='st'>"#FFFFFF"</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>hide_panel_grid_minor</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>theme_grk</span>(<span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"Fira Sans"</span>,
-  <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='fu'>paste</span>(<span class='fu'>sub</span>(<span class='st'>" ?(Mono|Sans|Serif)"</span>, <span class='st'>""</span>, <span class='no'>base_family</span>),
-  <span class='st'>"Mono"</span>), <span class='kw'>axis_title_family</span> <span class='kw'>=</span> <span class='no'>base_family</span>, <span class='kw'>axis_title_bold</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+<span class='fu'>theme_grk</span>(<span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"PT Sans"</span>, <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='st'>"PT Mono"</span>,
+  <span class='kw'>axis_title_family</span> <span class='kw'>=</span> <span class='no'>base_family</span>, <span class='kw'>axis_title_bold</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>axis_title_just</span> <span class='kw'>=</span> <span class='st'>"cc"</span>, <span class='kw'>axis_title_size</span> <span class='kw'>=</span> <span class='fl'>13</span>, <span class='kw'>subtitle_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
-  <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"Fira Sans Condensed"</span>,
+  <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"PT Sans Narrow"</span>,
   <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw pkg'>grkmisc</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/grkmisc/topics/moffitt_colors'>moffitt_colors</a></span>$<span class='no'>blue</span>,
   <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>, <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
-  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
+  <span class='kw'>panel_background_color</span> <span class='kw'>=</span> <span class='st'>"grey96"</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>hide_panel_grid_minor</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

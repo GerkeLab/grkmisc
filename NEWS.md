@@ -1,4 +1,4 @@
-# grkmisc 0.0.1
+# grkmisc 0.1.0
 
 - A nice default R Markdown template available through RStudio new markdown file
   "From Template" dialogue called "Garrick Default".

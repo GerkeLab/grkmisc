@@ -5,7 +5,7 @@
 \title{Use Default .gitignore File}
 \usage{
 use_gitignore(directory = here::here(), browse = TRUE,
-  overwrite = TRUE)
+  overwrite = yesno::yesno("Overwrite .gitignore? Select no to append to existing .gitignore file"))
 }
 \arguments{
 \item{directory}{Directory for the .gitignore, defaults to project root.}

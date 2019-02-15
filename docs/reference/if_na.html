@@ -65,7 +65,7 @@ inputs in the same way as filter." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9060</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -160,12 +160,12 @@ subsituted for missing values when the conditions in <code>...</code> are <code>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>storms</span> <span class='kw'>&lt;-</span> <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>name</span> <span class='kw'>==</span> <span class='st'>"Erika"</span>, <span class='no'>year</span> <span class='kw'>==</span> <span class='fl'>2003</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>name</span>, <span class='no'>year</span>, <span class='no'>status</span>, <span class='no'>wind</span>, <span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>contains</a></span>(<span class='st'>"diameter"</span>))
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>name</span> <span class='kw'>==</span> <span class='st'>"Erika"</span>, <span class='no'>year</span> <span class='kw'>==</span> <span class='fl'>2003</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>name</span>, <span class='no'>year</span>, <span class='no'>status</span>, <span class='no'>wind</span>, <span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>contains</a></span>(<span class='st'>"diameter"</span>))
 
 <span class='co'># Default is replacement with appropriate default (0, FALSE, "", etc.)</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>))</div><div class='output co'>#&gt; # A tibble: 11 x 6
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>))</div><div class='output co'>#&gt; # A tibble: 11 x 6
 #&gt;    name   year status               wind ts_diameter hu_diameter
 #&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;
 #&gt;  1 Erika  2003 tropical storm         35          NA           0
@@ -181,7 +181,7 @@ subsituted for missing values when the conditions in <code>...</code> are <code>
 #&gt; 11 Erika  2003 tropical depression    25          NA           0</div><div class='input'>
 <span class='co'># Replacement can be single value or vector of values</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
     <span class='kw'>ts_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>ts_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fl'>30</span>),
     <span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>11</span>, <span class='fl'>100</span>))
   )</div><div class='output co'>#&gt; # A tibble: 11 x 6
@@ -200,7 +200,7 @@ subsituted for missing values when the conditions in <code>...</code> are <code>
 #&gt; 11 Erika  2003 tropical depression    25          30        99.4</div><div class='input'>
 <span class='co'># Replacement can be predicated on other conditions in addition to missingness</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
     <span class='kw'>hu_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>hu_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"hurricane"</span>)
   )</div><div class='output co'>#&gt; # A tibble: 11 x 6
 #&gt;    name   year status               wind ts_diameter hu_diameter
@@ -219,7 +219,7 @@ subsituted for missing values when the conditions in <code>...</code> are <code>
 <span class='co'># Can provide a secondary value for missing values when the conditions</span>
 <span class='co'># are not met</span>
 <span class='no'>storms</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='http://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
     <span class='kw'>ts_diameter</span> <span class='kw'>=</span> <span class='fu'>if_na</span>(<span class='no'>ts_diameter</span>, <span class='kw'>then</span> <span class='kw'>=</span> <span class='no'>wind</span>, <span class='no'>status</span> <span class='kw'>==</span> <span class='st'>"tropical storm"</span>, <span class='kw'>otherwise</span> <span class='kw'>=</span> <span class='fl'>0</span>)
   )</div><div class='output co'>#&gt; # A tibble: 11 x 6
 #&gt;    name   year status               wind ts_diameter hu_diameter

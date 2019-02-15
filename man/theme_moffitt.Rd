@@ -12,16 +12,19 @@ theme_moffitt(base_family = "Overpass",
   default_geom_font = "Fira Sans Condensed",
   default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
-  panel_border_color = axis_text_color, ..., use_showtext = TRUE)
+  panel_border_color = axis_text_color,
+  panel_background_color = "#FFFFFF", ..., use_showtext = TRUE,
+  hide_panel_grid_minor = TRUE)
 
-theme_grk(base_family = "Fira Sans",
-  axis_text_family = paste(sub(" ?(Mono|Sans|Serif)", "", base_family),
-  "Mono"), axis_title_family = base_family, axis_title_bold = FALSE,
+theme_grk(base_family = "PT Sans", axis_text_family = "PT Mono",
+  axis_title_family = base_family, axis_title_bold = FALSE,
   axis_title_just = "cc", axis_title_size = 13, subtitle_size = 13,
-  default_geom_font = "Fira Sans Condensed",
+  default_geom_font = "PT Sans Narrow",
   default_geom_color = grkmisc::moffitt_colors$blue,
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
-  panel_border_color = axis_text_color, ..., use_showtext = TRUE)
+  panel_border_color = axis_text_color,
+  panel_background_color = "grey96", ..., use_showtext = TRUE,
+  hide_panel_grid_minor = TRUE)
 }
 \arguments{
 \item{base_family}{base font family and size}

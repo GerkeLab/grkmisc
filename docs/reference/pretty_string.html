@@ -64,7 +64,7 @@ string labels." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9060</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@ is <code>"..."</code>; set to <code>NULL</code> or <code>""</code> to skip.</p><
     </tr>
     <tr>
       <th>wrap_at</th>
-      <td><p>Wraps string at given length, passed to <code><a href='http://www.rdocumentation.org/packages/stringr/topics/str_wrap'>stringr::str_wrap()</a></code>.</p></td>
+      <td><p>Wraps string at given length, passed to <code><a href='https://stringr.tidyverse.org/reference/str_wrap.html'>stringr::str_wrap()</a></code>.</p></td>
     </tr>
     </table>
     
@@ -168,11 +168,11 @@ is <code>"..."</code>; set to <code>NULL</code> or <code>""</code> to skip.</p><
 <span class='fu'>pretty_string</span>(<span class='no'>text</span>, <span class='kw'>truncate_at</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>wrap_at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; [1] "Lorem ipsum dolor..."</div><div class='input'><span class='fu'>pretty_string</span>(<span class='no'>text</span>, <span class='kw'>truncate_at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>wrap_at</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; [1] "Lorem\nipsum\ndolor\nsit amet,\nconsectetur\nadipiscing\nelit"</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>654321</span>)
-<span class='no'>ex</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>(
-  <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/stringr/topics/stringr-data'>sentences</a></span>, <span class='fl'>3</span>),
+<span class='no'>ex</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/reexports.html'>data_frame</a></span>(
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='no'><a href='https://stringr.tidyverse.org/reference/stringr-data.html'>sentences</a></span>, <span class='fl'>3</span>),
   <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>10</span>)
-)
-
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: `data_frame()` is deprecated, use `tibble()`.</span>
+#&gt; <span class='warning'>This warning is displayed once per session.</span></div><div class='input'>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>ex</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>value</span>, <span class='no'>label</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()

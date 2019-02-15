@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9060</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
       </span>
     </div>
 
@@ -128,7 +128,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>Input data frame read from <a href='http://www.rdocumentation.org/packages/haven/topics/read_sas'>haven::read_sas</a></p></td>
+      <td><p>Input data frame read from <a href='https://haven.tidyverse.org/reference/read_sas.html'>haven::read_sas</a></p></td>
     </tr>
     <tr>
       <th>proc_format</th>
@@ -137,7 +137,7 @@ the results of <a href='read_proc_format.html'>read_proc_format</a>.</p></td>
     </tr>
     <tr>
       <th>as_factor</th>
-      <td><p>Convert labelled variables to factor with <a href='http://www.rdocumentation.org/packages/haven/topics/as_factor'>haven::as_factor</a>?</p></td>
+      <td><p>Convert labelled variables to factor with <a href='https://haven.tidyverse.org/reference/as_factor.html'>haven::as_factor</a>?</p></td>
     </tr>
     <tr>
       <th>varname_case</th>
@@ -170,7 +170,7 @@ applied to each variable in <code>df</code>.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>bdat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>haven</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/haven/topics/read_sas'>read_sas</a></span>(<span class='st'>"freepsa_data_feb16_d080516.sas7bdat"</span>)
+<span class='no'>bdat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>haven</span><span class='kw ns'>::</span><span class='fu'><a href='https://haven.tidyverse.org/reference/read_sas.html'>read_sas</a></span>(<span class='st'>"freepsa_data_feb16_d080516.sas7bdat"</span>)
 <span class='no'>bdat2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_proc_format_labels</span>(<span class='no'>bdat</span>, <span class='st'>"freepsa.sas_formats.feb16.d080516.sas"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
