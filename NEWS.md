@@ -4,6 +4,9 @@
 
 - Renamed all package helpers based on `usethis` to use the prefix `use_grk_`.
   For example, `use_grk_starter_package()` replaced `use_starter_package()`.
+  
+- Fixed `use_grk_gitignore()` so that template is correctly found internally.
+
 # grkmisc 0.1.0
 
 - A nice default R Markdown template available through RStudio new markdown file
