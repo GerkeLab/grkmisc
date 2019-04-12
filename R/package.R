@@ -227,7 +227,8 @@ grk_github_labels <- function() {
     "documentation :memo:",
     "bug :bug:",
     "duplicate",
-    ":construction: WIP :construction:"
+    ":construction: WIP :construction:",
+    "considering :thinking:"
   )
 }
 
@@ -241,7 +242,8 @@ grk_github_colours <- function() {
     "documentation :memo:" = "3E363F",
     "bug :bug:" = "754668",
     "duplicate" = "CFD3D7",
-    ":construction: WIP :construction:" = "FBCA04"
+    ":construction: WIP :construction:" = "FBCA04",
+    "considering :thinking:" = "BF1349"
   )
 }
 
@@ -255,6 +257,7 @@ grk_github_descriptions <- function() {
     "documentation :memo:" = "Documentation improvement, clarification, or update",
     "bug :bug:" = "Something isn't working",
     "duplicate" = "This issue or pull request already exists",
-    ":construction: WIP :construction:" = "Work in Progress! Don't Merge!"
+    ":construction: WIP :construction:" = "Work in Progress! Don't Merge!",
+    "considering :thinking:" = "Let's think about this..."
   )
 }
