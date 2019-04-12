@@ -64,7 +64,7 @@ string labels." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
 
@@ -173,15 +173,15 @@ is <code>"..."</code>; set to <code>NULL</code> or <code>""</code> to skip.</p><
   <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>runif</span>(<span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>10</span>)
 )</div><div class='output co'>#&gt; <span class='warning'>Warning: `data_frame()` is deprecated, use `tibble()`.</span>
 #&gt; <span class='warning'>This warning is displayed once per session.</span></div><div class='input'>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>ex</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>value</span>, <span class='no'>label</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>ex</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>value</span>, <span class='no'>label</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>()
 
 <span class='no'>g</span></div><div class='img'><img src='pretty_string-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>g</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_y_discrete</a></span>(
+<span class='no'>g</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_discrete'>scale_y_discrete</a></span>(
   <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>format_pretty_string</span>(<span class='kw'>truncate_at</span> <span class='kw'>=</span> <span class='fl'>25</span>)
 )</div><div class='img'><img src='pretty_string-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>g</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_y_discrete</a></span>(
+<span class='no'>g</span> + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_discrete'>scale_y_discrete</a></span>(
   <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'>format_pretty_string</span>(<span class='kw'>truncate_at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>wrap_at</span> <span class='kw'>=</span> <span class='fl'>20</span>)
 )</div><div class='img'><img src='pretty_string-3.png' alt='' width='700' height='433' /></div></pre>
   </div>

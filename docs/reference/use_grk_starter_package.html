@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe-Capable Log Messages — logger • grkmisc</title>
+<title>Create a default package skeleton — use_grk_starter_package • grkmisc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,12 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Pipe-Capable Log Messages — logger" />
+<meta property="og:title" content="Create a default package skeleton — use_grk_starter_package" />
 
-<meta property="og:description" content="Writes a log message, suitable for use inside pipes, meaning that the first
-argument is passed through untouched. The log message is processed using
-glue::glue, and you can reference the incoming data as .data inside the
-log message." />
+<meta property="og:description" content="Create a default package skeleton" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,74 +109,75 @@ log message." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe-Capable Log Messages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/misc.R'><code>R/misc.R</code></a></small>
-    <div class="hidden name"><code>logger.Rd</code></div>
+    <h1>Create a default package skeleton</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/package.R'><code>R/package.R</code></a></small>
+    <div class="hidden name"><code>use_grk_starter_package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Writes a log message, suitable for use inside pipes, meaning that the first
-argument is passed through untouched. The log message is processed using
-<a href='http://www.rdocumentation.org/packages/glue/topics/glue'>glue::glue</a>, and you can reference the incoming data as <code>.data</code> inside the
-log message.</p>
+    <p>Create a default package skeleton</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>logger</span>(<span class='kw'>.data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>msg</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"INFO"</span>)</pre>
+    <pre class="usage"><span class='fu'>use_grk_starter_package</span>(<span class='no'>path</span>, <span class='kw'>github</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>github_org</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>github_private</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"What the Package Does (One Line, Title Case)"</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>"What the package does (one paragraph)"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
-      <td><p>This argument is returned as-is.</p></td>
+      <th>path</th>
+      <td><p>Path (and thus package name) where the package will be stored</p></td>
     </tr>
     <tr>
-      <th>msg</th>
-      <td><p>The log message, processed using <a href='http://www.rdocumentation.org/packages/glue/topics/glue'>glue::glue</a>. You can refernce
-the data passed in via <code>.data</code>.</p></td>
+      <th>github</th>
+      <td><p>Should a github repository be created?</p></td>
     </tr>
     <tr>
-      <th>level</th>
-      <td><p>The log level, default is "INFO" and possible values include
-"DEBUG", "INFO", "WARNING", "ERROR", and "FATAL".</p></td>
+      <th>github_org</th>
+      <td><p>The organization where the repo should be created. If
+unspecified (or <code>NULL</code>), the default is to create the package in your
+personal account.</p></td>
+    </tr>
+    <tr>
+      <th>github_private</th>
+      <td><p>Should the GitHub repo be private?</p></td>
+    </tr>
+    <tr>
+      <th>open</th>
+      <td><p>Should the package be opened? If <code>TRUE</code>, tries to open in RStudio
+and falls back to changing the working directory.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Package title: "What the Package Does (One Line, Title Case)"</p></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><p>Package description: "What the package does (one
+paragraph)"</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="options"><a class="anchor" href="#options"></a>Options</h2>
+    <h2 class="hasAnchor" id="default-package-description"><a class="anchor" href="#default-package-description"></a>Default Package Description</h2>
 
     
-    <p>You can set the maximum debug level and the log output locations using the
-global options <code>grkmisc.log_level</code> and <code>grkmisc.log_output</code>. The defaults
-are <code>"INFO"</code> and <code>stdout()</code> respectively.</p>
+    <p>See <code><a href='https://usethis.r-lib.org/reference/use_description.html'>usethis::use_description()</a></code> for information about setting your default
+package DESCRIPTION file fields. The help file there provides an example of
+how to set <code>"usethis.description"</code> in your <code>.Rprofile</code>.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>dplyr</span>)
-<span class='no'>iris</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>logger</span>(<span class='st'>"Starting with {nrow(.data)} rows"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"setosa"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>logger</span>(<span class='st'>"Filtered to {nrow(.data)} rows and {ncol(.data)} columns"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>head</span>()</div><div class='output co'>#&gt; [2019-04-12 13:22:56.873742] INFO    Starting with 150 rows
-#&gt; [2019-04-12 13:22:56.874804] INFO    Filtered to 50 rows and 5 columns</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#&gt; 1          5.1         3.5          1.4         0.2  setosa
-#&gt; 2          4.9         3.0          1.4         0.2  setosa
-#&gt; 3          4.7         3.2          1.3         0.2  setosa
-#&gt; 4          4.6         3.1          1.5         0.2  setosa
-#&gt; 5          5.0         3.6          1.4         0.2  setosa
-#&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#options">Options</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#default-package-description">Default Package Description</a></li>
+          </ul>
 
   </div>
 </div>

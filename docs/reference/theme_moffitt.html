@@ -70,7 +70,7 @@ prefer, use theme_grk(), which simply uses &quot;Fira Sans&quot; as the base fon
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grkmisc</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
 
@@ -126,10 +126,10 @@ prefer, use theme_grk(), which simply uses &quot;Fira Sans&quot; as the base fon
     <p>A clean theme based on <code>hrbrthemes::theme_ispum()</code> that uses
 <a href='https://fonts.google.com/specimen/Overpass'>Overpass</a>, a free Google Font
 that resembles Freeway, the (proprietary) font chosen by MCC branding. This
-theme works best when set globally using <code><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>ggplot2::theme_set()</a></code> as it will
+theme works best when set globally using <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme_get'>ggplot2::theme_set()</a></code> as it will
 automatically download and register the correct fonts from Google Font using
 sysfonts and showtext (if installed) and will change the default
-<code><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>ggplot2::geom_text()</a></code> related fonts as well. For an alternative look that I
+<code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>ggplot2::geom_text()</a></code> related fonts as well. For an alternative look that I
 prefer, use <code>theme_grk()</code>, which simply uses "Fira Sans" as the base font.</p>
     
     </div>
@@ -165,7 +165,7 @@ prefer, use <code>theme_grk()</code>, which simply uses "Fira Sans" as the base 
     <tr>
       <th>axis_text_family</th>
       <td><p>The font family for axis ticks text labels.
-Passed to <code>family</code> in <code>axis.text</code> in <code><a href='https://ggplot2.tidyverse.org/reference/theme.html'>ggplot2::theme()</a></code>.</p></td>
+Passed to <code>family</code> in <code>axis.text</code> in <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/theme'>ggplot2::theme()</a></code>.</p></td>
     </tr>
     <tr>
       <th>axis_title_family</th>
@@ -230,7 +230,7 @@ good in constrained space.</p></td>
   <dt>axis_title_face</dt><dd><p>axis title font family, face and size</p></dd>
   <dt>axis_title_size</dt><dd><p>axis title font family, face and size</p></dd>
   <dt>axis_title_just</dt><dd><p>axis title font justification, one of <code>[blmcrt]</code></p></dd>
-  <dt>plot_margin</dt><dd><p>plot margin (specify with <code><a href='https://ggplot2.tidyverse.org/reference/element.html'>ggplot2::margin()</a></code>)</p></dd>
+  <dt>plot_margin</dt><dd><p>plot margin (specify with <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/element'>ggplot2::margin()</a></code>)</p></dd>
   <dt>grid_col</dt><dd><p>grid &amp; axis colors; both default to <code>#cccccc</code></p></dd>
   <dt>axis_col</dt><dd><p>grid &amp; axis colors; both default to <code>#cccccc</code></p></dd>
   <dt>grid</dt><dd><p>panel grid (<code>TRUE</code>, <code>FALSE</code>, or a combination of <code>X</code>, <code>x</code>, <code>Y</code>, <code>y</code>)</p></dd>
@@ -260,10 +260,10 @@ these colors are used only when color or fill is not mapped to the data.</p></td
 <span class='fu'>theme_set</span>(<span class='fu'>theme_moffitt</span>(<span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>))
 <span class='co'># }</span><div class='input'>
 <span class='fu'>library</span>(<span class='no'>ggplot2</span>)
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>mpg</span>, <span class='no'>wt</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>cyl</span>), <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1.65</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Fuel efficiency (mpg)"</span>,
+<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>mpg</span>, <span class='no'>wt</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>cyl</span>), <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1.65</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>labs</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Fuel efficiency (mpg)"</span>,
        <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Weight (tons)"</span>,
        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Seminal ggplot2 scatterplot example"</span>,
        <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"A plot that is only useful for demonstration purposes"</span>,

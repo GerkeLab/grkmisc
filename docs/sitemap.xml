@@ -88,12 +88,15 @@
     <loc>https://gerkelab.github.io/grkmisc/reference/use_git_hook_precommit.html</loc>
   </url>
   <url>
-    <loc>https://gerkelab.github.io/grkmisc/reference/use_gitignore.html</loc>
+    <loc>https://gerkelab.github.io/grkmisc/reference/use_grk_github_labels.html</loc>
   </url>
   <url>
-    <loc>https://gerkelab.github.io/grkmisc/reference/use_starter_package.html</loc>
+    <loc>https://gerkelab.github.io/grkmisc/reference/use_grk_gitignore.html</loc>
   </url>
   <url>
-    <loc>https://gerkelab.github.io/grkmisc/reference/use_starter_project.html</loc>
+    <loc>https://gerkelab.github.io/grkmisc/reference/use_grk_starter_package.html</loc>
+  </url>
+  <url>
+    <loc>https://gerkelab.github.io/grkmisc/reference/use_grk_starter_project.html</loc>
   </url>
 </urlset>

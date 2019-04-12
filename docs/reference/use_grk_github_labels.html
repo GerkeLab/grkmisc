@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pretty print scaled numbers — pretty_num • grkmisc</title>
+<title>Setup GerkeLab Default GitHub Labels — use_grk_github_labels • grkmisc</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Pretty print scaled numbers — pretty_num" />
+<meta property="og:title" content="Setup GerkeLab Default GitHub Labels — use_grk_github_labels" />
 
-<meta property="og:description" content="Pretty print scaled numbers" />
+<meta property="og:description" content="Removes the default GitHub labels and installs the GerkeLab labels. A small
+wrapper around usethis::use_github_labels()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,58 +110,95 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pretty print scaled numbers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/misc.R'><code>R/misc.R</code></a></small>
-    <div class="hidden name"><code>pretty_num.Rd</code></div>
+    <h1>Setup GerkeLab Default GitHub Labels</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/package.R'><code>R/package.R</code></a></small>
+    <div class="hidden name"><code>use_grk_github_labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Pretty print scaled numbers</p>
+    <p>Removes the default GitHub labels and installs the GerkeLab labels. A small
+wrapper around <code><a href='https://usethis.r-lib.org/reference/use_github_labels.html'>usethis::use_github_labels()</a></code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>pretty_num</span>(<span class='no'>x</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1e+09</span>),
-  <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>no_dot_zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>use_grk_github_labels</span>(<span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>grk_github_labels</span>(),
+  <span class='kw'>colours</span> <span class='kw'>=</span> <span class='fu'>grk_github_colours</span>(),
+  <span class='kw'>descriptions</span> <span class='kw'>=</span> <span class='fu'>grk_github_descriptions</span>(), <span class='kw'>delete_default</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>format_pretty_num</span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1e+09</span>),
-  <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>no_dot_zero</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>grk_github_labels</span>()
+
+<span class='fu'>grk_github_colours</span>()
+
+<span class='fu'>grk_github_descriptions</span>()</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Vector of numbers</p></td>
+      <th>...</th>
+      <td><p>Arguments passed on to <code><a href='https://usethis.r-lib.org/reference/use_github_labels.html'>usethis::use_github_labels</a></code></p><dl class='dl-horizontal'>
+  <dt>repo_spec</dt><dd><p>Optional repository specification (<code>owner/repo</code>) if you
+don't want to target the current project.</p></dd>
+  <dt>labels</dt><dd><p>A character vector giving labels to add.</p></dd>
+  <dt>rename</dt><dd><p>A named vector with names giving old names and values giving
+new values.</p></dd>
+  <dt>colours</dt><dd><p>Named character vectors giving hexadecimal
+colours (like <code>e02a2a</code>) and longer descriptions. The names should match
+label names, and anything unmatched will be left unchanged. If you
+create a new label, and don't supply colours, it will be given a random
+colour.</p></dd>
+  <dt>descriptions</dt><dd><p>Named character vectors giving hexadecimal
+colours (like <code>e02a2a</code>) and longer descriptions. The names should match
+label names, and anything unmatched will be left unchanged. If you
+create a new label, and don't supply colours, it will be given a random
+colour.</p></dd>
+  <dt>delete_default</dt><dd><p>If <code>TRUE</code>, will remove GitHub default labels that do
+not appear in the <code>labels</code> vector, and do not have associated issues.
+to your workflow).</p></dd>
+  <dt>auth_token</dt><dd><p>GitHub personal access token (PAT).</p></dd>
+  <dt>host</dt><dd><p>GitHub API host to use. Override with the endpoint-root for your
+GitHub enterprise instance, for example,
+"https://github.hostname.com/api/v3".</p></dd>
+</dl></td>
     </tr>
     <tr>
-      <th>units</th>
-      <td><p>Named list with lower bounds for units. Names are units or unit
-abbreviations.</p></td>
+      <th>labels</th>
+      <td><p>A character vector giving labels to add.</p></td>
     </tr>
     <tr>
-      <th>decimal_digits</th>
-      <td><p>Number of digits to show after the decimal point in the
-selected unit.</p></td>
+      <th>colours</th>
+      <td><p>Named character vectors giving hexadecimal
+colours (like <code>e02a2a</code>) and longer descriptions. The names should match
+label names, and anything unmatched will be left unchanged. If you
+create a new label, and don't supply colours, it will be given a random
+colour.</p></td>
+    </tr>
+    <tr>
+      <th>descriptions</th>
+      <td><p>Named character vectors giving hexadecimal
+colours (like <code>e02a2a</code>) and longer descriptions. The names should match
+label names, and anything unmatched will be left unchanged. If you
+create a new label, and don't supply colours, it will be given a random
+colour.</p></td>
+    </tr>
+    <tr>
+      <th>delete_default</th>
+      <td><p>If <code>TRUE</code>, will remove GitHub default labels that do
+not appear in the <code>labels</code> vector, and do not have associated issues.
+to your workflow).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     <ul>
-<li><p><code>format_pretty_num</code>: A label formatter for ggplot2</p></li>
+<li><p><code>grk_github_labels</code>: Default grkmisc GitHub labels.</p></li>
+<li><p><code>grk_github_colours</code>: Default grkmisc GitHub colours.</p></li>
+<li><p><code>grk_github_descriptions</code>: Default grkmisc GitHub descriptions.</p></li>
 </ul>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>pretty_num</span>(<span class='fl'>1234</span>)</div><div class='output co'>#&gt; [1] "1.2k"</div><div class='input'><span class='fu'>pretty_num</span>(<span class='fl'>12345</span>, <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] "12.345k"</div><div class='input'><span class='fu'>pretty_num</span>(<span class='fl'>123456789</span>)</div><div class='output co'>#&gt; [1] "123.5M"</div><div class='input'><span class='fu'>pretty_num</span>(<span class='fl'>12345678900</span>)</div><div class='output co'>#&gt; [1] "12.3B"</div><div class='input'><span class='fu'>pretty_num</span>(<span class='fu'>c</span>(<span class='fl'>1234</span>, <span class='fl'>1234567</span>, <span class='fl'>12345678900</span>))</div><div class='output co'>#&gt; [1] "1.2k"  "1.2M"  "12.3B"</div><div class='input'>
-<span class='fu'>library</span>(<span class='no'>ggplot2</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘ggplot2’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:grkmisc’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    vars</span></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mtcars</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>mpg</span>, <span class='no'>wt</span> * <span class='fl'>1000</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous'>scale_y_continuous</a></span>(<span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>format_pretty_num</span>())</div><div class='img'><img src='pretty_num-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -168,9 +206,7 @@ selected unit.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#functions">Functions</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
