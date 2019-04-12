@@ -75,10 +75,11 @@ reference:
 - title: Packages and Projects
   desc: "Helper functions to start up packages or projects."
   contents:
-  - '`use_starter_package`'
-  - '`use_starter_project`'
-  - '`use_gitignore`'
+  - '`use_grk_starter_package`'
+  - '`use_grk_starter_project`'
+  - '`use_grk_gitignore`'
   - '`use_git_hook_precommit`'
+  - '`use_grk_github_labels`'
 - title: Data Import
   desc: "Import Data"
   contents:

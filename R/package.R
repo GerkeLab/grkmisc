@@ -6,13 +6,13 @@
 #' @param browse Open the .gitignore file after modifying?
 #' @param overwrite Should existing file be overwritten?
 #' @export
-use_gitignore <- function(
+use_grk_gitignore <- function(
   directory = here::here(),
   browse = TRUE,
   overwrite = yesno::yesno("Overwrite .gitignore? Select no to append to existing .gitignore file")
 ) {
   proj_gitignore <- file.path(directory, ".gitignore")
-  default_gitignore <- system.file("templates", ".gitignore", package = "grkmisc")
+  default_gitignore <- system.file("templates", "_gitignore", package = "grkmisc")
   if (!file.exists(default_gitignore)) {
     rlang::abort(paste(
       ".gitignore template is missing from your installation of `grkmisc`.",
@@ -78,7 +78,7 @@ use_git_hook_precommit <- function() {
 #' @param description Package description: "What the package does (one
 #'   paragraph)"
 #' @export
-use_starter_package <- function(
+use_grk_starter_package <- function(
   path,
   github = TRUE,
   github_org = NULL,
@@ -120,7 +120,7 @@ use_starter_package <- function(
   if (suggest_package("devtools")) {
     devtools::document(usethis::proj_get())
   }
-  use_gitignore(browse = FALSE, overwrite = TRUE)
+  use_grk_gitignore(browse = FALSE, overwrite = TRUE)
   done("Initializing git repo")
   repo <- git2r::init(usethis::proj_get())
   use_git_hook_precommit()
@@ -171,7 +171,7 @@ use_starter_package <- function(
 #'
 #' @param path Path where the project will be started
 #' @export
-use_starter_project <- function(path) {
+use_grk_starter_project <- function(path) {
   usethis::create_project(path, rstudio = TRUE)
   usethis::use_blank_slate("project")
   usethis::use_readme_rmd(FALSE)
