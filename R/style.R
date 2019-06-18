@@ -25,6 +25,8 @@ NULL
 grk_style_transformer <- function(...) {
   require_styler()
   tidy_style <- styler::tidyverse_style(...)
+
+  # line breaks between *all* arguments if line breaks between *any*
   tidy_style$line_break$set_linebreak_each_argument_if_multi_line <- function(pd) {
     if (!(any(pd$token == "','"))) {
       return(pd)
@@ -34,7 +36,15 @@ grk_style_transformer <- function(...) {
     has_internal_linebreak <- FALSE
     is_function_definition <- pd$token[1] == "FUNCTION"
     if (has_children && !is_function_definition) {
-      has_internal_linebreak <- pd$child %>%
+      children <- pd$child
+
+      # don't count anything inside {} as internal linebreaks
+      idx_pre_open_brace <- which(pd$token_after == "'{'")
+      if (length(idx_pre_open_brace)) {
+        children[idx_pre_open_brace + 1] <- NULL
+      }
+
+      has_internal_linebreak <- children %>%
         purrr::discard(is.null) %>%
         purrr::map_int(~ sum(.$newlines, .$lag_newlines)) %>%
         any(. > 0)
@@ -56,6 +66,18 @@ grk_style_transformer <- function(...) {
     }
     pd
   }
+
+  # Function arguments on new lines, indented with 2 spaces
+  tidy_style$indention$update_indention_ref_fun_dec <- function (pd_nested)
+  {
+    if (pd_nested$token[1] == "FUNCTION") {
+      seq <- rlang::seq2(3, nrow(pd_nested) - 2)
+      pd_nested$indention_ref_pos_id[seq] <- max(pd_nested$pos_id[1] - 6, 0)
+      pd_nested$indent[seq] <- 2
+    }
+    pd_nested
+  }
+
   tidy_style
 }
 
