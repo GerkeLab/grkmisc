@@ -1,6 +1,6 @@
 Package: grkmisc
 Title: A package of miscellaneously helpful functions.
-Version: 0.1.1
+Version: 0.1.1.9000
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -40,7 +40,7 @@ Suggests:
     rematch2,
     roxygen2,
     rstudioapi,
-    styler,
+    styler (>= 1.1.1),
     sysfonts (>= 0.7.3),
     testthat
 ByteCompile: true
