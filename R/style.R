@@ -44,11 +44,15 @@ grk_style_transformer <- function(...) {
     }
 
     idx_comma <- which(pd$token == "','")
-    idx_open_paren <- which(pd$token == "'('")
-    idx_close_paren <- which(pd$token == "')'")
+    idx_open_paren <- grep("'[[(]'", pd$token)
+    idx_close_paren <- grep("'(]|\\))'", pd$token)
     pd[idx_comma + 1L, "lag_newlines"] <- 1L
-    pd[idx_open_paren[1] + 1L, "lag_newlines"] <- 1L
-    pd[idx_close_paren[length(idx_close_paren)], "lag_newlines"] <- 1L
+    if (length(idx_open_paren)) {
+      pd[idx_open_paren[1] + 1L, "lag_newlines"] <- 1L
+    }
+    if (length(idx_close_paren)) {
+      pd[idx_close_paren[length(idx_close_paren)], "lag_newlines"] <- 1L
+    }
     pd
   }
   tidy_style
