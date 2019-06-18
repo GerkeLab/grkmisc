@@ -32,7 +32,8 @@ grk_style_transformer <- function(...) {
     # does this expression contain expressions with linebreaks?
     has_children <- purrr::some(pd$child, purrr::negate(is.null))
     has_internal_linebreak <- FALSE
-    if (has_children) {
+    is_function_definition <- pd$token[1] == "FUNCTION"
+    if (has_children && !is_function_definition) {
       has_internal_linebreak <- pd$child %>%
         purrr::discard(is.null) %>%
         purrr::map_int(~ sum(.$newlines, .$lag_newlines)) %>%
