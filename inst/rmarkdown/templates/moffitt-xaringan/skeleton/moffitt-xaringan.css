@@ -15,14 +15,17 @@
  *    - xaringan wiki: https://github.com/yihui/xaringan/wiki
  *    - remarkjs wiki: https://github.com/gnab/remark/wiki
  *
+ *  Version: 0.2.0.9000
+ *
  * ------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Overpass:400,300);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:400,300);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400);
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400);
 @import url(https://fonts.googleapis.com/css?family=Lora:300,300i,400,400i);
+@import url(https://fonts.googleapis.com/css?family=Overpass:300,600);
 
 body {
-  font-family: Overpass, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+  font-family: 'Work Sans', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
   font-weight: 400;
   color: #000000;
 }
@@ -33,11 +36,8 @@ h1, h2, h3 {
 }
 .remark-slide-content {
   background-color: #FFFFFF;
-  font-size: 24px;
-  
-  
-  
-  padding: 1em 4em 1em 4em;
+  font-size: 26px;
+  padding: 1rem 4rem 1rem 4rem;
 }
 .remark-slide-content h1 {
     font-size: 55px;
@@ -49,29 +49,27 @@ h1, h2, h3 {
     font-size: 35px;
 }
 .remark-code, .remark-inline-code {
-  font-family: IBM Plex Mono, 'Lucida Console', Monaco, monospace;
+  font-family: 'IBM Plex Mono', 'Lucida Console', Monaco, monospace;
 }
 .remark-code {
   font-size: 0.9em;
 }
 .remark-inline-code {
-  font-size: 1em;
   color: #00589A;
-  
-  
+  font-size: 1em;
 }
 .remark-slide-number {
   color: #00589A;
   opacity: 1;
   font-size: 15px;
 }
-strong{color:#00589A;}
+strong { color: #eb1455; }
 a, a > code {
   color: #00589A;
   text-decoration: none;
 }
 .footnote {
-  
+
   position: absolute;
   bottom: 3em;
   padding-right: 4em;
@@ -83,7 +81,7 @@ a, a > code {
 .inverse {
   background-color: #82c878;
   color: white;
-  
+
 }
 .inverse h1, .inverse h2, .inverse h3 {
   color: white;
@@ -93,9 +91,9 @@ a, a > code {
 }
 .title-slide {
   background-color: #00589A;
-  
-  
-  
+
+
+
 }
 .title-slide .remark-slide-number {
   display: none;
@@ -140,9 +138,15 @@ blockquote {
   border-top: 1px solid #666;
   border-bottom: 1px solid #666;
 }
-.remark-slide table thead th { border-bottom: 1px solid #ddd; }
-th, td { padding: 5px; }
-.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #f0f0f0 }
+.remark-slide table thead th {
+  border-bottom: 1px solid #ddd;
+}
+th, td {
+  padding: 5px;
+}
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) {
+  background: #f0f0f0;
+}
 table.dataTable tbody {
   background-color: #FFFFFF;
   color: #000000;
@@ -161,6 +165,23 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   color: #000000 !important;
+}
+
+/* Slide Header Background for h1 elements */
+.remark-slide-content.header_background > h1 {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #00589A;
+  color: #FFFFFF;
+  padding: 2rem 4rem 1.5rem 4rem;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+.remark-slide-content.header_background {
+  padding-top: 7rem;
 }
 
 @page { margin: 0; }
@@ -236,6 +257,9 @@ blockquote {
   max-height: 35vh;
   margin-top: -2em;
 }
+.hide-count .remark-slide-number {
+  display: none;
+}
 ::-mox-selection {
   background-color: rgba(255, 255, 0, 0.5);
 }
@@ -261,3 +285,96 @@ kbd {
   line-height: 1.4;
   white-space: nowrap;
 }
+
+
+/* ---- Moffitt Colors ---- */
+
+/* Foreground Colors */
+.moffitt-blue { color: #00589a; }
+.moffitt-green { color: #82c878; }
+.moffitt-red { color: #eb1455; }
+.moffitt-orange { color: #faa555; }
+.moffitt-light-blue { color: #58b0e3; }
+.moffitt-yellow { color: #ffcd5a; }
+.moffitt-grey { color: #bec3c3; }
+
+/* Backgrounds */
+.moffitt-bg-blue { background-color: #00589a; }
+.moffitt-bg-green { background-color: #82c878; }
+.moffitt-bg-red { background-color: #eb1455; }
+.moffitt-bg-orange { background-color: #faa555; }
+.moffitt-bg-light-blue { background-color: #58b0e3; }
+.moffitt-bg-yellow { background-color: #ffcd5a; }
+.moffitt-bg-grey { background-color: #bec3c3; }
+
+/* Background with opacity */
+.moffitt-bg-blue-o10 { background-color: rgba(0, 88, 154, 0.1); }
+.moffitt-bg-blue-o20 { background-color: rgba(0, 88, 154, 0.2); }
+.moffitt-bg-blue-o30 { background-color: rgba(0, 88, 154, 0.3); }
+.moffitt-bg-blue-o40 { background-color: rgba(0, 88, 154, 0.4); }
+.moffitt-bg-blue-o50 { background-color: rgba(0, 88, 154, 0.5); }
+.moffitt-bg-blue-o60 { background-color: rgba(0, 88, 154, 0.6); }
+.moffitt-bg-blue-o70 { background-color: rgba(0, 88, 154, 0.7); }
+.moffitt-bg-blue-o80 { background-color: rgba(0, 88, 154, 0.8); }
+.moffitt-bg-blue-o90 { background-color: rgba(0, 88, 154, 0.9); }
+.moffitt-bg-blue-o100 { background-color: rgba(0, 88, 154, 1); }
+.moffitt-bg-green-o10 { background-color: rgba(130, 200, 120, 0.1); }
+.moffitt-bg-green-o20 { background-color: rgba(130, 200, 120, 0.2); }
+.moffitt-bg-green-o30 { background-color: rgba(130, 200, 120, 0.3); }
+.moffitt-bg-green-o40 { background-color: rgba(130, 200, 120, 0.4); }
+.moffitt-bg-green-o50 { background-color: rgba(130, 200, 120, 0.5); }
+.moffitt-bg-green-o60 { background-color: rgba(130, 200, 120, 0.6); }
+.moffitt-bg-green-o70 { background-color: rgba(130, 200, 120, 0.7); }
+.moffitt-bg-green-o80 { background-color: rgba(130, 200, 120, 0.8); }
+.moffitt-bg-green-o90 { background-color: rgba(130, 200, 120, 0.9); }
+.moffitt-bg-green-o100 { background-color: rgba(130, 200, 120, 1); }
+.moffitt-bg-red-o10 { background-color: rgba(235, 20, 85, 0.1); }
+.moffitt-bg-red-o20 { background-color: rgba(235, 20, 85, 0.2); }
+.moffitt-bg-red-o30 { background-color: rgba(235, 20, 85, 0.3); }
+.moffitt-bg-red-o40 { background-color: rgba(235, 20, 85, 0.4); }
+.moffitt-bg-red-o50 { background-color: rgba(235, 20, 85, 0.5); }
+.moffitt-bg-red-o60 { background-color: rgba(235, 20, 85, 0.6); }
+.moffitt-bg-red-o70 { background-color: rgba(235, 20, 85, 0.7); }
+.moffitt-bg-red-o80 { background-color: rgba(235, 20, 85, 0.8); }
+.moffitt-bg-red-o90 { background-color: rgba(235, 20, 85, 0.9); }
+.moffitt-bg-red-o100 { background-color: rgba(235, 20, 85, 1); }
+.moffitt-bg-orange-o10 { background-color: rgba(250, 165, 85, 0.1); }
+.moffitt-bg-orange-o20 { background-color: rgba(250, 165, 85, 0.2); }
+.moffitt-bg-orange-o30 { background-color: rgba(250, 165, 85, 0.3); }
+.moffitt-bg-orange-o40 { background-color: rgba(250, 165, 85, 0.4); }
+.moffitt-bg-orange-o50 { background-color: rgba(250, 165, 85, 0.5); }
+.moffitt-bg-orange-o60 { background-color: rgba(250, 165, 85, 0.6); }
+.moffitt-bg-orange-o70 { background-color: rgba(250, 165, 85, 0.7); }
+.moffitt-bg-orange-o80 { background-color: rgba(250, 165, 85, 0.8); }
+.moffitt-bg-orange-o90 { background-color: rgba(250, 165, 85, 0.9); }
+.moffitt-bg-orange-o100 { background-color: rgba(250, 165, 85, 1); }
+.moffitt-bg-light-blue-o10 { background-color: rgba(88, 176, 227, 0.1); }
+.moffitt-bg-light-blue-o20 { background-color: rgba(88, 176, 227, 0.2); }
+.moffitt-bg-light-blue-o30 { background-color: rgba(88, 176, 227, 0.3); }
+.moffitt-bg-light-blue-o40 { background-color: rgba(88, 176, 227, 0.4); }
+.moffitt-bg-light-blue-o50 { background-color: rgba(88, 176, 227, 0.5); }
+.moffitt-bg-light-blue-o60 { background-color: rgba(88, 176, 227, 0.6); }
+.moffitt-bg-light-blue-o70 { background-color: rgba(88, 176, 227, 0.7); }
+.moffitt-bg-light-blue-o80 { background-color: rgba(88, 176, 227, 0.8); }
+.moffitt-bg-light-blue-o90 { background-color: rgba(88, 176, 227, 0.9); }
+.moffitt-bg-light-blue-o100 { background-color: rgba(88, 176, 227, 1); }
+.moffitt-bg-yellow-o10 { background-color: rgba(255, 205, 90, 0.1); }
+.moffitt-bg-yellow-o20 { background-color: rgba(255, 205, 90, 0.2); }
+.moffitt-bg-yellow-o30 { background-color: rgba(255, 205, 90, 0.3); }
+.moffitt-bg-yellow-o40 { background-color: rgba(255, 205, 90, 0.4); }
+.moffitt-bg-yellow-o50 { background-color: rgba(255, 205, 90, 0.5); }
+.moffitt-bg-yellow-o60 { background-color: rgba(255, 205, 90, 0.6); }
+.moffitt-bg-yellow-o70 { background-color: rgba(255, 205, 90, 0.7); }
+.moffitt-bg-yellow-o80 { background-color: rgba(255, 205, 90, 0.8); }
+.moffitt-bg-yellow-o90 { background-color: rgba(255, 205, 90, 0.9); }
+.moffitt-bg-yellow-o100 { background-color: rgba(255, 205, 90, 1); }
+.moffitt-bg-grey-o10 { background-color: rgba(190, 195, 195, 0.1); }
+.moffitt-bg-grey-o20 { background-color: rgba(190, 195, 195, 0.2); }
+.moffitt-bg-grey-o30 { background-color: rgba(190, 195, 195, 0.3); }
+.moffitt-bg-grey-o40 { background-color: rgba(190, 195, 195, 0.4); }
+.moffitt-bg-grey-o50 { background-color: rgba(190, 195, 195, 0.5); }
+.moffitt-bg-grey-o60 { background-color: rgba(190, 195, 195, 0.6); }
+.moffitt-bg-grey-o70 { background-color: rgba(190, 195, 195, 0.7); }
+.moffitt-bg-grey-o80 { background-color: rgba(190, 195, 195, 0.8); }
+.moffitt-bg-grey-o90 { background-color: rgba(190, 195, 195, 0.9); }
+.moffitt-bg-grey-o100 { background-color: rgba(190, 195, 195, 1); }
