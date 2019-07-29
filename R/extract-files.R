@@ -5,7 +5,7 @@
 #' @param ... Arguments passed on to [untar] or [unzip] (or both for
 #'   `list` and `extdir`). The `files` argument will be ignored.
 #' @export
-auto_extract <- function(path, ..., gunzip_args = NULL) {
+auto_extract <- function(path, ...) {
   is_dir <- file.info(path)$isdir == TRUE
 
   files <- NULL
@@ -20,8 +20,8 @@ auto_extract <- function(path, ..., gunzip_args = NULL) {
 
   dots <- list(...)
   dots <- dots[setdiff(names(dots), "files")] # ignore files args if specified
-  untar_args <- dots[intersect(names(formals(untar)), names(dots))]
-  unzip_args <- dots[intersect(names(formals(unzip)), names(dots))]
+  untar_args <- dots[intersect(names(formals(utils::untar)), names(dots))]
+  unzip_args <- dots[intersect(names(formals(utils::unzip)), names(dots))]
 
   for (file in files) {
     file_args <- switch(
@@ -52,13 +52,13 @@ auto_extract <- function(path, ..., gunzip_args = NULL) {
 untar_in_dir <- function(file, ...) {
   assertthat::is.readable(file)
   message("Untarring file: ", file)
-  in_dir(dirname(file), untar(basename(file), ...))
+  in_dir(dirname(file), utils::untar(basename(file), ...))
 }
 
 unzip_in_dir <- function(file, ...) {
   assertthat::is.readable(file)
   message("Unzipping file: ", file)
-  in_dir(dirname(file), unzip(basename(file), ...))
+  in_dir(dirname(file), utils::unzip(basename(file), ...))
 }
 
 file_ext <- function(x) {

@@ -7,7 +7,12 @@
 insert_styled_text(x = NULL, ...)
 }
 \arguments{
-\item{x}{Text to style}
+\item{x}{The code as a character string}
+
+\item{...}{Arguments passed on to \code{style_console}
+\describe{
+  \item{x}{Text to style}
+}}
 }
 \description{
 Inserts text from clipboard at cursor position, styled according to the

@@ -18,3 +18,5 @@
 #' @format A named list of 7 colors: blue, light_blue, green, orange,
 #'   grey, yellow, and red.
 "moffitt_colors"
+
+if(getRversion() >= "2.15.1") utils::globalVariables(c("."))

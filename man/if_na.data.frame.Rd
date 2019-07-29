@@ -8,6 +8,8 @@
   vars = NULL)
 }
 \arguments{
+\item{.x}{Input vector of values}
+
 \item{...}{Optional named arguments specifying column-wise replacement values
 for missing values. Other arguments are ignored by \code{if_na()} when used.}
 
@@ -19,7 +21,7 @@ for missing values. Other arguments are ignored by \code{if_na()} when used.}
 value replacement. Use the \code{vars()} helper to provide bare column names.}
 }
 \description{
-Replaces missing values in data frames, similar to \code{\link[dplyr:replace_na]{dplyr::replace_na()}} with
+Replaces missing values in data frames, similar to \code{\link[tidyr:replace_na]{tidyr::replace_na()}} with
 a few extras. There are several ways to use this function. If called without
 any arguments, all missing values will be replaced by the default type.
 You can change the global default value with the \code{then} argument, and you
@@ -36,7 +38,7 @@ df \%>\% if_na()
 
 df \%>\% if_na(then = "0")
 
-df \%>\% if_na(vars = vars(x, y))
+df \%>\% if_na(vars = dplyr::vars(x, y))
 
 df \%>\% if_na(x = 3, y = "c")
 

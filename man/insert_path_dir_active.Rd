@@ -9,6 +9,9 @@ insert_path_dir_active(relative = TRUE)
 
 insert_path_dir_active_abs()
 }
+\arguments{
+\item{relative}{Should the path be relative to the current working directory?}
+}
 \description{
 For the "Insert Relative Directory Path" RStudio Addin. Inserts the relative
 path to the directory containing the active source document. If text is

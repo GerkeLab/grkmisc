@@ -40,8 +40,8 @@ knitr_list_cache <- function(cache_path = NULL, names_only = TRUE) {
   cache_path <- find_cache_path(cache_path)
 
   chunks <- fs::file_info(fs::dir_ls(cache_path, regexp = "\\.rdb$")) %>%
-    dplyr::arrange(birth_time) %>%
-    dplyr::pull(path)
+    dplyr::arrange(.data$birth_time) %>%
+    dplyr::pull(.data$path)
 
   if (!names_only) return(sub("\\.rdb$", "", chunks))
 
@@ -63,9 +63,9 @@ find_cache_path <- function(cache_path = NULL) {
 
   # inside cache_path is an output specific path, pick the most recent
   cache_path <- fs::file_info(fs::dir_ls(cache_path)) %>%
-    dplyr::arrange(change_time) %>%
+    dplyr::arrange(.data$change_time) %>%
     dplyr::slice(1) %>%
-    dplyr::pull(path)
+    dplyr::pull(.data$path)
 }
 
 #' Embolden rows matching an expression
@@ -101,7 +101,7 @@ knitr_bold_row <- function(x, ..., cols = NULL, format = c("markdown", "html", "
     dplyr::ungroup() %>%
     dplyr::mutate(i = dplyr::row_number()) %>%
     dplyr::filter(!!!f_expr) %>%
-    dplyr::pull(i)
+    dplyr::pull(.data$i)
   x[i, cols] <- apply(x[i, cols], 2, function(x) ifelse(!is.na(x) & x != "", paste0(wrap[1], x, wrap[2]), x))
   x
 }

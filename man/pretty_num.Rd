@@ -19,6 +19,9 @@ abbreviations.}
 
 \item{decimal_digits}{Number of digits to show after the decimal point in the
 selected unit.}
+
+\item{no_dot_zero}{Should trailing \code{.0} be removed regardless of the decimal
+digits requested?}
 }
 \description{
 Pretty print scaled numbers

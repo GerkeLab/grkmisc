@@ -4,7 +4,7 @@
 \name{grkmisc-package}
 \alias{grkmisc}
 \alias{grkmisc-package}
-\title{grkmisc: A package of miscellaneously helpful functions.}
+\title{grkmisc: A package of miscellaneously helpful functions}
 \description{
 A package of miscellaneously helpful
     functions.

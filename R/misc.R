@@ -5,6 +5,8 @@
 #'   abbreviations.
 #' @param decimal_digits Number of digits to show after the decimal point in the
 #'   selected unit.
+#' @param no_dot_zero Should trailing `.0` be removed regardless of the decimal
+#'   digits requested?
 #' @examples
 #' pretty_num(1234)
 #' pretty_num(12345, decimal_digits = 3)
@@ -25,13 +27,13 @@ pretty_num <- function(
   no_dot_zero = FALSE
 ) {
   if (!is.numeric(x)) {
-    rlang::stop("`pretty_num()` inputs should be numeric")
+    rlang::abort("`pretty_num()` inputs should be numeric")
   }
   if (is.null(names(units))) {
-    rlang::stop("`units` must be named list of lower bounds")
+    rlang::abort("`units` must be named list of lower bounds")
   }
   if (!is.numeric(units)) {
-    rlang::stop("`units` must be list of numeric lower bounds")
+    rlang::abort("`units` must be list of numeric lower bounds")
   }
 
   x <- purrr::map_chr(x, prettify_number, units = units, decimal_digits = decimal_digits)

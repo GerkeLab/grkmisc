@@ -1,5 +1,5 @@
 Package: grkmisc
-Title: A package of miscellaneously helpful functions.
+Title: A package of miscellaneously helpful functions
 Version: 0.1.2
 Authors@R: 
     person(given = "Garrick",
@@ -11,6 +11,8 @@ Description: A package of miscellaneously helpful
 License: MIT + file LICENSE
 URL: https://github.com/gerkelab/grkmisc
 BugReports: https://github.com/gerkelab/grkmisc/issues
+Depends:
+    R (>= 2.10)
 Imports: 
     assertthat,
     cli,
@@ -19,6 +21,8 @@ Imports:
     forcats (>= 0.3.0),
     fs,
     ggplot2 (>= 3.0.0),
+    git2r,
+    glue (>= 1.3.1),
     here,
     hrbrthemes (>= 0.5.0),
     magrittr,
@@ -27,7 +31,10 @@ Imports:
     showtext (>= 0.5-1),
     stringr,
     usethis (>= 1.4.0),
-    yesno
+    yesno,
+    methods,
+    stats,
+    utils
 Suggests: 
     clipr,
     curl,
@@ -38,8 +45,10 @@ Suggests:
     labelled,
     readr (>= 1.1.1),
     rematch2,
+    rmarkdown,
     roxygen2,
     rstudioapi,
+    scales,
     styler,
     sysfonts (>= 0.7.3),
     testthat

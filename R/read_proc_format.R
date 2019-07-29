@@ -48,7 +48,7 @@ extract_statement <- function(pf_statement) {
     pf_vartype,
     pf_value
   ) %>%
-    dplyr::mutate(vartype = guess_vartype(vartype))
+    dplyr::mutate(vartype = guess_vartype(.data$vartype))
 }
 
 guess_vartype <- function(vartype) {
@@ -100,7 +100,10 @@ fill_missing_varname <- function(pfdf) {
   if (!any(is.na(pfdf$varname))) return(pfdf)
   pfdf %>%
     dplyr::mutate(
-      varname = ifelse(is.na(varname), sub("value (.+?)\n.+", "\\1", value), varname)
+      varname = ifelse(
+        is.na(.data$varname),
+        sub("value (.+?)\n.+", "\\1", .data$value),
+        .data$varname)
     )
 }
 
@@ -234,8 +237,11 @@ read_proc_format <- function(
   read_proc_format_statements(file) %>%
     purrr::map_dfr(extract_statement) %>%
     dplyr::mutate(
-      value = strip_sas_comments(value, "inline"),
-      label = purrr::map2(value, vartype, labelize_values, missing_values = missing_values)
+      value = strip_sas_comments(.data$value, "inline"),
+      label = purrr::map2(
+        .data$value, .data$vartype, labelize_values,
+        missing_values = missing_values
+      )
     ) %>%
     expand_varnames()
 }
@@ -282,9 +288,11 @@ add_proc_format_labels <- function(
   }
   verbose <- debug_level > 1
 
+  varname <- NULL
+
   if (any(duplicated(proc_format$varname))) {
     rlang::warn("Duplicate variables found in `proc_format`, using first defined.")
-    proc_format <- filter(proc_format, !duplicated(varname))
+    proc_format <- dplyr::filter(proc_format, !duplicated(varname))
   }
 
   varname_case <- if (!is.null(varname_case)) match.arg(varname_case) else "default"

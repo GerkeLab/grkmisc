@@ -4,7 +4,7 @@
 \alias{auto_extract}
 \title{Auto Extract Zipped Files}
 \usage{
-auto_extract(path, ..., gunzip_args = NULL)
+auto_extract(path, ...)
 }
 \arguments{
 \item{path}{Path to a single zipped file or a folder containing files to be

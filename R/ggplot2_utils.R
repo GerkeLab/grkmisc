@@ -18,15 +18,15 @@
 #' ggsave_and_print("iris_plot.png", width = 10, height = 6)
 #' }
 #'
-#' @param include Mimics the [knitr] `include` chunk option. If `FALSE` then the
+#' @param include Mimics the \pkg{knitr} `include` chunk option. If `FALSE` then the
 #'   plot is saved but not printed. If `TRUE`, then the plot is saved and
 #'   printed.
 #' @param force_save If `TRUE` the plot is saved, even if inside an interactive
 #'   session. The default is `FALSE`, meaning that plots are not saved when
 #'   in interactive mode.
 #' @param base_dir Save figures into a specified directory
+#' @param ... Additional arguments passed on to [ggplot2::ggsave()].
 #' @inheritParams ggplot2::ggsave
-#' @inheritDotParams ggplot2::ggsave -filename:-device -width -height
 #' @export
 ggsave_and_print <- function(
   plot,
@@ -46,7 +46,7 @@ ggsave_and_print <- function(
 
   fs::dir_create(fs::path_dir(filename))
 
-  ggsave(plot, filename = filename, width = width, height = height, device = device, ...)
+  ggplot2::ggsave(plot, filename = filename, width = width, height = height, device = device, ...)
 
   if (include) print(plot)
 

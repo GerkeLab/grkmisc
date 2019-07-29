@@ -87,9 +87,12 @@ use_grk_starter_package <- function(
   title = "What the Package Does (One Line, Title Case)",
   description = "What the package does (one paragraph)"
 ) {
-  required_pkgs <- setdiff(c("spelling", "roxygen2"), installed.packages()[, "Package"])
+  required_pkgs <- setdiff(
+    c("spelling", "roxygen2"),
+    utils::installed.packages()[, "Package"]
+  )
   if (length(required_pkgs)) {
-    install.packages(required_pkgs)
+    utils::install.packages(required_pkgs)
   }
   usethis::create_package(
     path, open = FALSE, rstudio = TRUE,
@@ -190,7 +193,7 @@ in_rstudio_project <- function() {
 }
 
 is_usethis_recent <- function() {
-  package_version(packageVersion("usethis")) >= "1.4.0.9000"
+  package_version(utils::packageVersion("usethis")) >= "1.4.0.9000"
 }
 
 #' Setup GerkeLab Default GitHub Labels

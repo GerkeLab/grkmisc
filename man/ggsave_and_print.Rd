@@ -24,31 +24,17 @@ If not supplied, uses the size of current graphics device.}
 (e.g. \code{\link[=png]{png()}}), or one of "eps", "ps", "tex" (pictex),
 "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
 
-\item{include}{Mimics the \link{knitr} \code{include} chunk option. If \code{FALSE} then the
+\item{include}{Mimics the \pkg{knitr} \code{include} chunk option. If \code{FALSE} then the
 plot is saved but not printed. If \code{TRUE}, then the plot is saved and
 printed.}
 
-\item{...}{Other arguments passed on to the graphics device function,
-as specified by \code{device}.}
+\item{...}{Additional arguments passed on to \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}}.}
 
 \item{force_save}{If \code{TRUE} the plot is saved, even if inside an interactive
 session. The default is \code{FALSE}, meaning that plots are not saved when
 in interactive mode.}
 
 \item{base_dir}{Save figures into a specified directory}
-
-\item{...}{Arguments passed on to \code{ggplot2::ggsave}
-\describe{
-  \item{path}{Path to save plot to (combined with filename).}
-  \item{scale}{Multiplicative scaling factor.}
-  \item{units}{Plot size in \code{units} ("in", "cm", or "mm").
-If not supplied, uses the size of current graphics device.}
-  \item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),
-"print" (300), or "screen" (72). Applies only to raster output types.}
-  \item{limitsize}{When \code{TRUE} (the default), \code{ggsave} will not
-save images larger than 50x50 inches, to prevent the common error of
-specifying dimensions in pixels.}
-}}
 }
 \description{
 A thin wrapper around \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} that takes a plot as the first

@@ -4,9 +4,11 @@
 \alias{if_na}
 \title{Replace Missing Values}
 \usage{
-if_na(.x, ..., then = default_value(x), otherwise = NULL)
+if_na(.x, ..., then = default_value(.x), otherwise = NULL)
 }
 \arguments{
+\item{.x}{Input vector of values}
+
 \item{...}{Additional expressions to condition replacement. NA values are
 only replaced when the additional expression matches.}
 
@@ -15,8 +17,6 @@ and favors \code{0}, \code{FALSE}, \code{""} or empty lists according to the inp
 
 \item{otherwise}{If given, provides a secondary replacement value to be
 subsituted for missing values when the conditions in \code{...} are \code{FALSE}.}
-
-\item{x}{Input vector of values}
 }
 \description{
 Replaces missing values with the given value, or optionally conditions the

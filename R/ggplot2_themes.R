@@ -32,20 +32,23 @@
 #'
 #' @inheritParams hrbrthemes::theme_ipsum
 #' @inheritDotParams hrbrthemes::theme_ipsum
-#' @param default_color Changes default colors of bars and points to
-#'   the value given. Set to `NULL` to avoid changing these colors. Note that
-#'   these colors are used only when color or fill is not mapped to the data.
+#' @param default_geom_color Changes default colors of bars and points to the
+#'   value given. Set to `NULL` to avoid changing these colors. Note that these
+#'   colors are used only when color or fill is not mapped to the data.
 #' @param default_geom_font Change the default ggplot2 geom fonts to the
 #'   specified font. The default is "Fira Sans Condensed", which tends to look
 #'   good in constrained space.
-#' @param axis_text_family The font family for axis ticks text labels.
-#'   Passed to `family` in `axis.text` in [ggplot2::theme()].
+#' @param axis_text_family The font family for axis ticks text labels. Passed to
+#'   `family` in `axis.text` in [ggplot2::theme()].
 #' @param axis_title_bold If `TRUE`, the axis title's will be bold.
 #' @param axis_text_color Color of axis text
-#' @param plot_caption_color Color of the plot caption text, or `NULL` to disable
+#' @param plot_caption_color Color of the plot caption text, or `NULL` to
+#'   disable
 #' @param panel_border_color Color of the panel border, or `NULL` to disable
-#' @param use_showtext Should [showtext] and [sysfonts] be used to register
-#'   font families from Google? Default is `TRUE`.
+#' @param panel_background_color Color of the panel background, or `NULL` to
+#'   disable
+#' @param use_showtext Should \pkg{showtext} and \pkg{sysfonts} be used to
+#'   register font families from Google? Default is `TRUE`.
 #' @param panel_grid One of "major", "minor", "both", or "none"
 #' @export
 theme_moffitt <- function(
@@ -205,6 +208,10 @@ update_geom_moffitt_defaults <- function(
   ggplot2::update_geom_defaults(geom, setNames(list(value), attr))
 }
 
+setNames <- function(x, nm = x) {
+  names(x) <- nm
+}
+
 # ---- Scales ----
 
 moffitt_pal <- function(color_other = "grey", direction = 1) {
@@ -286,9 +293,9 @@ scale_fill_moffitt <- function(color_other = "grey", direction = 1, ...) {
 #'
 #' Creates a new R Markdown document of the requested type. There are currently
 #' three templates, one for reports where the default is HTML based on the HTML
-#' vignette template, and another with a Moffitt-styled [xaringan] theme. In all
-#' cases, the document and supporting files are added to a directory with the
-#' name given by the file.
+#' vignette template, and another with a Moffitt-styled \pkg{xaringan} theme. In
+#' all cases, the document and supporting files are added to a directory with
+#' the name given by the file.
 #'
 #' @examples
 #' \dontrun{
@@ -303,6 +310,9 @@ doc_new <- function(path, type = c("doc", "slides")) {
   type <- match.arg(type)
   if (!dir.exists(dirname(path))) {
     dir.create(dirname(path), recursive = TRUE)
+  }
+  if (!requireNamespace("rmarkdown", quietly = TRUE)) {
+    stop("`rmarkdown` is required: install.packages('rmarkdown')")
   }
   file_path <- switch(
     type,

@@ -34,7 +34,7 @@
 #'     ts_diameter = if_na(ts_diameter, then = wind, status == "tropical storm", otherwise = 0)
 #'   )
 #'
-#' @param x Input vector of values
+#' @param .x Input vector of values
 #' @param then Replacement value. Defaults to a value based on the input type
 #'   and favors `0`, `FALSE`, `""` or empty lists according to the input type.
 #' @param otherwise If given, provides a secondary replacement value to be
@@ -42,7 +42,7 @@
 #' @param ... Additional expressions to condition replacement. NA values are
 #'   only replaced when the additional expression matches.
 #' @export
-if_na <- function(.x, ..., then = default_value(x), otherwise = NULL) {
+if_na <- function(.x, ..., then = default_value(.x), otherwise = NULL) {
   UseMethod("if_na")
 }
 
@@ -72,7 +72,7 @@ if_na.default <- function(.x, ..., then = default_value(.x), otherwise = NULL) {
 
 #' Replace Missing Values in Data Frames
 #'
-#' Replaces missing values in data frames, similar to [dplyr::replace_na()] with
+#' Replaces missing values in data frames, similar to [tidyr::replace_na()] with
 #' a few extras. There are several ways to use this function. If called without
 #' any arguments, all missing values will be replaced by the default type.
 #' You can change the global default value with the `then` argument, and you
@@ -89,7 +89,7 @@ if_na.default <- function(.x, ..., then = default_value(.x), otherwise = NULL) {
 #'
 #' df %>% if_na(then = "0")
 #'
-#' df %>% if_na(vars = vars(x, y))
+#' df %>% if_na(vars = dplyr::vars(x, y))
 #'
 #' df %>% if_na(x = 3, y = "c")
 #'
@@ -193,10 +193,11 @@ default_value.default   <- function(x) {
   rlang::abort(msg)
 }
 
+#' @importFrom methods as
 check_type <- function(x, value) {
   if (identical(typeof(x), typeof(value))) return(value)
 
-  if (!canCoerce(value, class(x))) rlang::abort(
+  if (!methods::canCoerce(value, class(x))) rlang::abort(
     paste("Unable to coerce value from", class(value)[1], "to", class(x)[1])
   )
 

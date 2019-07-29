@@ -29,8 +29,8 @@ theme_grk(base_family = "PT Sans", axis_text_family = "PT Mono",
 \arguments{
 \item{base_family}{base font family and size}
 
-\item{axis_text_family}{The font family for axis ticks text labels.
-Passed to \code{family} in \code{axis.text} in \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
+\item{axis_text_family}{The font family for axis ticks text labels. Passed to
+\code{family} in \code{axis.text} in \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 
 \item{axis_title_family}{axis title font family, face and size}
 
@@ -46,11 +46,19 @@ Passed to \code{family} in \code{axis.text} in \code{\link[ggplot2:theme]{ggplot
 specified font. The default is "Fira Sans Condensed", which tends to look
 good in constrained space.}
 
+\item{default_geom_color}{Changes default colors of bars and points to the
+value given. Set to \code{NULL} to avoid changing these colors. Note that these
+colors are used only when color or fill is not mapped to the data.}
+
 \item{axis_text_color}{Color of axis text}
 
-\item{plot_caption_color}{Color of the plot caption text, or \code{NULL} to disable}
+\item{plot_caption_color}{Color of the plot caption text, or \code{NULL} to
+disable}
 
 \item{panel_border_color}{Color of the panel border, or \code{NULL} to disable}
+
+\item{panel_background_color}{Color of the panel background, or \code{NULL} to
+disable}
 
 \item{...}{Arguments passed on to \code{hrbrthemes::theme_ipsum}
 \describe{
@@ -84,14 +92,10 @@ good in constrained space.}
   \item{ticks}{ticks if \code{TRUE} add ticks}
 }}
 
-\item{use_showtext}{Should \link{showtext} and \link{sysfonts} be used to register
-font families from Google? Default is \code{TRUE}.}
+\item{use_showtext}{Should \pkg{showtext} and \pkg{sysfonts} be used to
+register font families from Google? Default is \code{TRUE}.}
 
 \item{panel_grid}{One of "major", "minor", "both", or "none"}
-
-\item{default_color}{Changes default colors of bars and points to
-the value given. Set to \code{NULL} to avoid changing these colors. Note that
-these colors are used only when color or fill is not mapped to the data.}
 }
 \description{
 A clean theme based on \code{\link[hrbrthemes:theme_ispum]{hrbrthemes::theme_ispum()}} that uses

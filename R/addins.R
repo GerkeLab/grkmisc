@@ -30,7 +30,8 @@ style_console <- function(x, ...) {
 #' [tidyverse style guide](http://style.tidyverse.org/). Powers the RStudio
 #' addin.
 #'
-#' @inheritParams style_console
+#' @param x The code as a character string
+#' @inheritDotParams style_console
 insert_styled_text <- function(x = NULL, ...) {
   require_package("clipr")
   if (!clipr::clipr_available()) rlang::abort("clipr is unable to read from the clipboard")
@@ -48,6 +49,7 @@ insert_styled_text <- function(x = NULL, ...) {
 #' selected, this text is assumed to be a file inside that directory and is
 #' appended to the path. The "Insert Absolute Directory Path" Rstudio Addin does
 #' the same but provides the absolute path to the active source document.
+#' @param relative Should the path be relative to the current working directory?
 insert_path_dir_active <- function(relative = TRUE) {
   context <- rstudioapi::getSourceEditorContext()
   this_path <- if (relative) {
