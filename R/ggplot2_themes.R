@@ -42,10 +42,11 @@
 #'   Passed to `family` in `axis.text` in [ggplot2::theme()].
 #' @param axis_title_bold If `TRUE`, the axis title's will be bold.
 #' @param axis_text_color Color of axis text
-#' @param plot_caption_color Color of the plot caption text
-#' @param panel_border_color Color of the panel border
+#' @param plot_caption_color Color of the plot caption text, or `NULL` to disable
+#' @param panel_border_color Color of the panel border, or `NULL` to disable
 #' @param use_showtext Should [showtext] and [sysfonts] be used to register
 #'   font families from Google? Default is `TRUE`.
+#' @param panel_grid One of "major", "minor", "both", or "none"
 #' @export
 theme_moffitt <- function(
   base_family        = "Overpass",
@@ -63,7 +64,7 @@ theme_moffitt <- function(
   panel_background_color = "#FFFFFF",
   ...,
   use_showtext = TRUE,
-  hide_panel_grid_minor = TRUE
+  panel_grid = c("major", "minor", "both", "none")
 ) {
   theme_grk(
     base_family        = base_family,
@@ -80,7 +81,7 @@ theme_moffitt <- function(
     panel_border_color = panel_border_color,
     use_showtext       = use_showtext,
     panel_background_color = panel_background_color,
-    hide_panel_grid_minor  = hide_panel_grid_minor,
+    panel_grid         = panel_grid,
     ...
   )
 }
@@ -103,7 +104,7 @@ theme_grk <- function(
   panel_background_color = "grey96",
   ...,
   use_showtext = TRUE,
-  hide_panel_grid_minor = TRUE
+  panel_grid   = c("major", "minor", "both", "none")
 ) {
   axis_title_family_name <- axis_title_family
   # Get and set fonts - this works across all devices
@@ -143,15 +144,44 @@ theme_grk <- function(
       axis.text = ggplot2::element_text(
         family = axis_text_family, color = axis_text_color, inherit.blank = TRUE),
       plot.caption = ggplot2::element_text(
-        family = base_family, face = "plain", color = plot_caption_color, inherit.blank = TRUE),
-      panel.background = ggplot2::element_rect(fill = panel_background_color),
-      panel.border = ggplot2::element_rect(fill = NA, color = panel_border_color, inherit.blank = TRUE)
+        family = base_family, face = "plain", color = plot_caption_color, inherit.blank = TRUE)
     )
 
-  if (hide_panel_grid_minor) theme <- theme + theme(
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_blank()
-  )
+  theme <- if (is.null(panel_border_color)) {
+    theme + ggplot2::theme(panel.border = ggplot2::element_blank())
+  } else {
+    theme + ggplot2::theme(
+      panel.border = ggplot2::element_rect(fill = NA, color = panel_border_color, inherit.blank = TRUE)
+    )
+  }
+
+  theme <- if (is.null(panel_background_color)) {
+    theme + ggplot2::theme(panel.background = ggplot2::element_blank())
+  } else {
+    theme + ggplot2::theme(
+      panel.background = ggplot2::element_rect(fill = panel_background_color, color = NA, inherit.blank = TRUE)
+    )
+  }
+
+  theme <- theme +
+    switch(
+      match.arg(panel_grid),
+      "major" = ggplot2::theme(
+        panel.grid.minor.x = ggplot2::element_blank(),
+        panel.grid.minor.y = ggplot2::element_blank()
+      ),
+      "minor" = ggplot2::theme(
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.grid.major.y = ggplot2::element_blank()
+      ),
+      "none" = ggplot2::theme(
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.grid.major.y = ggplot2::element_blank(),
+        panel.grid.minor.x = ggplot2::element_blank(),
+        panel.grid.minor.y = ggplot2::element_blank()
+      ),
+      NULL
+    )
 
   theme
 }

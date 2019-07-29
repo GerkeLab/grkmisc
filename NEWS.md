@@ -1,4 +1,4 @@
-# grkmisc 0.1.1
+# grkmisc 0.1.2
 
 - Added `use_grk_github_labels()` with standard labels for use in GitHub repos.
 
@@ -6,6 +6,12 @@
   For example, `use_grk_starter_package()` replaced `use_starter_package()`.
   
 - Fixed `use_grk_gitignore()` so that template is correctly found internally.
+
+- Replaced `hide_panel_grid_minor` with `panel_grid` having options "major",
+  "minor", "both", or "none" in `theme_moffitt()`.
+  
+- Setting `plot_caption_color` or `panel_border_color` to `NULL` in
+  `theme_moffitt()` skips setting those colors.
 
 # grkmisc 0.1.0
 

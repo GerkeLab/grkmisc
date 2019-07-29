@@ -14,7 +14,7 @@ theme_moffitt(base_family = "Overpass",
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
   panel_background_color = "#FFFFFF", ..., use_showtext = TRUE,
-  hide_panel_grid_minor = TRUE)
+  panel_grid = c("major", "minor", "both", "none"))
 
 theme_grk(base_family = "PT Sans", axis_text_family = "PT Mono",
   axis_title_family = base_family, axis_title_bold = FALSE,
@@ -24,7 +24,7 @@ theme_grk(base_family = "PT Sans", axis_text_family = "PT Mono",
   axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
   panel_background_color = "grey96", ..., use_showtext = TRUE,
-  hide_panel_grid_minor = TRUE)
+  panel_grid = c("major", "minor", "both", "none"))
 }
 \arguments{
 \item{base_family}{base font family and size}
@@ -48,9 +48,9 @@ good in constrained space.}
 
 \item{axis_text_color}{Color of axis text}
 
-\item{plot_caption_color}{Color of the plot caption text}
+\item{plot_caption_color}{Color of the plot caption text, or \code{NULL} to disable}
 
-\item{panel_border_color}{Color of the panel border}
+\item{panel_border_color}{Color of the panel border, or \code{NULL} to disable}
 
 \item{...}{Arguments passed on to \code{hrbrthemes::theme_ipsum}
 \describe{
@@ -86,6 +86,8 @@ good in constrained space.}
 
 \item{use_showtext}{Should \link{showtext} and \link{sysfonts} be used to register
 font families from Google? Default is \code{TRUE}.}
+
+\item{panel_grid}{One of "major", "minor", "both", or "none"}
 
 \item{default_color}{Changes default colors of bars and points to
 the value given. Set to \code{NULL} to avoid changing these colors. Note that
