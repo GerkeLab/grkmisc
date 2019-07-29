@@ -4,7 +4,7 @@
 \alias{doc_new}
 \title{Create New Document}
 \usage{
-doc_new(path, type = c("doc", "slides", "radix"))
+doc_new(path, type = c("doc", "slides"))
 }
 \arguments{
 \item{path}{Path to the location of the new document}
@@ -14,10 +14,9 @@ doc_new(path, type = c("doc", "slides", "radix"))
 \description{
 Creates a new R Markdown document of the requested type. There are currently
 three templates, one for reports where the default is HTML based on the HTML
-vignette template, and another with a Moffitt-styled \link{xaringan} theme. There
-is also a \link{radix} template for stunning HTML-only reports. In all cases, the
-document and supporting files are added to a directory with the name given by
-the file.
+vignette template, and another with a Moffitt-styled \link{xaringan} theme. In all
+cases, the document and supporting files are added to a directory with the
+name given by the file.
 }
 \examples{
 \dontrun{

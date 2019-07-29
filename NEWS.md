@@ -12,6 +12,8 @@
   
 - Setting `plot_caption_color` or `panel_border_color` to `NULL` in
   `theme_moffitt()` skips setting those colors.
+  
+- Remove `radix` article option from `doc_new()`.
 
 # grkmisc 0.1.0
 

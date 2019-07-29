@@ -15,7 +15,7 @@ author:
     affiliation: GerkeLab
     affiliation_url: https://gerkelab.com
 date: "`r Sys.Date()`"
-output: radix::radix_article
+output: distill::distill_article
 creative_commons: CC BY-NC
 preview: https://www.gerkelab.com/img/GerkeLab-1200dpi-square.png
 twitter:
