@@ -11,7 +11,7 @@ read_csv_filtered(file, filter_expression, ...)
 
 \item{filter_expression}{<bare> The expression passed to \code{dplyr::filter()}}
 
-\item{...}{Arguments passed on to \code{readr::read_csv_chunked}
+\item{...}{Arguments passed on to \code{readr::read_csv}
 \describe{
   \item{file}{Either a path to a file, a connection, or literal data
 (either a single string or a raw vector).
@@ -27,8 +27,6 @@ least one new line to be recognised as data (instead of a path) or be a
 vector of greater than length 1.
 
 Using a value of \code{\link[=clipboard]{clipboard()}} will read from the system clipboard.}
-  \item{callback}{A callback function to call on each chunk}
-  \item{chunk_size}{The number of rows to include in each chunk}
   \item{quote}{Single character used to quote strings.}
   \item{col_names}{Either \code{TRUE}, \code{FALSE} or a character vector
 of column names.
@@ -74,6 +72,7 @@ comment characters will be silently ignored.}
   \item{trim_ws}{Should leading and trailing whitespace be trimmed from
 each field before parsing it?}
   \item{skip}{Number of lines to skip before reading data.}
+  \item{n_max}{Maximum number of records to read.}
   \item{guess_max}{Maximum number of records to use for guessing column types.}
   \item{progress}{Display a progress bar? By default it will only display
 in an interactive session and not while knitting a document. The display

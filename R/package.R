@@ -9,7 +9,7 @@
 use_grk_gitignore <- function(
   directory = here::here(),
   browse = TRUE,
-  overwrite = yesno::yesno("Overwrite .gitignore? Select no to append to existing .gitignore file")
+  overwrite = NULL
 ) {
   proj_gitignore <- file.path(directory, ".gitignore")
   default_gitignore <- system.file("templates", "_gitignore", package = "grkmisc")
@@ -21,6 +21,9 @@ use_grk_gitignore <- function(
       "\nhttps://github.com/GerkeLab/grkmisc/blob/master/inst/templates/.gitignore"
     ))
   }
+  overwrite <- overwrite %||% yesno::yesno(
+    "Overwrite .gitignore? Select no to append to existing .gitignore file"
+  )
   append <- file.exists(proj_gitignore) && !overwrite
   cat(readLines(default_gitignore), sep = "\n", file = proj_gitignore, append = append)
   if (append) {

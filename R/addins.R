@@ -14,14 +14,18 @@ style_console <- function(x, ...) {
   }
   if (grepl("ggplot", x)) {
     # Add newline after `+` after finding start of ggplot()
-    ggplot_starts_at <- stringr::str_locate(x, "ggplot")[1, 'start']
-    x <- paste0(substr(x, 1, ggplot_starts_at - 1),
-                gsub("\\+", "\\+\n", substring(x, ggplot_starts_at)))
+    ggplot_starts_at <- stringr::str_locate(x, "ggplot")[1, "start"]
+    x <- paste0(
+      substr(x, 1, ggplot_starts_at - 1),
+      gsub("\\+", "\\+\n", substring(x, ggplot_starts_at))
+    )
   }
   x <- strsplit(x, "\n")[[1]]
   if (suggest_package("styler")) {
     styler::style_text(x, ...)
-  } else x
+  } else {
+    x
+  }
 }
 
 #' Insert Styled Text
@@ -34,10 +38,12 @@ style_console <- function(x, ...) {
 #' @inheritDotParams style_console
 insert_styled_text <- function(x = NULL, ...) {
   require_package("clipr")
-  if (!clipr::clipr_available()) rlang::abort("clipr is unable to read from the clipboard")
+  if (!clipr::clipr_available()) {
+    rlang::abort("clipr is unable to read from the clipboard")
+  }
   if (is.null(x)) x <- clipr::read_clip()
   x <- style_console(x, ...)
-  x <- paste(x, collapse ="\n")
+  x <- paste(x, collapse = "\n")
   context <- rstudioapi::getSourceEditorContext()
   rstudioapi::insertText(context$selection[[1]]$range, x, context$id)
 }
@@ -49,6 +55,7 @@ insert_styled_text <- function(x = NULL, ...) {
 #' selected, this text is assumed to be a file inside that directory and is
 #' appended to the path. The "Insert Absolute Directory Path" Rstudio Addin does
 #' the same but provides the absolute path to the active source document.
+#'
 #' @param relative Should the path be relative to the current working directory?
 insert_path_dir_active <- function(relative = TRUE) {
   context <- rstudioapi::getSourceEditorContext()

@@ -5,7 +5,7 @@
 #' that resembles Freeway, the (proprietary) font chosen by MCC branding. This
 #' theme works best when set globally using [ggplot2::theme_set()] as it will
 #' automatically download and register the correct fonts from Google Font using
-#' [sysfonts] and [showtext] (if installed) and will change the default
+#' \pkg{sysfonts} and \pkg{showtext} (if installed) and will change the default
 #' [ggplot2::geom_text()] related fonts as well. For an alternative look that I
 #' prefer, use `theme_grk()`, which simply uses "Fira Sans" as the base font.
 #'

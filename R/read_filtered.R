@@ -2,7 +2,7 @@
 #'
 #' @param file <chr> Filename to read in
 #' @param filter_expression <bare> The expression passed to `dplyr::filter()`
-#' @inheritDotParams readr::read_tsv_chunked
+#' @inheritDotParams readr::read_tsv
 #' @export
 read_tsv_filtered <- function(file, filter_expression, ...) {
   stopifnot(requireNamespace("dplyr", quietly = TRUE),
@@ -25,7 +25,7 @@ read_tsv_filtered <- function(file, filter_expression, ...) {
 #'
 #' @param file <chr> Filename to read in
 #' @param filter_expression <bare> The expression passed to `dplyr::filter()`
-#' @inheritDotParams readr::read_csv_chunked
+#' @inheritDotParams readr::read_csv
 #' @export
 read_csv_filtered <- function(file, filter_expression, ...) {
   stopifnot(requireNamespace("dplyr", quietly = TRUE),
