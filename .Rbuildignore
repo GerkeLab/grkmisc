@@ -7,3 +7,6 @@
 ^README\.Rmd$
 ^\.github$
 ^pkgdown$
+^\.travis\.yml$
+^appveyor\.yml$
+^tic\.R$
