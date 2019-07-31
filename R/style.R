@@ -20,15 +20,24 @@
 #' styler:::style_selection()
 #' }
 #'
-#' grk_style_text(
-#'   "x = paste(\n'a', 'b')",
-#'   transformers = grk_style_transformer()
-#' )
+#' ex_code <- "mtcars %>% mutate(mpg = mpg * 2,\n\t\t     cyl = paste(cyl)) %>% head()"
+#' cat(ex_code)
+#'
+#' grk_style_text(ex_code)
 #'
 #' @param ... Arguments passed to underling \pkg{styler} functions (identified
-#'   by removing the `grk_` prefix)
+#'   by removing the `grk_` prefix), except for `transofrmers`, which is set to
+#'   the `grk_style_transformer()` internally.
 #' @name grk_style
 NULL
+
+#' @describeIn grk_style Set the \pkg{grkmisc} style as the default style for
+#'   \pkg{styler} addins.
+#' @export
+use_grk_style <- function() {
+  require_styler()
+  options(styler.addins_style_transformer = "grkmisc::grk_style_transformer()")
+}
 
 #' @describeIn grk_style A code transformer for use with [styler::style_text()]
 #' @export
@@ -91,43 +100,35 @@ grk_style_transformer <- function(...) {
   tidy_style
 }
 
-#' @describeIn grk_style Set the \pkg{grkmisc} style as the default style for
-#'   \pkg{styler} addins.
-#' @export
-use_grk_style <- function() {
-  require_styler()
-  options(styler.addins_style_transformer = "grkmisc::grk_style_transformer()")
-}
-
 #' @describeIn grk_style Style text using the \pkg{grkmisc} code style
 #' @inheritParams styler::style_text
 #' @export
-grk_style_text <- function(text, ..., transformers = grk_style_transformer()) {
+grk_style_text <- function(text, ...) {
   require_styler()
-  styler::style_text(text, ..., transformers = transformers)
+  styler::style_text(text, ..., transformers = grk_style_transformer())
 }
 
 #' @describeIn grk_style Style a file using the \pkg{grkmisc} code style
 #' @inheritParams styler::style_file
 #' @export
-grk_style_file <- function(path, ..., transformers = grk_style_transformer()) {
+grk_style_file <- function(path, ...) {
   require_styler()
-  styler::style_file(path, ..., transformers = transformers)
+  styler::style_file(path, ..., transformers = grk_style_transformer())
 }
 
 #' @describeIn grk_style Style a directory using the \pkg{grkmisc} code style
 #' @export
-grk_style_dir <- function(path, ..., transformers = grk_style_transformer()) {
+grk_style_dir <- function(path, ...) {
   require_styler()
-  styler::style_dir(path, ..., transformers = transformers)
+  styler::style_dir(path, ..., transformers = grk_style_transformer())
 }
 
 #' @describeIn grk_style Style a package using the \pkg{grkmisc} code style
 #' @inheritParams styler::style_pkg
 #' @export
-grk_style_pkg <- function(pkg, ..., transformers = grk_style_transformer()) {
+grk_style_pkg <- function(pkg, ...) {
   require_styler()
-  styler::style_pkg(pkg, ..., transformers = transformers)
+  styler::style_pkg(pkg, ..., transformers = grk_style_transformer())
 }
 
 require_styler <- function() {

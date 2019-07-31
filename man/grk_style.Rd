@@ -2,35 +2,32 @@
 % Please edit documentation in R/style.R
 \name{grk_style}
 \alias{grk_style}
-\alias{grk_style_transformer}
 \alias{use_grk_style}
+\alias{grk_style_transformer}
 \alias{grk_style_text}
 \alias{grk_style_file}
 \alias{grk_style_dir}
 \alias{grk_style_pkg}
 \title{The grkmisc Code Style}
 \usage{
-grk_style_transformer(...)
-
 use_grk_style()
 
-grk_style_text(text, ..., transformers = grk_style_transformer())
+grk_style_transformer(...)
 
-grk_style_file(path, ..., transformers = grk_style_transformer())
+grk_style_text(text, ...)
 
-grk_style_dir(path, ..., transformers = grk_style_transformer())
+grk_style_file(path, ...)
 
-grk_style_pkg(pkg, ..., transformers = grk_style_transformer())
+grk_style_dir(path, ...)
+
+grk_style_pkg(pkg, ...)
 }
 \arguments{
 \item{...}{Arguments passed to underling \pkg{styler} functions (identified
-by removing the \code{grk_} prefix)}
+by removing the \code{grk_} prefix), except for \code{transofrmers}, which is set to
+the \code{grk_style_transformer()} internally.}
 
 \item{text}{A character vector with text to style.}
-
-\item{transformers}{A set of transformer functions. This argument is most
-conveniently constructed via the \code{style} argument and \code{...}. See
-'Examples'.}
 
 \item{path}{A character vector with paths to files to style.}
 
@@ -42,10 +39,10 @@ Use \code{\link[styler:style_text]{styler::style_text()}} to format code accordi
 }
 \section{Functions}{
 \itemize{
-\item \code{grk_style_transformer}: A code transformer for use with \code{\link[styler:style_text]{styler::style_text()}}
-
 \item \code{use_grk_style}: Set the \pkg{grkmisc} style as the default style for
 \pkg{styler} addins.
+
+\item \code{grk_style_transformer}: A code transformer for use with \code{\link[styler:style_text]{styler::style_text()}}
 
 \item \code{grk_style_text}: Style text using the \pkg{grkmisc} code style
 
@@ -72,9 +69,9 @@ use_grk_style()
 styler:::style_selection()
 }
 
-grk_style_text(
-  "x = paste(\\n'a', 'b')",
-  transformers = grk_style_transformer()
-)
+ex_code <- "mtcars \%>\% mutate(mpg = mpg * 2,\\n\\t\\t     cyl = paste(cyl)) \%>\% head()"
+cat(ex_code)
+
+grk_style_text(ex_code)
 
 }

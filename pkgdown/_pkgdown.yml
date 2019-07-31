@@ -48,6 +48,10 @@ reference:
   - '`scale_moffitt`'
   - '`doc_new`'
   - matches("color|fill|theme")
+- title: "Code Style"
+  desc: ~
+  contents:
+  - contains("grk_style")
 - title: "dplyr Helpers"
   desc: "Helper functions that extended or work well with `dplyr`."
   contents:
