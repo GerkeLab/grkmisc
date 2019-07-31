@@ -124,17 +124,17 @@ grkmisc style guide." />
     
     </div>
 
-    <pre class="usage"><span class='fu'>grk_style_transformer</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>use_grk_style</span>()
 
-<span class='fu'>use_grk_style</span>()
+<span class='fu'>grk_style_transformer</span>(<span class='no'>...</span>)
 
-<span class='fu'>grk_style_text</span>(<span class='no'>text</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())
+<span class='fu'>grk_style_text</span>(<span class='no'>text</span>, <span class='no'>...</span>)
 
-<span class='fu'>grk_style_file</span>(<span class='no'>path</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())
+<span class='fu'>grk_style_file</span>(<span class='no'>path</span>, <span class='no'>...</span>)
 
-<span class='fu'>grk_style_dir</span>(<span class='no'>path</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())
+<span class='fu'>grk_style_dir</span>(<span class='no'>path</span>, <span class='no'>...</span>)
 
-<span class='fu'>grk_style_pkg</span>(<span class='no'>pkg</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())</pre>
+<span class='fu'>grk_style_pkg</span>(<span class='no'>pkg</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,17 +142,12 @@ grkmisc style guide." />
     <tr>
       <th>...</th>
       <td><p>Arguments passed to underling <span class="pkg">styler</span> functions (identified
-by removing the <code>grk_</code> prefix)</p></td>
+by removing the <code>grk_</code> prefix), except for <code>transofrmers</code>, which is set to
+the <code>grk_style_transformer()</code> internally.</p></td>
     </tr>
     <tr>
       <th>text</th>
       <td><p>A character vector with text to style.</p></td>
-    </tr>
-    <tr>
-      <th>transformers</th>
-      <td><p>A set of transformer functions. This argument is most
-conveniently constructed via the <code>style</code> argument and <code>...</code>. See
-'Examples'.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -167,9 +162,9 @@ conveniently constructed via the <code>style</code> argument and <code>...</code
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     <ul>
-<li><p><code>grk_style_transformer</code>: A code transformer for use with <code><a href='https://www.rdocumentation.org/packages/styler/topics/style_text'>styler::style_text()</a></code></p></li>
 <li><p><code>use_grk_style</code>: Set the <span class="pkg">grkmisc</span> style as the default style for
 <span class="pkg">styler</span> addins.</p></li>
+<li><p><code>grk_style_transformer</code>: A code transformer for use with <code><a href='https://www.rdocumentation.org/packages/styler/topics/style_text'>styler::style_text()</a></code></p></li>
 <li><p><code>grk_style_text</code>: Style text using the <span class="pkg">grkmisc</span> code style</p></li>
 <li><p><code>grk_style_file</code>: Style a file using the <span class="pkg">grkmisc</span> code style</p></li>
 <li><p><code>grk_style_dir</code>: Style a directory using the <span class="pkg">grkmisc</span> code style</p></li>
@@ -192,13 +187,15 @@ for all session, you can add the following to your <code>.Rprofile</code>:</p><p
 <span class='co'># Use styler addins</span>
 <span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/styler/topics/style_selection'>style_selection</a></span>()
 <span class='co'># }</span><div class='input'>
-<span class='fu'>grk_style_text</span>(
-  <span class='st'>"x = paste(\n'a', 'b')"</span>,
-  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>()
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: Could not use colored = TRUE, as the package prettycode is not installed. Please install it if you want to see colored output or see `?print.vertical` for more information.</span></div><div class='output co'>#&gt; x &lt;- paste(
-#&gt;   "a",
-#&gt;   "b"
-#&gt; )</div><div class='input'>
+<span class='no'>ex_code</span> <span class='kw'>&lt;-</span> <span class='st'>"mtcars %&gt;% mutate(mpg = mpg * 2,\n\t\t     cyl = paste(cyl)) %&gt;% head()"</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='no'>ex_code</span>)</div><div class='output co'>#&gt; mtcars %&gt;% mutate(mpg = mpg * 2,
+#&gt; 		     cyl = paste(cyl)) %&gt;% head()</div><div class='input'>
+<span class='fu'>grk_style_text</span>(<span class='no'>ex_code</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Could not use colored = TRUE, as the package prettycode is not installed. Please install it if you want to see colored output or see `?print.vertical` for more information.</span></div><div class='output co'>#&gt; mtcars %&gt;%
+#&gt;   mutate(
+#&gt;     mpg = mpg * 2,
+#&gt;     cyl = paste(cyl)
+#&gt;   ) %&gt;%
+#&gt;   head()</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
