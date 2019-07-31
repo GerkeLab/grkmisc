@@ -49,6 +49,15 @@ Use \code{\link[styler:style_text]{styler::style_text()}} to format code accordi
 \item \code{grk_style_pkg}: Style a package using the \pkg{grkmisc} code style
 }}
 
+\section{Using the grkmisc code style}{
+ You can set the \pkg{grkmisc} code
+style as the default code style for \pkg{styler} (and its associated
+RStudio addins, like "Style active file" and "Style selection") by calling
+\code{grkmisc::use_grk_style()}. If you would rather set this option globally
+for all session, you can add the following to your \code{.Rprofile}:\preformatted{options(styler.addins_style_transformer = "grkmisc::grk_style_transformer()")
+}
+}
+
 \examples{
 \dontrun{
 use_grk_style()

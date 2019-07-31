@@ -24,7 +24,7 @@ grk_github_descriptions()
 don't want to target the current project.}
   \item{labels}{A character vector giving labels to add.}
   \item{rename}{A named vector with names giving old names and values giving
-new values.}
+new names.}
   \item{colours}{Named character vectors giving hexadecimal
 colours (like \code{e02a2a}) and longer descriptions. The names should match
 label names, and anything unmatched will be left unchanged. If you
@@ -35,9 +35,8 @@ colours (like \code{e02a2a}) and longer descriptions. The names should match
 label names, and anything unmatched will be left unchanged. If you
 create a new label, and don't supply colours, it will be given a random
 colour.}
-  \item{delete_default}{If \code{TRUE}, will remove GitHub default labels that do
-not appear in the \code{labels} vector, and do not have associated issues.
-to your workflow).}
+  \item{delete_default}{If \code{TRUE}, removes GitHub default labels that do
+not appear in the \code{labels} vector and that do not have associated issues.}
   \item{auth_token}{GitHub personal access token (PAT).}
   \item{host}{GitHub API host to use. Override with the endpoint-root for your
 GitHub enterprise instance, for example,
@@ -58,9 +57,8 @@ label names, and anything unmatched will be left unchanged. If you
 create a new label, and don't supply colours, it will be given a random
 colour.}
 
-\item{delete_default}{If \code{TRUE}, will remove GitHub default labels that do
-not appear in the \code{labels} vector, and do not have associated issues.
-to your workflow).}
+\item{delete_default}{If \code{TRUE}, removes GitHub default labels that do
+not appear in the \code{labels} vector and that do not have associated issues.}
 }
 \description{
 Removes the default GitHub labels and installs the GerkeLab labels. A small

@@ -3,6 +3,16 @@
 #' Use [styler::style_text()] to format code according to the unofficial
 #' \pkg{grkmisc} style guide.
 #'
+#' @section Using the grkmisc code style: You can set the \pkg{grkmisc} code
+#'   style as the default code style for \pkg{styler} (and its associated
+#'   RStudio addins, like "Style active file" and "Style selection") by calling
+#'   `grkmisc::use_grk_style()`. If you would rather set this option globally
+#'   for all session, you can add the following to your `.Rprofile`:
+#'
+#'   ```
+#'   options(styler.addins_style_transformer = "grkmisc::grk_style_transformer()")
+#'   ```
+#'
 #' @examples
 #' \dontrun{
 #' use_grk_style()
