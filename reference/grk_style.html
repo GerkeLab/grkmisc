@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read Proc Format File — read_proc_format • grkmisc</title>
+<title>The grkmisc Code Style — grk_style • grkmisc</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Read Proc Format File — read_proc_format" />
+<meta property="og:title" content="The grkmisc Code Style — grk_style" />
 
-<meta property="og:description" content="Read Proc Format File" />
+<meta property="og:description" content="Use styler::style_text() to format code according to the unofficial
+grkmisc style guide." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,47 +112,93 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read Proc Format File</h1>
-    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/read_proc_format.R'><code>R/read_proc_format.R</code></a></small>
-    <div class="hidden name"><code>read_proc_format.Rd</code></div>
+    <h1>The grkmisc Code Style</h1>
+    <small class="dont-index">Source: <a href='https://github.com/gerkelab/grkmisc/blob/master/R/style.R'><code>R/style.R</code></a></small>
+    <div class="hidden name"><code>grk_style.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Read Proc Format File</p>
+    <p>Use <code><a href='https://www.rdocumentation.org/packages/styler/topics/style_text'>styler::style_text()</a></code> to format code according to the unofficial
+<span class="pkg">grkmisc</span> style guide.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>read_proc_format</span>(<span class='no'>file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"."</span>,
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>)))</pre>
+    <pre class="usage"><span class='fu'>grk_style_transformer</span>(<span class='no'>...</span>)
+
+<span class='fu'>use_grk_style</span>()
+
+<span class='fu'>grk_style_text</span>(<span class='no'>text</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())
+
+<span class='fu'>grk_style_file</span>(<span class='no'>path</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())
+
+<span class='fu'>grk_style_dir</span>(<span class='no'>path</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())
+
+<span class='fu'>grk_style_pkg</span>(<span class='no'>pkg</span>, <span class='no'>...</span>, <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>Path to proc format file.</p></td>
+      <th>...</th>
+      <td><p>Arguments passed to underling <span class="pkg">styler</span> functions (identified
+by removing the <code>grk_</code> prefix)</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>Writes out file path being read. May be removed in the future.</p></td>
+      <th>text</th>
+      <td><p>A character vector with text to style.</p></td>
     </tr>
     <tr>
-      <th>missing_values</th>
-      <td><p>Possible SAS values that should be treated as missing.</p></td>
+      <th>transformers</th>
+      <td><p>A set of transformer functions. This argument is most
+conveniently constructed via the <code>style</code> argument and <code>...</code>. See
+'Examples'.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>A character vector with paths to files to style.</p></td>
+    </tr>
+    <tr>
+      <th>pkg</th>
+      <td><p>Path to a (subdirectory of an) R package.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
-    <div class='dont-index'><p>Other SAS helper functions: <code><a href='add_proc_format_labels.html'>add_proc_format_labels</a></code>,
-  <code><a href='read_sas_with_format.html'>read_sas_with_format</a></code></p></div>
+    <ul>
+<li><p><code>grk_style_transformer</code>: A code transformer for use with <code><a href='https://www.rdocumentation.org/packages/styler/topics/style_text'>styler::style_text()</a></code></p></li>
+<li><p><code>use_grk_style</code>: Set the <span class="pkg">grkmisc</span> style as the default style for
+<span class="pkg">styler</span> addins.</p></li>
+<li><p><code>grk_style_text</code>: Style text using the <span class="pkg">grkmisc</span> code style</p></li>
+<li><p><code>grk_style_file</code>: Style a file using the <span class="pkg">grkmisc</span> code style</p></li>
+<li><p><code>grk_style_dir</code>: Style a directory using the <span class="pkg">grkmisc</span> code style</p></li>
+<li><p><code>grk_style_pkg</code>: Style a package using the <span class="pkg">grkmisc</span> code style</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="using-the-grkmisc-code-style"><a class="anchor" href="#using-the-grkmisc-code-style"></a>Using the grkmisc code style</h2>
+
+    <p>You can set the <span class="pkg">grkmisc</span> code
+style as the default code style for <span class="pkg">styler</span> (and its associated
+RStudio addins, like "Style active file" and "Style selection") by calling
+<code>grkmisc::use_grk_style()</code>. If you would rather set this option globally
+for all session, you can add the following to your <code>.Rprofile</code>:</p><pre>options(styler.addins_style_transformer = "grkmisc::grk_style_transformer()")
+</pre>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>read_proc_format</span>(<span class='st'>"freepsa.sas_formats.feb16.d080516.sas"</span>)
+<span class='fu'>use_grk_style</span>()
+<span class='co'># Use styler addins</span>
+<span class='kw pkg'>styler</span><span class='kw ns'>:::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/styler/topics/style_selection'>style_selection</a></span>()
 <span class='co'># }</span><div class='input'>
+<span class='fu'>grk_style_text</span>(
+  <span class='st'>"x = paste(\n'a', 'b')"</span>,
+  <span class='kw'>transformers</span> <span class='kw'>=</span> <span class='fu'>grk_style_transformer</span>()
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: Could not use colored = TRUE, as the package prettycode is not installed. Please install it if you want to see colored output or see `?print.vertical` for more information.</span></div><div class='output co'>#&gt; x &lt;- paste(
+#&gt;   "a",
+#&gt;   "b"
+#&gt; )</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -159,7 +206,9 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#functions">Functions</a></li>
+
+      <li><a href="#using-the-grkmisc-code-style">Using the grkmisc code style</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
