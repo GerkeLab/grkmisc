@@ -1,3 +1,9 @@
+# grkmisc 0.1.3
+
+- Added a `grkmisc` code style that can be used with the `styler` package. Use
+  `use_grk_style()` to set the `grkmisc` code style as the default style for
+  `styler` addins and functions.
+
 # grkmisc 0.1.2
 
 - Added `use_grk_github_labels()` with standard labels for use in GitHub repos.
