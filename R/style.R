@@ -99,6 +99,14 @@ use_grk_style <- function() {
   options(styler.addins_style_transformer = "grkmisc::grk_style_transformer()")
 }
 
+#' @describeIn grk_style Style text using the \pkg{grkmisc} code style
+#' @inheritParams styler::style_text
+#' @export
+grk_style_text <- function(text, ..., transformers = grk_style_transformer()) {
+  require_styler()
+  styler::style_text(text, ..., transformers = transformers)
+}
+
 #' @describeIn grk_style Style a file using the \pkg{grkmisc} code style
 #' @inheritParams styler::style_file
 #' @export

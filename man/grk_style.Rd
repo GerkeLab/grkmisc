@@ -4,6 +4,7 @@
 \alias{grk_style}
 \alias{grk_style_transformer}
 \alias{use_grk_style}
+\alias{grk_style_text}
 \alias{grk_style_file}
 \alias{grk_style_dir}
 \alias{grk_style_pkg}
@@ -12,6 +13,8 @@
 grk_style_transformer(...)
 
 use_grk_style()
+
+grk_style_text(text, ..., transformers = grk_style_transformer())
 
 grk_style_file(path, ..., transformers = grk_style_transformer())
 
@@ -23,11 +26,13 @@ grk_style_pkg(pkg, ..., transformers = grk_style_transformer())
 \item{...}{Arguments passed to underling \pkg{styler} functions (identified
 by removing the \code{grk_} prefix)}
 
-\item{path}{A character vector with paths to files to style.}
+\item{text}{A character vector with text to style.}
 
 \item{transformers}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
+
+\item{path}{A character vector with paths to files to style.}
 
 \item{pkg}{Path to a (subdirectory of an) R package.}
 }
@@ -41,6 +46,8 @@ Use \code{\link[styler:style_text]{styler::style_text()}} to format code accordi
 
 \item \code{use_grk_style}: Set the \pkg{grkmisc} style as the default style for
 \pkg{styler} addins.
+
+\item \code{grk_style_text}: Style text using the \pkg{grkmisc} code style
 
 \item \code{grk_style_file}: Style a file using the \pkg{grkmisc} code style
 
