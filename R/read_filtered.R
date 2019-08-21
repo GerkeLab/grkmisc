@@ -6,7 +6,7 @@
 #' @export
 read_tsv_filtered <- function(file, filter_expression, ...) {
   stopifnot(requireNamespace("dplyr", quietly = TRUE),
-            requireNamespace("readr", quietyl = TRUE))
+            requireNamespace("readr", quietly = TRUE))
 
   filter_expression <- rlang::enexpr(filter_expression)
 
@@ -29,7 +29,7 @@ read_tsv_filtered <- function(file, filter_expression, ...) {
 #' @export
 read_csv_filtered <- function(file, filter_expression, ...) {
   stopifnot(requireNamespace("dplyr", quietly = TRUE),
-            requireNamespace("readr", quietyl = TRUE))
+            requireNamespace("readr", quietly = TRUE))
 
   filter_expression <- rlang::enexpr(filter_expression)
 
