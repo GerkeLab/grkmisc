@@ -241,11 +241,20 @@ blockquote {
   font-style: italic;
   color: #777;
 }
-.large {
-  font-size: 1.5em;
+.smaller {
+  font-size: 0.5em;
+}
+.small {
+  font-size: 0.75em;
 }
 .big {
-  font-size: 2em;
+  font-size: 1.5em;
+}
+.bigger {
+  font-size: 2.0em;
+}
+.huge {
+  font-size: 3.0em;
 }
 .third {
   width: 33%;

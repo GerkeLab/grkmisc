@@ -58,6 +58,9 @@ duo_accent(
       "font-style" = "italic",
       color = "#777"
     ),
+    ".small" = list(
+      "font-size" = ".5em"
+    ),
     ".large" = list(
       "font-size" = "1.5em"
     ),
