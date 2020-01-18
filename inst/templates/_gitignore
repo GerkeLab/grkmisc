@@ -3,6 +3,10 @@
 .Rhistory
 .RData
 .DS_Store
+README.html
+
+# vscode
+.history/
 
 # Directories that start with _
 _*/
