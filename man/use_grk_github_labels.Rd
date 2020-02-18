@@ -2,66 +2,50 @@
 % Please edit documentation in R/package.R
 \name{use_grk_github_labels}
 \alias{use_grk_github_labels}
-\alias{grk_github_labels}
-\alias{grk_github_colours}
-\alias{grk_github_descriptions}
 \title{Setup GerkeLab Default GitHub Labels}
 \usage{
-use_grk_github_labels(
-  ...,
-  labels = grk_github_labels(),
-  colours = grk_github_colours(),
-  descriptions = grk_github_descriptions(),
-  delete_default = TRUE
-)
-
-grk_github_labels()
-
-grk_github_colours()
-
-grk_github_descriptions()
+use_grk_github_labels(labels_yaml = NULL, ..., delete_default = TRUE)
 }
 \arguments{
+\item{labels_yaml}{Path to a \code{yaml} file specifying the issue labels, or a
+list in the same format as the parsed \code{yaml} file. Each label should be in
+formatted as follows:\if{html}{\out{<div class="yaml">}}\preformatted{- label: "status: planned"
+  color: bbd5af
+  description: Planning to implement
+}\if{html}{\out{</div>}}
+
+View the \pkg{grkmisc} default github issue labels YAML file with\if{html}{\out{<div class="r">}}\preformatted{system.file("github-issues.yaml", package = "grkmisc")
+}\if{html}{\out{</div>}}
+
+Note: \code{color} or \code{colour} are accepted spellings.}
+
 \item{...}{
   Arguments passed on to \code{\link[usethis:use_github_labels]{usethis::use_github_labels}}
   \describe{
     \item{\code{repo_spec}}{Optional repository specification (\code{owner/repo}) if you
 don't want to target the current project.}
+    \item{\code{labels}}{A character vector giving labels to add.}
     \item{\code{rename}}{A named vector with names giving old names and values giving
 new names.}
+    \item{\code{colours}}{Named character vectors giving hexadecimal
+colours (like \code{e02a2a}) and longer descriptions. The names should match
+label names, and anything unmatched will be left unchanged. If you
+create a new label, and don't supply colours, it will be given a random
+colour.}
+    \item{\code{descriptions}}{Named character vectors giving hexadecimal
+colours (like \code{e02a2a}) and longer descriptions. The names should match
+label names, and anything unmatched will be left unchanged. If you
+create a new label, and don't supply colours, it will be given a random
+colour.}
+    \item{\code{delete_default}}{If \code{TRUE}, removes GitHub default labels that do
+not appear in the \code{labels} vector and that do not have associated issues.}
     \item{\code{auth_token}}{GitHub personal access token (PAT).}
     \item{\code{host}}{GitHub API host to use. Override with the endpoint-root for your
 GitHub enterprise instance, for example,
 "https://github.hostname.com/api/v3".}
   }}
-
-\item{labels}{A character vector giving labels to add.}
-
-\item{colours}{Named character vectors giving hexadecimal
-colours (like \code{e02a2a}) and longer descriptions. The names should match
-label names, and anything unmatched will be left unchanged. If you
-create a new label, and don't supply colours, it will be given a random
-colour.}
-
-\item{descriptions}{Named character vectors giving hexadecimal
-colours (like \code{e02a2a}) and longer descriptions. The names should match
-label names, and anything unmatched will be left unchanged. If you
-create a new label, and don't supply colours, it will be given a random
-colour.}
-
-\item{delete_default}{If \code{TRUE}, removes GitHub default labels that do
-not appear in the \code{labels} vector and that do not have associated issues.}
 }
 \description{
 Removes the default GitHub labels and installs the GerkeLab labels. A small
 wrapper around \code{\link[usethis:use_github_labels]{usethis::use_github_labels()}}.
 }
-\section{Functions}{
-\itemize{
-\item \code{grk_github_labels}: Default grkmisc GitHub labels.
-
-\item \code{grk_github_colours}: Default grkmisc GitHub colours.
-
-\item \code{grk_github_descriptions}: Default grkmisc GitHub descriptions.
-}}
-

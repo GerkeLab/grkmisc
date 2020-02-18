@@ -1,0 +1,42 @@
+- label: "status: complete"
+  color: d6e6f1
+  description: All done
+- label: "status: review"
+  color: c8deed
+  description: Waiting for review, feedback, or testing
+- label: "status: in progress"
+  color: bad6e9
+  description: work in progress
+- label: "status: planned"
+  color: a4bfd2
+  description: Planning to implement
+- label: "status: considering"
+  color: 63737e
+  description: Considering if/how this should be implemented
+- label: "status: blocked"
+  color: 526069
+  description: Blocked by another issue or problem
+- label: "type: maintenance"
+  color: cfc2cd
+  description: Eat your vegetables
+- label: "type: question"
+  color: dfd6de
+  description: Question or troubleshooting
+- label: "type: documentation"
+  color: bfaebd
+  description: Documentation required or needs improvement
+- label: "type: new"
+  color: 563b4a
+  description: New feature or enhancement
+- label: "type: bug"
+  color: 3e2a35
+  description: It's a bug
+- label: "priority: high"
+  color: 346458
+  description: High priority
+- label: "priority: medium"
+  color: 89b3a9
+  description: Medium priority
+- label: "priority: low"
+  color: ccdeda
+  description: Low priority

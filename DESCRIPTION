@@ -34,6 +34,7 @@ Imports:
     stringr,
     usethis (>= 1.4.0),
     utils,
+    yaml,
     yesno
 Suggests: 
     clipr,
