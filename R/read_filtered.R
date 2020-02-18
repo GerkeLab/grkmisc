@@ -1,7 +1,7 @@
 #' Read TSV and Filter on the Fly
 #'
-#' @param file <chr> Filename to read in
-#' @param filter_expression <bare> The expression passed to `dplyr::filter()`
+#' @param file (chr) Filename to read in
+#' @param filter_expression (bare) The expression passed to `dplyr::filter()`
 #' @inheritDotParams readr::read_tsv
 #' @export
 read_tsv_filtered <- function(file, filter_expression, ...) {
@@ -23,8 +23,8 @@ read_tsv_filtered <- function(file, filter_expression, ...) {
 
 #' Read CSV and Filter on the Fly
 #'
-#' @param file <chr> Filename to read in
-#' @param filter_expression <bare> The expression passed to `dplyr::filter()`
+#' @param file (chr) Filename to read in
+#' @param filter_expression (bare) The expression passed to `dplyr::filter()`
 #' @inheritDotParams readr::read_csv
 #' @export
 read_csv_filtered <- function(file, filter_expression, ...) {

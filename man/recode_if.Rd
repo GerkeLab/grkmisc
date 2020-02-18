@@ -11,10 +11,11 @@ recode_if(x, condition, ...)
 
 \item{condition}{Conditions upon which the replacement should occurr}
 
-\item{...}{Arguments passed on to \code{dplyr::recode}
-\describe{
-  \item{.x}{A vector to modify}
-  \item{.default}{If supplied, all values not otherwise matched will
+\item{...}{
+  Arguments passed on to \code{\link[dplyr:recode]{dplyr::recode}}
+  \describe{
+    \item{\code{.x}}{A vector to modify}
+    \item{\code{.default}}{If supplied, all values not otherwise matched will
 be given this value. If not supplied and if the replacements are
 the same type as the original values in \code{.x}, unmatched
 values are not changed. If not supplied and if the replacements
@@ -22,10 +23,10 @@ are not compatible, unmatched values are replaced with \code{NA}.
 
 \code{.default} must be either length 1 or the same length as
 \code{.x}.}
-  \item{.missing}{If supplied, any missing values in \code{.x} will be
+    \item{\code{.missing}}{If supplied, any missing values in \code{.x} will be
 replaced by this value. Must be either length 1 or the same length as
 \code{.x}.}
-}}
+  }}
 }
 \description{
 A simple wrapper around \code{\link[dplyr:recode]{dplyr::recode()}}.

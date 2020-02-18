@@ -4,8 +4,7 @@
 \alias{if_na.data.frame}
 \title{Replace Missing Values in Data Frames}
 \usage{
-\method{if_na}{data.frame}(.x, ..., then = NULL, otherwise = NULL,
-  vars = NULL)
+\method{if_na}{data.frame}(.x, ..., then = NULL, otherwise = NULL, vars = NULL)
 }
 \arguments{
 \item{.x}{Input vector of values}

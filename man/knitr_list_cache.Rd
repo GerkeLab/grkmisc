@@ -16,6 +16,7 @@ full absolute path names for loading the chunks.}
 List cached knitr chunks
 }
 \seealso{
-Other knitr helpers: \code{\link{knitr_load_cache}}
+Other knitr helpers: 
+\code{\link{knitr_load_cache}()}
 }
 \concept{knitr helpers}

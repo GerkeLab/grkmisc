@@ -204,66 +204,62 @@ is_usethis_recent <- function() {
 #' Removes the default GitHub labels and installs the GerkeLab labels. A small
 #' wrapper around [usethis::use_github_labels()].
 #'
+#' @param labels_yaml Path to a `yaml` file specifying the issue labels, or a
+#'   list in the same format as the parsed `yaml` file. Each label should be in
+#'   formatted as follows:
+#'
+#'   ```yaml
+#'   - label: "status: planned"
+#'     color: bbd5af
+#'     description: Planning to implement
+#'   ```
+#'
+#'   View the \pkg{grkmisc} default github issue labels YAML file with
+#'
+#'   ```r
+#'   system.file("github-issues.yaml", package = "grkmisc")
+#'   ```
+#'
+#'   Note: `color` or `colour` are accepted spellings.
+#'
 #' @inheritDotParams usethis::use_github_labels
-#' @inheritParams usethis::use_github_labels
 #' @export
 use_grk_github_labels <- function(
+  labels_yaml = NULL,
   ...,
-  labels = grk_github_labels(),
-  colours = grk_github_colours(),
-  descriptions = grk_github_descriptions(),
   delete_default = TRUE
 ) {
+  labels_yaml <-
+    labels_yaml %||% system.file("github-issues.yaml", package = "grkmisc")
+
+  if (is.character(labels_yaml)) {
+    stopifnot(file.exists(labels_yaml))
+    labels <- yaml::read_yaml(labels_yaml)
+  } else if (is.list(labels_yaml)) {
+    labels <- labels_yaml
+  } else {
+    rlang::abort("Unrecognized format of `labels_yaml`. Must be a list or a path to a YAML file.")
+  }
+
+  labels <- purrr::map(labels, function(l) {
+    names(l)[names(l) == "color"] <- "colour"
+    for (exp in c("label", "colour", "description")) {
+      if (!exp %in% names(l)) l[[exp]] <- ""
+    }
+    l
+  })
+
+  issue_labels <- purrr::map_chr(labels, "label")
+  issue_colours <- purrr::map_chr(labels, "colour") %>%
+    purrr::set_names(issue_labels)
+  issue_description <- purrr::map_chr(labels, "description") %>%
+    purrr::set_names(issue_labels)
+
   usethis::use_github_labels(
     ...,
-    labels = labels,
-    colours = colours,
-    descriptions = descriptions,
+    labels = issue_labels,
+    colours = issue_colours,
+    descriptions = issue_description,
     delete_default = delete_default
-  )
-}
-
-#' @describeIn use_grk_github_labels Default grkmisc GitHub labels.
-#' @export
-grk_github_labels <- function() {
-  c(
-    "planning :seedling:",
-    "feature :hatching_chick:",
-    "question :question:",
-    "documentation :memo:",
-    "bug :bug:",
-    "duplicate",
-    ":construction: WIP :construction:",
-    "considering :thinking:"
-  )
-}
-
-#' @describeIn use_grk_github_labels Default grkmisc GitHub colours.
-#' @export
-grk_github_colours <- function() {
-  c(
-    "planning :seedling:" = "BFDADC",
-    "feature :hatching_chick:" = "B5DDA4",
-    "question :question:" = "99ADC2",
-    "documentation :memo:" = "3E363F",
-    "bug :bug:" = "754668",
-    "duplicate" = "CFD3D7",
-    ":construction: WIP :construction:" = "FBCA04",
-    "considering :thinking:" = "BF1349"
-  )
-}
-
-#' @describeIn use_grk_github_labels Default grkmisc GitHub descriptions.
-#' @export
-grk_github_descriptions <- function() {
-  c(
-    "planning :seedling:" = "Development planning",
-    "feature :hatching_chick:" = "New functionality!",
-    "question :question:" = "Need help or more information",
-    "documentation :memo:" = "Documentation improvement, clarification, or update",
-    "bug :bug:" = "Something isn't working",
-    "duplicate" = "This issue or pull request already exists",
-    ":construction: WIP :construction:" = "Work in Progress! Don't Merge!",
-    "considering :thinking:" = "Let's think about this..."
   )
 }

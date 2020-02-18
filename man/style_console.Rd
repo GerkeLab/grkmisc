@@ -9,19 +9,20 @@ style_console(x, ...)
 \arguments{
 \item{x}{Text to style}
 
-\item{...}{Arguments passed on to \code{styler::style_text}
-\describe{
-  \item{text}{A character vector with text to style.}
-  \item{style}{A function that creates a style guide to use, by default
-\code{\link[=tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
+\item{...}{
+  Arguments passed on to \code{\link[styler:style_text]{styler::style_text}}
+  \describe{
+    \item{\code{text}}{A character vector with text to style.}
+    \item{\code{style}}{A function that creates a style guide to use, by default
+\code{\link[styler:tidyverse_style]{tidyverse_style()}} (without the parentheses). Not used
 further except to construct the argument \code{transformers}. See
-\code{\link[=style_guides]{style_guides()}} for details.}
-  \item{transformers}{A set of transformer functions. This argument is most
+\code{\link[styler:style_guides]{style_guides()}} for details.}
+    \item{\code{transformers}}{A set of transformer functions. This argument is most
 conveniently constructed via the \code{style} argument and \code{...}. See
 'Examples'.}
-  \item{include_roxygen_examples}{Whether or not to style code in roxygen
+    \item{\code{include_roxygen_examples}}{Whether or not to style code in roxygen
 examples.}
-}}
+  }}
 }
 \description{
 Style text from console

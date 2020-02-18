@@ -4,8 +4,11 @@
 \alias{read_proc_format}
 \title{Read Proc Format File}
 \usage{
-read_proc_format(file, verbose = FALSE, missing_values = paste0(".",
-  c("", 1:9, LETTERS)))
+read_proc_format(
+  file,
+  verbose = FALSE,
+  missing_values = paste0(".", c("", 1:9, LETTERS))
+)
 }
 \arguments{
 \item{file}{Path to proc format file.}
@@ -24,7 +27,8 @@ read_proc_format("freepsa.sas_formats.feb16.d080516.sas")
 
 }
 \seealso{
-Other SAS helper functions: \code{\link{add_proc_format_labels}},
-  \code{\link{read_sas_with_format}}
+Other SAS helper functions: 
+\code{\link{add_proc_format_labels}()},
+\code{\link{read_sas_with_format}()}
 }
 \concept{SAS helper functions}
