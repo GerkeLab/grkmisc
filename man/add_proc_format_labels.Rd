@@ -4,13 +4,19 @@
 \alias{add_proc_format_labels}
 \title{Add labels from proc_format file to SAS data file}
 \usage{
-add_proc_format_labels(df, proc_format, as_factor = FALSE,
-  varname_case = c("lower", "upper"), debug_level = 0, ...)
+add_proc_format_labels(
+  df,
+  proc_format,
+  as_factor = FALSE,
+  varname_case = c("lower", "upper"),
+  debug_level = 0,
+  ...
+)
 }
 \arguments{
 \item{df}{Input data frame read from \link[haven:read_sas]{haven::read_sas}}
 
-\item{proc_format}{Either path to SAS file with \code{proc format} statements or
+\item{proc_format}{Either path to SAS file with \verb{proc format} statements or
 the results of \link{read_proc_format}.}
 
 \item{as_factor}{Convert labelled variables to factor with \link[haven:as_factor]{haven::as_factor}?}
@@ -24,12 +30,13 @@ equal to NULL to leave both as-is.}
 \code{proc_format} file. Level \code{2} prints confirmation that the labels were
 applied to each variable in \code{df}.}
 
-\item{...}{Arguments passed on to \code{read_proc_format}
-\describe{
-  \item{file}{Path to proc format file.}
-  \item{verbose}{Writes out file path being read. May be removed in the future.}
-  \item{missing_values}{Possible SAS values that should be treated as missing.}
-}}
+\item{...}{
+  Arguments passed on to \code{\link[=read_proc_format]{read_proc_format}}
+  \describe{
+    \item{\code{file}}{Path to proc format file.}
+    \item{\code{verbose}}{Writes out file path being read. May be removed in the future.}
+    \item{\code{missing_values}}{Possible SAS values that should be treated as missing.}
+  }}
 }
 \description{
 Add labels from proc_format file to SAS data file
@@ -42,7 +49,8 @@ bdat2 <- add_proc_format_labels(bdat, "freepsa.sas_formats.feb16.d080516.sas")
 
 }
 \seealso{
-Other SAS helper functions: \code{\link{read_proc_format}},
-  \code{\link{read_sas_with_format}}
+Other SAS helper functions: 
+\code{\link{read_proc_format}()},
+\code{\link{read_sas_with_format}()}
 }
 \concept{SAS helper functions}

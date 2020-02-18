@@ -8,8 +8,8 @@ use_git_hook_precommit()
 }
 \description{
 Installs a pre-commit hook that automatically bumps the lowest part of the
-package version before committing - for example from \code{0.1.2.9000} to
-\code{0.1.2.90001} - and tidies up the DESCRIPTION file using
+package version before committing - for example from \verb{0.1.2.9000} to
+\verb{0.1.2.90001} - and tidies up the DESCRIPTION file using
 \link[usethis:use_tidy_description]{usethis::use_tidy_description}. If the version was manually changed as part
 of the commit, the version number is not changed. If changes were made to the
 DESCRIPTION file but this file was not committed, those additional changes
@@ -19,7 +19,7 @@ will be committed with the version bump.
 
 You can disable the pre-commit hook in two ways. First you can set an
 environment variable when committing your files:
-\code{doIncrement=FALSE git commit -m "commit message"}. Alternatively, you can
-skip the pre-commit hook with \code{git commit --no-verify -m "commit message"}.
+\verb{doIncrement=FALSE git commit -m "commit message"}. Alternatively, you can
+skip the pre-commit hook with \verb{git commit --no-verify -m "commit message"}.
 }
 

@@ -4,8 +4,7 @@
 \alias{knitr_bold_row}
 \title{Embolden rows matching an expression}
 \usage{
-knitr_bold_row(x, ..., cols = NULL, format = c("markdown", "html",
-  "latex"))
+knitr_bold_row(x, ..., cols = NULL, format = c("markdown", "html", "latex"))
 }
 \arguments{
 \item{x}{A data frame}

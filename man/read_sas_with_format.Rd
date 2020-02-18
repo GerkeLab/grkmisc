@@ -4,9 +4,14 @@
 \alias{read_sas_with_format}
 \title{Read SAS file and label according to PROC FORMAT}
 \usage{
-read_sas_with_format(file_bdat, file_format, as_factor = FALSE,
-  missing_values = paste0(".", c("", 1:9, LETTERS)), debug_level = 0,
-  ...)
+read_sas_with_format(
+  file_bdat,
+  file_format,
+  as_factor = FALSE,
+  missing_values = paste0(".", c("", 1:9, LETTERS)),
+  debug_level = 0,
+  ...
+)
 }
 \arguments{
 \item{file_bdat}{Path to the \code{sas7bdat} file to be read by \link[haven:read_sas]{haven::read_sas}}
@@ -21,27 +26,47 @@ read_sas_with_format(file_bdat, file_format, as_factor = FALSE,
 \code{proc_format} file. Level \code{2} prints confirmation that the labels were
 applied to each variable in \code{df}.}
 
-\item{...}{Arguments passed on to \code{haven::read_sas}
-\describe{
-  \item{data_file}{Path to data and catalog files. The files are
+\item{...}{
+  Arguments passed on to \code{\link[haven:read_sas]{haven::read_sas}}
+  \describe{
+    \item{\code{data_file}}{Path to data and catalog files. The files are
 processed with \code{\link[readr:datasource]{readr::datasource()}}.}
-  \item{catalog_file}{Path to data and catalog files. The files are
+    \item{\code{catalog_file}}{Path to data and catalog files. The files are
 processed with \code{\link[readr:datasource]{readr::datasource()}}.}
-  \item{encoding}{The character encoding used for the
-\code{data_file} and \code{catalog_encoding} respectively. A value of \code{NULL}
-uses the encoding specified in the file; use this argument to override it
-if it is incorrect.}
-  \item{catalog_encoding}{The character encoding used for the
-\code{data_file} and \code{catalog_encoding} respectively. A value of \code{NULL}
-uses the encoding specified in the file; use this argument to override it
-if it is incorrect.}
-  \item{cols_only}{A character vector giving an experimental way to read in
-only specified columns.}
-}}
+    \item{\code{encoding}}{The character encoding used for the
+\code{data_file} and \code{catalog_encoding} respectively. A value of \code{NULL} uses the
+encoding specified in the file; use this argument to override it if it is
+incorrect.}
+    \item{\code{catalog_encoding}}{The character encoding used for the
+\code{data_file} and \code{catalog_encoding} respectively. A value of \code{NULL} uses the
+encoding specified in the file; use this argument to override it if it is
+incorrect.}
+    \item{\code{col_select}}{One or more selection expressions, like in
+\code{\link[dplyr:select]{dplyr::select()}}. Use \code{c()} or \code{list()} to use more than one expression.
+See \code{?dplyr::select} for details on available selection options. Only the
+specified columns will be read from \code{data_file}.}
+    \item{\code{skip}}{Number of lines to skip before reading data.}
+    \item{\code{n_max}}{Maximum number of lines to read.}
+    \item{\code{cols_only}}{\strong{Deprecated}: Use \code{col_select} instead.}
+    \item{\code{.name_repair}}{Treatment of problematic column names:
+\itemize{
+\item \code{"minimal"}: No name repair or checks, beyond basic existence,
+\item \code{"unique"}: Make sure names are unique and not empty,
+\item \code{"check_unique"}: (default value), no name repair, but check they are
+\code{unique},
+\item \code{"universal"}: Make the names \code{unique} and syntactic
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
+for names in the style of base R).
+\item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
+}
+
+See \link{name-repair} for more details on these terms and the strategies used
+to enforce them.}
+  }}
 }
 \description{
 Reads a SAS \code{sas7bdat} file using \link[haven:read_sas]{haven::read_sas} and then applies the
-labels given in the formats file (containing \code{PROC FORMAT} statements).
+labels given in the formats file (containing \verb{PROC FORMAT} statements).
 The labels use \link[labelled:labelled]{labelled::labelled} and may be coerced to factors if desired.
 }
 \examples{
@@ -51,7 +76,8 @@ read_sas_with_format("freepsa_data_feb16_d080516.sas7bdat", "freepsa.sas_formats
 
 }
 \seealso{
-Other SAS helper functions: \code{\link{add_proc_format_labels}},
-  \code{\link{read_proc_format}}
+Other SAS helper functions: 
+\code{\link{add_proc_format_labels}()},
+\code{\link{read_proc_format}()}
 }
 \concept{SAS helper functions}

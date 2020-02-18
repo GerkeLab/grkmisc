@@ -5,11 +5,18 @@
 \alias{format_pretty_num}
 \title{Pretty print scaled numbers}
 \usage{
-pretty_num(x, units = c(k = 1000, M = 1e+06, B = 1e+09),
-  decimal_digits = 1, no_dot_zero = FALSE)
+pretty_num(
+  x,
+  units = c(k = 1000, M = 1e+06, B = 1e+09),
+  decimal_digits = 1,
+  no_dot_zero = FALSE
+)
 
-format_pretty_num(units = c(k = 1000, M = 1e+06, B = 1e+09),
-  decimal_digits = 1, no_dot_zero = TRUE)
+format_pretty_num(
+  units = c(k = 1000, M = 1e+06, B = 1e+09),
+  decimal_digits = 1,
+  no_dot_zero = TRUE
+)
 }
 \arguments{
 \item{x}{Vector of numbers}

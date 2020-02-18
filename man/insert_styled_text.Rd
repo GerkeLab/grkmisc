@@ -9,10 +9,11 @@ insert_styled_text(x = NULL, ...)
 \arguments{
 \item{x}{The code as a character string}
 
-\item{...}{Arguments passed on to \code{style_console}
-\describe{
-  \item{x}{Text to style}
-}}
+\item{...}{
+  Arguments passed on to \code{\link[=style_console]{style_console}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \description{
 Inserts text from clipboard at cursor position, styled according to the

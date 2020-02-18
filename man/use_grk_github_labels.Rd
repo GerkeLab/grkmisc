@@ -7,9 +7,13 @@
 \alias{grk_github_descriptions}
 \title{Setup GerkeLab Default GitHub Labels}
 \usage{
-use_grk_github_labels(..., labels = grk_github_labels(),
+use_grk_github_labels(
+  ...,
+  labels = grk_github_labels(),
   colours = grk_github_colours(),
-  descriptions = grk_github_descriptions(), delete_default = TRUE)
+  descriptions = grk_github_descriptions(),
+  delete_default = TRUE
+)
 
 grk_github_labels()
 
@@ -18,30 +22,18 @@ grk_github_colours()
 grk_github_descriptions()
 }
 \arguments{
-\item{...}{Arguments passed on to \code{usethis::use_github_labels}
-\describe{
-  \item{repo_spec}{Optional repository specification (\code{owner/repo}) if you
+\item{...}{
+  Arguments passed on to \code{\link[usethis:use_github_labels]{usethis::use_github_labels}}
+  \describe{
+    \item{\code{repo_spec}}{Optional repository specification (\code{owner/repo}) if you
 don't want to target the current project.}
-  \item{labels}{A character vector giving labels to add.}
-  \item{rename}{A named vector with names giving old names and values giving
+    \item{\code{rename}}{A named vector with names giving old names and values giving
 new names.}
-  \item{colours}{Named character vectors giving hexadecimal
-colours (like \code{e02a2a}) and longer descriptions. The names should match
-label names, and anything unmatched will be left unchanged. If you
-create a new label, and don't supply colours, it will be given a random
-colour.}
-  \item{descriptions}{Named character vectors giving hexadecimal
-colours (like \code{e02a2a}) and longer descriptions. The names should match
-label names, and anything unmatched will be left unchanged. If you
-create a new label, and don't supply colours, it will be given a random
-colour.}
-  \item{delete_default}{If \code{TRUE}, removes GitHub default labels that do
-not appear in the \code{labels} vector and that do not have associated issues.}
-  \item{auth_token}{GitHub personal access token (PAT).}
-  \item{host}{GitHub API host to use. Override with the endpoint-root for your
+    \item{\code{auth_token}}{GitHub personal access token (PAT).}
+    \item{\code{host}}{GitHub API host to use. Override with the endpoint-root for your
 GitHub enterprise instance, for example,
 "https://github.hostname.com/api/v3".}
-}}
+  }}
 
 \item{labels}{A character vector giving labels to add.}
 

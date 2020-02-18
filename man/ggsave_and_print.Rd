@@ -4,10 +4,17 @@
 \alias{ggsave_and_print}
 \title{Save and/or Print Plot}
 \usage{
-ggsave_and_print(plot, filename, width = 20, height = 15,
+ggsave_and_print(
+  plot,
+  filename,
+  width = 20,
+  height = 15,
   device = fs::path_ext(filename),
-  include = knitr::opts_current$get("include") \%||\% TRUE, ...,
-  force_save = FALSE, base_dir = getwd())
+  include = knitr::opts_current$get("include") \%||\% TRUE,
+  ...,
+  force_save = FALSE,
+  base_dir = getwd()
+)
 }
 \arguments{
 \item{plot}{Plot to save, defaults to last plot displayed.}

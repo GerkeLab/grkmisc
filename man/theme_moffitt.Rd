@@ -5,26 +5,43 @@
 \alias{theme_grk}
 \title{A Clean Theme with Moffitt Style}
 \usage{
-theme_moffitt(base_family = "Overpass",
-  axis_text_family = "Overpass Mono", axis_title_family = base_family,
-  axis_title_bold = FALSE, axis_title_just = "cc",
-  axis_title_size = 13, subtitle_size = 13,
+theme_moffitt(
+  base_family = "Overpass",
+  axis_text_family = "Overpass Mono",
+  axis_title_family = base_family,
+  axis_title_bold = FALSE,
+  axis_title_just = "cc",
+  axis_title_size = 13,
+  subtitle_size = 13,
   default_geom_font = "Fira Sans Condensed",
   default_geom_color = grkmisc::moffitt_colors$blue,
-  axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
+  axis_text_color = "#6e6e6e",
+  plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
-  panel_background_color = "#FFFFFF", ..., use_showtext = TRUE,
-  panel_grid = c("major", "minor", "both", "none"))
+  panel_background_color = "#FFFFFF",
+  ...,
+  use_showtext = TRUE,
+  panel_grid = c("major", "minor", "both", "none")
+)
 
-theme_grk(base_family = "PT Sans", axis_text_family = "PT Mono",
-  axis_title_family = base_family, axis_title_bold = FALSE,
-  axis_title_just = "cc", axis_title_size = 13, subtitle_size = 13,
+theme_grk(
+  base_family = "PT Sans",
+  axis_text_family = "PT Mono",
+  axis_title_family = base_family,
+  axis_title_bold = FALSE,
+  axis_title_just = "cc",
+  axis_title_size = 13,
+  subtitle_size = 13,
   default_geom_font = "PT Sans Narrow",
   default_geom_color = grkmisc::moffitt_colors$blue,
-  axis_text_color = "#6e6e6e", plot_caption_color = axis_text_color,
+  axis_text_color = "#6e6e6e",
+  plot_caption_color = axis_text_color,
   panel_border_color = axis_text_color,
-  panel_background_color = "grey96", ..., use_showtext = TRUE,
-  panel_grid = c("major", "minor", "both", "none"))
+  panel_background_color = "grey96",
+  ...,
+  use_showtext = TRUE,
+  panel_grid = c("major", "minor", "both", "none")
+)
 }
 \arguments{
 \item{base_family}{base font family and size}
@@ -60,37 +77,33 @@ disable}
 \item{panel_background_color}{Color of the panel background, or \code{NULL} to
 disable}
 
-\item{...}{Arguments passed on to \code{hrbrthemes::theme_ipsum}
-\describe{
-  \item{base_family}{base font family and size}
-  \item{base_size}{base font family and size}
-  \item{plot_title_family}{plot title family, face, size and margi}
-  \item{plot_title_face}{plot title family, face, size and margi}
-  \item{plot_title_size}{plot title family, face, size and margi}
-  \item{plot_title_margin}{plot title family, face, size and margi}
-  \item{subtitle_family}{plot subtitle family, face and size}
-  \item{subtitle_face}{plot subtitle family, face and size}
-  \item{subtitle_size}{plot subtitle family, face and size}
-  \item{subtitle_margin}{plot subtitle margin bottom (single numeric value)}
-  \item{strip_text_family}{facet label font family, face and size}
-  \item{strip_text_face}{facet label font family, face and size}
-  \item{strip_text_size}{facet label font family, face and size}
-  \item{caption_family}{plot caption family, face, size and margin}
-  \item{caption_face}{plot caption family, face, size and margin}
-  \item{caption_size}{plot caption family, face, size and margin}
-  \item{caption_margin}{plot caption family, face, size and margin}
-  \item{axis_text_size}{font size of axis text}
-  \item{axis_title_family}{axis title font family, face and size}
-  \item{axis_title_face}{axis title font family, face and size}
-  \item{axis_title_size}{axis title font family, face and size}
-  \item{axis_title_just}{axis title font justification, one of \code{[blmcrt]}}
-  \item{plot_margin}{plot margin (specify with \code{\link[ggplot2:margin]{ggplot2::margin()}})}
-  \item{grid_col}{grid & axis colors; both default to \code{#cccccc}}
-  \item{axis_col}{grid & axis colors; both default to \code{#cccccc}}
-  \item{grid}{panel grid (\code{TRUE}, \code{FALSE}, or a combination of \code{X}, \code{x}, \code{Y}, \code{y})}
-  \item{axis}{add x or y axes? \code{TRUE}, \code{FALSE}, "\code{xy}"}
-  \item{ticks}{ticks if \code{TRUE} add ticks}
-}}
+\item{...}{
+  Arguments passed on to \code{\link[hrbrthemes:theme_ipsum]{hrbrthemes::theme_ipsum}}
+  \describe{
+    \item{\code{base_size}}{base font family and size}
+    \item{\code{plot_title_family}}{plot title family, face, size and margi}
+    \item{\code{plot_title_face}}{plot title family, face, size and margi}
+    \item{\code{plot_title_size}}{plot title family, face, size and margi}
+    \item{\code{plot_title_margin}}{plot title family, face, size and margi}
+    \item{\code{subtitle_family}}{plot subtitle family, face and size}
+    \item{\code{subtitle_face}}{plot subtitle family, face and size}
+    \item{\code{subtitle_margin}}{plot subtitle margin bottom (single numeric value)}
+    \item{\code{strip_text_family}}{facet label font family, face and size}
+    \item{\code{strip_text_face}}{facet label font family, face and size}
+    \item{\code{strip_text_size}}{facet label font family, face and size}
+    \item{\code{caption_family}}{plot caption family, face, size and margin}
+    \item{\code{caption_face}}{plot caption family, face, size and margin}
+    \item{\code{caption_size}}{plot caption family, face, size and margin}
+    \item{\code{caption_margin}}{plot caption family, face, size and margin}
+    \item{\code{axis_text_size}}{font size of axis text}
+    \item{\code{axis_title_face}}{axis title font family, face and size}
+    \item{\code{plot_margin}}{plot margin (specify with \code{\link[ggplot2:margin]{ggplot2::margin()}})}
+    \item{\code{grid_col}}{grid & axis colors; both default to \code{#cccccc}}
+    \item{\code{axis_col}}{grid & axis colors; both default to \code{#cccccc}}
+    \item{\code{grid}}{panel grid (\code{TRUE}, \code{FALSE}, or a combination of \code{X}, \code{x}, \code{Y}, \code{y})}
+    \item{\code{axis}}{add x or y axes? \code{TRUE}, \code{FALSE}, "\code{xy}"}
+    \item{\code{ticks}}{ticks if \code{TRUE} add ticks}
+  }}
 
 \item{use_showtext}{Should \pkg{showtext} and \pkg{sysfonts} be used to
 register font families from Google? Default is \code{TRUE}.}

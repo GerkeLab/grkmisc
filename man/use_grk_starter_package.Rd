@@ -4,10 +4,15 @@
 \alias{use_grk_starter_package}
 \title{Create a default package skeleton}
 \usage{
-use_grk_starter_package(path, github = TRUE, github_org = NULL,
-  github_private = FALSE, open = TRUE,
+use_grk_starter_package(
+  path,
+  github = TRUE,
+  github_org = NULL,
+  github_private = FALSE,
+  open = TRUE,
   title = "What the Package Does (One Line, Title Case)",
-  description = "What the package does (one paragraph)")
+  description = "What the package does (one paragraph)"
+)
 }
 \arguments{
 \item{path}{Path (and thus package name) where the package will be stored}

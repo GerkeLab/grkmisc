@@ -15,6 +15,7 @@ knitr_load_cache(chunk = NULL, cache_path = NULL)
 Lazy load results from a knitr cache
 }
 \seealso{
-Other knitr helpers: \code{\link{knitr_list_cache}}
+Other knitr helpers: 
+\code{\link{knitr_list_cache}()}
 }
 \concept{knitr helpers}

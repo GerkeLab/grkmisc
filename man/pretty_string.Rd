@@ -5,11 +5,20 @@
 \alias{format_pretty_string}
 \title{Truncate and wrap strings}
 \usage{
-pretty_string(x, truncate_at = 80, truncate_with = "...",
-  trim = TRUE, wrap_at = 40)
+pretty_string(
+  x,
+  truncate_at = 80,
+  truncate_with = "...",
+  trim = TRUE,
+  wrap_at = 40
+)
 
-format_pretty_string(truncate_at = 80, truncate_with = "...",
-  trim = TRUE, wrap_at = 40)
+format_pretty_string(
+  truncate_at = 80,
+  truncate_with = "...",
+  trim = TRUE,
+  wrap_at = 40
+)
 }
 \arguments{
 \item{x}{Strings}
