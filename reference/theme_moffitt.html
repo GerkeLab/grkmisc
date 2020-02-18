@@ -140,26 +140,43 @@ automatically download and register the correct fonts from Google Font using
 prefer, use <code>theme_grk()</code>, which simply uses "Fira Sans" as the base font.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>theme_moffitt</span>(<span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"Overpass"</span>,
-  <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='st'>"Overpass Mono"</span>, <span class='kw'>axis_title_family</span> <span class='kw'>=</span> <span class='no'>base_family</span>,
-  <span class='kw'>axis_title_bold</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>axis_title_just</span> <span class='kw'>=</span> <span class='st'>"cc"</span>,
-  <span class='kw'>axis_title_size</span> <span class='kw'>=</span> <span class='fl'>13</span>, <span class='kw'>subtitle_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
+    <pre class="usage"><span class='fu'>theme_moffitt</span>(
+  <span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"Overpass"</span>,
+  <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='st'>"Overpass Mono"</span>,
+  <span class='kw'>axis_title_family</span> <span class='kw'>=</span> <span class='no'>base_family</span>,
+  <span class='kw'>axis_title_bold</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>axis_title_just</span> <span class='kw'>=</span> <span class='st'>"cc"</span>,
+  <span class='kw'>axis_title_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
+  <span class='kw'>subtitle_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
   <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"Fira Sans Condensed"</span>,
   <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw pkg'>grkmisc</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/grkmisc/man/moffitt_colors.html'>moffitt_colors</a></span>$<span class='no'>blue</span>,
-  <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>, <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
+  <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>,
+  <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
   <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
-  <span class='kw'>panel_background_color</span> <span class='kw'>=</span> <span class='st'>"#FFFFFF"</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>panel_grid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"major"</span>, <span class='st'>"minor"</span>, <span class='st'>"both"</span>, <span class='st'>"none"</span>))
+  <span class='kw'>panel_background_color</span> <span class='kw'>=</span> <span class='st'>"#FFFFFF"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>panel_grid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"major"</span>, <span class='st'>"minor"</span>, <span class='st'>"both"</span>, <span class='st'>"none"</span>)
+)
 
-<span class='fu'>theme_grk</span>(<span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"PT Sans"</span>, <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='st'>"PT Mono"</span>,
-  <span class='kw'>axis_title_family</span> <span class='kw'>=</span> <span class='no'>base_family</span>, <span class='kw'>axis_title_bold</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>axis_title_just</span> <span class='kw'>=</span> <span class='st'>"cc"</span>, <span class='kw'>axis_title_size</span> <span class='kw'>=</span> <span class='fl'>13</span>, <span class='kw'>subtitle_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
+<span class='fu'>theme_grk</span>(
+  <span class='kw'>base_family</span> <span class='kw'>=</span> <span class='st'>"PT Sans"</span>,
+  <span class='kw'>axis_text_family</span> <span class='kw'>=</span> <span class='st'>"PT Mono"</span>,
+  <span class='kw'>axis_title_family</span> <span class='kw'>=</span> <span class='no'>base_family</span>,
+  <span class='kw'>axis_title_bold</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>axis_title_just</span> <span class='kw'>=</span> <span class='st'>"cc"</span>,
+  <span class='kw'>axis_title_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
+  <span class='kw'>subtitle_size</span> <span class='kw'>=</span> <span class='fl'>13</span>,
   <span class='kw'>default_geom_font</span> <span class='kw'>=</span> <span class='st'>"PT Sans Narrow"</span>,
   <span class='kw'>default_geom_color</span> <span class='kw'>=</span> <span class='kw pkg'>grkmisc</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/grkmisc/man/moffitt_colors.html'>moffitt_colors</a></span>$<span class='no'>blue</span>,
-  <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>, <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
+  <span class='kw'>axis_text_color</span> <span class='kw'>=</span> <span class='st'>"#6e6e6e"</span>,
+  <span class='kw'>plot_caption_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
   <span class='kw'>panel_border_color</span> <span class='kw'>=</span> <span class='no'>axis_text_color</span>,
-  <span class='kw'>panel_background_color</span> <span class='kw'>=</span> <span class='st'>"grey96"</span>, <span class='no'>...</span>, <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>panel_grid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"major"</span>, <span class='st'>"minor"</span>, <span class='st'>"both"</span>, <span class='st'>"none"</span>))</pre>
+  <span class='kw'>panel_background_color</span> <span class='kw'>=</span> <span class='st'>"grey96"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>use_showtext</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>panel_grid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"major"</span>, <span class='st'>"minor"</span>, <span class='st'>"both"</span>, <span class='st'>"none"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,35 +243,30 @@ disable</p></td>
     <tr>
       <th>...</th>
       <td><p>Arguments passed on to <code><a href='https://rdrr.io/pkg/hrbrthemes/man/theme_ipsum.html'>hrbrthemes::theme_ipsum</a></code></p><dl class='dl-horizontal'>
-  <dt>base_family</dt><dd><p>base font family and size</p></dd>
-  <dt>base_size</dt><dd><p>base font family and size</p></dd>
-  <dt>plot_title_family</dt><dd><p>plot title family, face, size and margi</p></dd>
-  <dt>plot_title_face</dt><dd><p>plot title family, face, size and margi</p></dd>
-  <dt>plot_title_size</dt><dd><p>plot title family, face, size and margi</p></dd>
-  <dt>plot_title_margin</dt><dd><p>plot title family, face, size and margi</p></dd>
-  <dt>subtitle_family</dt><dd><p>plot subtitle family, face and size</p></dd>
-  <dt>subtitle_face</dt><dd><p>plot subtitle family, face and size</p></dd>
-  <dt>subtitle_size</dt><dd><p>plot subtitle family, face and size</p></dd>
-  <dt>subtitle_margin</dt><dd><p>plot subtitle margin bottom (single numeric value)</p></dd>
-  <dt>strip_text_family</dt><dd><p>facet label font family, face and size</p></dd>
-  <dt>strip_text_face</dt><dd><p>facet label font family, face and size</p></dd>
-  <dt>strip_text_size</dt><dd><p>facet label font family, face and size</p></dd>
-  <dt>caption_family</dt><dd><p>plot caption family, face, size and margin</p></dd>
-  <dt>caption_face</dt><dd><p>plot caption family, face, size and margin</p></dd>
-  <dt>caption_size</dt><dd><p>plot caption family, face, size and margin</p></dd>
-  <dt>caption_margin</dt><dd><p>plot caption family, face, size and margin</p></dd>
-  <dt>axis_text_size</dt><dd><p>font size of axis text</p></dd>
-  <dt>axis_title_family</dt><dd><p>axis title font family, face and size</p></dd>
-  <dt>axis_title_face</dt><dd><p>axis title font family, face and size</p></dd>
-  <dt>axis_title_size</dt><dd><p>axis title font family, face and size</p></dd>
-  <dt>axis_title_just</dt><dd><p>axis title font justification, one of <code>[blmcrt]</code></p></dd>
-  <dt>plot_margin</dt><dd><p>plot margin (specify with <code><a href='https://ggplot2.tidyverse.org/reference/element.html'>ggplot2::margin()</a></code>)</p></dd>
-  <dt>grid_col</dt><dd><p>grid &amp; axis colors; both default to <code>#cccccc</code></p></dd>
-  <dt>axis_col</dt><dd><p>grid &amp; axis colors; both default to <code>#cccccc</code></p></dd>
-  <dt>grid</dt><dd><p>panel grid (<code>TRUE</code>, <code>FALSE</code>, or a combination of <code>X</code>, <code>x</code>, <code>Y</code>, <code>y</code>)</p></dd>
-  <dt>axis</dt><dd><p>add x or y axes? <code>TRUE</code>, <code>FALSE</code>, "<code>xy</code>"</p></dd>
-  <dt>ticks</dt><dd><p>ticks if <code>TRUE</code> add ticks</p></dd>
-
+    <dt><code>base_size</code></dt><dd><p>base font family and size</p></dd>
+    <dt><code>plot_title_family</code></dt><dd><p>plot title family, face, size and margi</p></dd>
+    <dt><code>plot_title_face</code></dt><dd><p>plot title family, face, size and margi</p></dd>
+    <dt><code>plot_title_size</code></dt><dd><p>plot title family, face, size and margi</p></dd>
+    <dt><code>plot_title_margin</code></dt><dd><p>plot title family, face, size and margi</p></dd>
+    <dt><code>subtitle_family</code></dt><dd><p>plot subtitle family, face and size</p></dd>
+    <dt><code>subtitle_face</code></dt><dd><p>plot subtitle family, face and size</p></dd>
+    <dt><code>subtitle_margin</code></dt><dd><p>plot subtitle margin bottom (single numeric value)</p></dd>
+    <dt><code>strip_text_family</code></dt><dd><p>facet label font family, face and size</p></dd>
+    <dt><code>strip_text_face</code></dt><dd><p>facet label font family, face and size</p></dd>
+    <dt><code>strip_text_size</code></dt><dd><p>facet label font family, face and size</p></dd>
+    <dt><code>caption_family</code></dt><dd><p>plot caption family, face, size and margin</p></dd>
+    <dt><code>caption_face</code></dt><dd><p>plot caption family, face, size and margin</p></dd>
+    <dt><code>caption_size</code></dt><dd><p>plot caption family, face, size and margin</p></dd>
+    <dt><code>caption_margin</code></dt><dd><p>plot caption family, face, size and margin</p></dd>
+    <dt><code>axis_text_size</code></dt><dd><p>font size of axis text</p></dd>
+    <dt><code>axis_title_face</code></dt><dd><p>axis title font family, face and size</p></dd>
+    <dt><code>plot_margin</code></dt><dd><p>plot margin (specify with <code><a href='https://ggplot2.tidyverse.org/reference/element.html'>ggplot2::margin()</a></code>)</p></dd>
+    <dt><code>grid_col</code></dt><dd><p>grid &amp; axis colors; both default to <code>#cccccc</code></p></dd>
+    <dt><code>axis_col</code></dt><dd><p>grid &amp; axis colors; both default to <code>#cccccc</code></p></dd>
+    <dt><code>grid</code></dt><dd><p>panel grid (<code>TRUE</code>, <code>FALSE</code>, or a combination of <code>X</code>, <code>x</code>, <code>Y</code>, <code>y</code>)</p></dd>
+    <dt><code>axis</code></dt><dd><p>add x or y axes? <code>TRUE</code>, <code>FALSE</code>, "<code>xy</code>"</p></dd>
+    <dt><code>ticks</code></dt><dd><p>ticks if <code>TRUE</code> add ticks</p></dd>
+  
 </dl></td>
     </tr>
     <tr>

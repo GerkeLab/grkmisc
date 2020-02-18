@@ -126,11 +126,18 @@
     <p>Pretty print scaled numbers</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pretty_num</span>(<span class='no'>x</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1e+09</span>),
-  <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>no_dot_zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>pretty_num</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1e+09</span>),
+  <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>no_dot_zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-<span class='fu'>format_pretty_num</span>(<span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1e+09</span>),
-  <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>no_dot_zero</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>format_pretty_num</span>(
+  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1e+09</span>),
+  <span class='kw'>decimal_digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>no_dot_zero</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -130,9 +130,14 @@ labels given in the formats file (containing <code>PROC FORMAT</code> statements
 The labels use <a href='https://rdrr.io/pkg/labelled/man/labelled.html'>labelled::labelled</a> and may be coerced to factors if desired.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_sas_with_format</span>(<span class='no'>file_bdat</span>, <span class='no'>file_format</span>, <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>)), <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>read_sas_with_format</span>(
+  <span class='no'>file_bdat</span>,
+  <span class='no'>file_format</span>,
+  <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>)),
+  <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,29 +167,47 @@ applied to each variable in <code>df</code>.</p></td>
     <tr>
       <th>...</th>
       <td><p>Arguments passed on to <code><a href='https://haven.tidyverse.org/reference/read_sas.html'>haven::read_sas</a></code></p><dl class='dl-horizontal'>
-  <dt>data_file</dt><dd><p>Path to data and catalog files. The files are
+    <dt><code>data_file</code></dt><dd><p>Path to data and catalog files. The files are
 processed with <code><a href='https://readr.tidyverse.org/reference/datasource.html'>readr::datasource()</a></code>.</p></dd>
-  <dt>catalog_file</dt><dd><p>Path to data and catalog files. The files are
+    <dt><code>catalog_file</code></dt><dd><p>Path to data and catalog files. The files are
 processed with <code><a href='https://readr.tidyverse.org/reference/datasource.html'>readr::datasource()</a></code>.</p></dd>
-  <dt>encoding</dt><dd><p>The character encoding used for the
-<code>data_file</code> and <code>catalog_encoding</code> respectively. A value of <code>NULL</code>
-uses the encoding specified in the file; use this argument to override it
-if it is incorrect.</p></dd>
-  <dt>catalog_encoding</dt><dd><p>The character encoding used for the
-<code>data_file</code> and <code>catalog_encoding</code> respectively. A value of <code>NULL</code>
-uses the encoding specified in the file; use this argument to override it
-if it is incorrect.</p></dd>
-  <dt>cols_only</dt><dd><p>A character vector giving an experimental way to read in
-only specified columns.</p></dd>
-
+    <dt><code>encoding</code></dt><dd><p>The character encoding used for the
+<code>data_file</code> and <code>catalog_encoding</code> respectively. A value of <code>NULL</code> uses the
+encoding specified in the file; use this argument to override it if it is
+incorrect.</p></dd>
+    <dt><code>catalog_encoding</code></dt><dd><p>The character encoding used for the
+<code>data_file</code> and <code>catalog_encoding</code> respectively. A value of <code>NULL</code> uses the
+encoding specified in the file; use this argument to override it if it is
+incorrect.</p></dd>
+    <dt><code>col_select</code></dt><dd><p>One or more selection expressions, like in
+<code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code>. Use <code><a href='https://rdrr.io/r/base/c.html'>c()</a></code> or <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> to use more than one expression.
+See <code><a href='https://dplyr.tidyverse.org/reference/select.html'>?dplyr::select</a></code> for details on available selection options. Only the
+specified columns will be read from <code>data_file</code>.</p></dd>
+    <dt><code>skip</code></dt><dd><p>Number of lines to skip before reading data.</p></dd>
+    <dt><code>n_max</code></dt><dd><p>Maximum number of lines to read.</p></dd>
+    <dt><code>cols_only</code></dt><dd><p><strong>Deprecated</strong>: Use <code>col_select</code> instead.</p></dd>
+    <dt><code>.name_repair</code></dt><dd><p>Treatment of problematic column names:
+<ul>
+<li><p><code>"minimal"</code>: No name repair or checks, beyond basic existence,</p></li>
+<li><p><code>"unique"</code>: Make sure names are unique and not empty,</p></li>
+<li><p><code>"check_unique"</code>: (default value), no name repair, but check they are
+<code>unique</code>,</p></li>
+<li><p><code>"universal"</code>: Make the names <code>unique</code> and syntactic</p></li>
+<li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
+for names in the style of base R).</p></li>
+<li><p>A purrr-style anonymous function, see <code><a href='https://rlang.r-lib.org/reference/as_function.html'>rlang::as_function()</a></code></p></li>
+</ul>See name-repair for more details on these terms and the strategies used
+to enforce them.</p></dd>
+  
 </dl></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other SAS helper functions: <code><a href='add_proc_format_labels.html'>add_proc_format_labels</a></code>,
-  <code><a href='read_proc_format.html'>read_proc_format</a></code></p></div>
+    <div class='dont-index'><p>Other SAS helper functions: 
+<code><a href='add_proc_format_labels.html'>add_proc_format_labels</a>()</code>,
+<code><a href='read_proc_format.html'>read_proc_format</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

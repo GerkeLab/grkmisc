@@ -126,8 +126,14 @@
     <p>Add labels from proc_format file to SAS data file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_proc_format_labels</span>(<span class='no'>df</span>, <span class='no'>proc_format</span>, <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>varname_case</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>), <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>add_proc_format_labels</span>(
+  <span class='no'>df</span>,
+  <span class='no'>proc_format</span>,
+  <span class='kw'>as_factor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>varname_case</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>),
+  <span class='kw'>debug_level</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,19 +166,20 @@ applied to each variable in <code>df</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed on to <code>read_proc_format</code></p><dl class='dl-horizontal'>
-  <dt>file</dt><dd><p>Path to proc format file.</p></dd>
-  <dt>verbose</dt><dd><p>Writes out file path being read. May be removed in the future.</p></dd>
-  <dt>missing_values</dt><dd><p>Possible SAS values that should be treated as missing.</p></dd>
-
+      <td><p>Arguments passed on to <code><a href='read_proc_format.html'>read_proc_format</a></code></p><dl class='dl-horizontal'>
+    <dt><code>file</code></dt><dd><p>Path to proc format file.</p></dd>
+    <dt><code>verbose</code></dt><dd><p>Writes out file path being read. May be removed in the future.</p></dd>
+    <dt><code>missing_values</code></dt><dd><p>Possible SAS values that should be treated as missing.</p></dd>
+  
 </dl></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other SAS helper functions: <code><a href='read_proc_format.html'>read_proc_format</a></code>,
-  <code><a href='read_sas_with_format.html'>read_sas_with_format</a></code></p></div>
+    <div class='dont-index'><p>Other SAS helper functions: 
+<code><a href='read_proc_format.html'>read_proc_format</a>()</code>,
+<code><a href='read_sas_with_format.html'>read_sas_with_format</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

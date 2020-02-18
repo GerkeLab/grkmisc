@@ -128,88 +128,58 @@ wrapper around usethis::use_github_labels()." />
 wrapper around <code><a href='https://usethis.r-lib.org/reference/use_github_labels.html'>usethis::use_github_labels()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_grk_github_labels</span>(<span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>grk_github_labels</span>(),
-  <span class='kw'>colours</span> <span class='kw'>=</span> <span class='fu'>grk_github_colours</span>(),
-  <span class='kw'>descriptions</span> <span class='kw'>=</span> <span class='fu'>grk_github_descriptions</span>(), <span class='kw'>delete_default</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>grk_github_labels</span>()
-
-<span class='fu'>grk_github_colours</span>()
-
-<span class='fu'>grk_github_descriptions</span>()</pre>
+    <pre class="usage"><span class='fu'>use_grk_github_labels</span>(<span class='kw'>labels_yaml</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>delete_default</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>labels_yaml</th>
+      <td><p>Path to a <code>yaml</code> file specifying the issue labels, or a
+list in the same format as the parsed <code>yaml</code> file. Each label should be in
+formatted as follows:<div class="yaml"></p><pre>- label: "status: planned"
+  color: bbd5af
+  description: Planning to implement
+</pre><p></div></p>
+<p>View the <span class="pkg">grkmisc</span> default github issue labels YAML file with<div class="r"></p><pre>system.file("github-issues.yaml", package = "grkmisc")
+</pre><p></div></p>
+<p>Note: <code>color</code> or <code>colour</code> are accepted spellings.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Arguments passed on to <code><a href='https://usethis.r-lib.org/reference/use_github_labels.html'>usethis::use_github_labels</a></code></p><dl class='dl-horizontal'>
-  <dt>repo_spec</dt><dd><p>Optional repository specification (<code>owner/repo</code>) if you
+    <dt><code>repo_spec</code></dt><dd><p>Optional repository specification (<code>owner/repo</code>) if you
 don't want to target the current project.</p></dd>
-  <dt>labels</dt><dd><p>A character vector giving labels to add.</p></dd>
-  <dt>rename</dt><dd><p>A named vector with names giving old names and values giving
+    <dt><code>labels</code></dt><dd><p>A character vector giving labels to add.</p></dd>
+    <dt><code>rename</code></dt><dd><p>A named vector with names giving old names and values giving
 new names.</p></dd>
-  <dt>colours</dt><dd><p>Named character vectors giving hexadecimal
+    <dt><code>colours</code></dt><dd><p>Named character vectors giving hexadecimal
 colours (like <code>e02a2a</code>) and longer descriptions. The names should match
 label names, and anything unmatched will be left unchanged. If you
 create a new label, and don't supply colours, it will be given a random
 colour.</p></dd>
-  <dt>descriptions</dt><dd><p>Named character vectors giving hexadecimal
+    <dt><code>descriptions</code></dt><dd><p>Named character vectors giving hexadecimal
 colours (like <code>e02a2a</code>) and longer descriptions. The names should match
 label names, and anything unmatched will be left unchanged. If you
 create a new label, and don't supply colours, it will be given a random
 colour.</p></dd>
-  <dt>delete_default</dt><dd><p>If <code>TRUE</code>, removes GitHub default labels that do
+    <dt><code>delete_default</code></dt><dd><p>If <code>TRUE</code>, removes GitHub default labels that do
 not appear in the <code>labels</code> vector and that do not have associated issues.</p></dd>
-  <dt>auth_token</dt><dd><p>GitHub personal access token (PAT).</p></dd>
-  <dt>host</dt><dd><p>GitHub API host to use. Override with the endpoint-root for your
+    <dt><code>auth_token</code></dt><dd><p>GitHub personal access token (PAT).</p></dd>
+    <dt><code>host</code></dt><dd><p>GitHub API host to use. Override with the endpoint-root for your
 GitHub enterprise instance, for example,
 "https://github.hostname.com/api/v3".</p></dd>
-
+  
 </dl></td>
-    </tr>
-    <tr>
-      <th>labels</th>
-      <td><p>A character vector giving labels to add.</p></td>
-    </tr>
-    <tr>
-      <th>colours</th>
-      <td><p>Named character vectors giving hexadecimal
-colours (like <code>e02a2a</code>) and longer descriptions. The names should match
-label names, and anything unmatched will be left unchanged. If you
-create a new label, and don't supply colours, it will be given a random
-colour.</p></td>
-    </tr>
-    <tr>
-      <th>descriptions</th>
-      <td><p>Named character vectors giving hexadecimal
-colours (like <code>e02a2a</code>) and longer descriptions. The names should match
-label names, and anything unmatched will be left unchanged. If you
-create a new label, and don't supply colours, it will be given a random
-colour.</p></td>
-    </tr>
-    <tr>
-      <th>delete_default</th>
-      <td><p>If <code>TRUE</code>, removes GitHub default labels that do
-not appear in the <code>labels</code> vector and that do not have associated issues.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
-
-    
-<ul>
-<li><p><code>grk_github_labels</code>: Default grkmisc GitHub labels.</p></li>
-<li><p><code>grk_github_colours</code>: Default grkmisc GitHub colours.</p></li>
-<li><p><code>grk_github_descriptions</code>: Default grkmisc GitHub descriptions.</p></li>
-</ul>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#functions">Functions</a></li>
     </ul>
 
   </div>

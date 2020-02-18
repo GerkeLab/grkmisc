@@ -126,8 +126,11 @@
     <p>Read Proc Format File</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_proc_format</span>(<span class='no'>file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"."</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>)))</pre>
+    <pre class="usage"><span class='fu'>read_proc_format</span>(
+  <span class='no'>file</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>missing_values</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='fl'>1</span>:<span class='fl'>9</span>, <span class='no'>LETTERS</span>))
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,8 +151,9 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other SAS helper functions: <code><a href='add_proc_format_labels.html'>add_proc_format_labels</a></code>,
-  <code><a href='read_sas_with_format.html'>read_sas_with_format</a></code></p></div>
+    <div class='dont-index'><p>Other SAS helper functions: 
+<code><a href='add_proc_format_labels.html'>add_proc_format_labels</a>()</code>,
+<code><a href='read_sas_with_format.html'>read_sas_with_format</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
