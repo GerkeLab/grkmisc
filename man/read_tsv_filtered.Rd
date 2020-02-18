@@ -7,9 +7,9 @@
 read_tsv_filtered(file, filter_expression, ...)
 }
 \arguments{
-\item{file}{<chr> Filename to read in}
+\item{file}{(chr) Filename to read in}
 
-\item{filter_expression}{<bare> The expression passed to \code{dplyr::filter()}}
+\item{filter_expression}{(bare) The expression passed to \code{dplyr::filter()}}
 
 \item{...}{
   Arguments passed on to \code{\link[readr:read_tsv]{readr::read_tsv}}
